@@ -2,6 +2,7 @@ import React from 'react';
 import Page from '../assets/Page.png'; 
 import Pencil from '../assets/Pencil.png';
 import Application from '../assets/Application.png';
+import Nav from '../Nav';
 
 // Sample tasks
 const tasks = [
@@ -13,6 +14,7 @@ const tasks = [
 const TaskList = () => {
     return (
         <div className='m-10'>
+            <Nav />
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-2xl font-bold">Tasks</h2>
                 <button className="add-task-btn">+ Add Task</button>

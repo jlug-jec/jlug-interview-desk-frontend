@@ -4,6 +4,7 @@ import avatar1 from '../assets/3d_avatar_1.png';
 import avatar2 from '../assets/3d_avatar_13.png';
 import remove from '../assets/Remove.png';
 import star from '../assets/Star.png';
+import Nav from '../Nav';
 
 
 
@@ -34,6 +35,7 @@ const Bookmark = () => {
     
 
     <div className="flex-1 pt-10 w-screen">
+      <Nav />
     <div className= " w-full px-6 md:px-6 lg:px-10  pb-10 lg:pb-20 xl:pb-20">
       <header className="w-full h-20 bg-gray-200">
         <div className="mt-auto max-w-full px-7 py-6 sm:px-6 lg:px-8 ">
