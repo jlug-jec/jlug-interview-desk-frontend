@@ -14,7 +14,6 @@ const tasks = [
 const TaskList = () => {
     return (
         <div className='m-10'>
-            <Nav />
             <div className="flex justify-between items-center mb-4">
                 <h2 className="text-2xl font-bold">Tasks</h2>
                 <button className="add-task-btn">+ Add Task</button>

@@ -14,8 +14,7 @@ function Dashboard() {
 
   return (
     <>
-      <div className=' bg-zinc-100 pb-10 w-100 h-full '>
-        <Nav />
+      <div className=' bg-zinc-100 pb-10 w-100 h-full'>
         <h1 className='font-semibold p-10 text-4xl'>Dashboard</h1>
         <div className='flex justify-between ml-14 mb-14 mr-14 pl-8 pr-8'>
 

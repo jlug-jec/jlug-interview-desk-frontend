@@ -34,12 +34,11 @@ const Bookmark = () => {
   return (
     
 
-    <div className="flex-1 pt-10 w-screen">
-      <Nav />
+    <div className="flex-1 pt-10 w-100">
     <div className= " w-full px-6 md:px-6 lg:px-10  pb-10 lg:pb-20 xl:pb-20">
-      <header className="w-full h-20 bg-gray-200">
-        <div className="mt-auto max-w-full px-7 py-6 sm:px-6 lg:px-8 ">
-          <h1 className="text-4xl font-bold tracking-tight text-gray-900 text-left">BookMarks</h1>
+      <header className="w-full h-14">
+        <div className="mt-auto max-w-full pl-3 ">
+          <h1 className="text-4xl tracking-tight font-semibold text-left">BookMarks</h1>
         </div>
       </header>
       <div className="px-4 py-6 sm:px-10 lg:px-10 w-full mt-6 sm:m-2 bg-white min-h-screen pb-10 lg:pb-[15vh] xl:pb-[20vh]">
