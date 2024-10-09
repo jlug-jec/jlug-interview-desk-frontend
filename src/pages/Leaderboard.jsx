@@ -4,15 +4,13 @@ import avatar1 from '../assets/3d_avatar_1.png';
 import avatar2 from '../assets/3d_avatar_13.png';
 import remove from '../assets/Remove.png';
 import star from '../assets/Star.png';
-import Nav from '../Nav';
 
 
 
-const Bookmark = () => {
+const Leader = () => {
   const avatars = {
     1: avatar1,
     2: avatar2,
-    // Add more avatars as needed
   };
 
 
@@ -22,14 +20,8 @@ const Bookmark = () => {
   ]);
 
   
-  // Function to get avatar URL based on user id
   const getAvatarUrl = (id) => avatars[id]
 
-   // Function to handle remove
-   const handleRemove = (id) => {
-    const updatedBookmarks = bookmarks.filter(bookmark => bookmark.id !== id);
-    setBookmarks(updatedBookmarks);
-  };
 
   return (
     
@@ -38,7 +30,7 @@ const Bookmark = () => {
     <div className= " w-full px-6 md:px-6 lg:px-10  pb-10 lg:pb-20 xl:pb-20">
       <header className="w-full h-16">
         <div className="mt-auto max-w-full pl-6 ">
-          <h1 className="text-4xl tracking-tight font-semibold text-left">BookMarks</h1>
+          <h1 className="text-4xl tracking-tight font-semibold text-left">Leaderboard</h1>
         </div>
       </header>
       <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col p-10 rounded-xl drop-shadow-lg">
@@ -57,10 +49,9 @@ const Bookmark = () => {
                 <p className="text-4 font-semibold leading-6 text-center text-gray-900">{bookmark.name}</p>
               </div>
             </div>
-            <div className={`flex items-center ${bookmark.rating < 10 ? 'gap-5' : 'gap-4'}`}>
+            <div className={`flex items-center justify-between ${bookmark.rating < 10 ? 'gap-6' : 'gap-4'}`}>
               <div className="text-yellow-500  h-7 w-7 flex justify-center items-center"><img src={star} alt="star" /></div>
               <div>{bookmark.rating}</div>
-              <button className="text-red-500 h-5 w-5" onClick={() => handleRemove(bookmark.id)}><img src={remove} alt="remove" /></button>
             </div>
           </div>
         ))}
@@ -76,4 +67,4 @@ const Bookmark = () => {
 
 );
 };
-export default Bookmark;
+export default Leader;

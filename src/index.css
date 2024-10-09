@@ -6,8 +6,6 @@ body{
     user-select: none;
     background-color: #ECECEC;
     overflow-x: hidden;
-    margin-left: 70px;
-    margin-top: 64px;
 }
 
 input[type="file"]::file-selector-button {

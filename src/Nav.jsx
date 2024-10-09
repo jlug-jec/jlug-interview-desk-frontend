@@ -52,11 +52,11 @@ const Nav = ()=>{
 
         </div>
         <div className='w-[70px] bg-[#1F2937] fixed h-screen left-0 p-2'>
-            <div className='flex flex-col gap-8 items-center w-full h-full mt-9'>                
+            <div className='flex flex-col gap-8 items-center w-full h-full mt-5'>                
                 <Link to='/'><div className={`w-12 h-12 ${tab === 0 ? 'bg-white' : 'bg-[#1F2937]'} p-2 rounded-xl`} onClick={() => handleChange(0)}>
                     <img src={tab === 0 ? HomeB : Home} alt='home'></img>
                 </div></Link>
-                <Link to='/review' className='w-12 h-12'><div className={`w-12 h-12 ${tab === 1 ? 'bg-white' : 'bg-[#1F2937]'} p-2 rounded-xl`} onClick={() => handleChange(1)}>
+                <Link to='/leader' className='w-12 h-12'><div className={`w-12 h-12 ${tab === 1 ? 'bg-white' : 'bg-[#1F2937]'} p-2 rounded-xl`} onClick={() => handleChange(1)}>
                     <img src={tab === 1 ? LeadB : Lead} alt='lead'></img>
                 </div></Link>
                 <Link to='/review'><div className={`w-12 h-12 ${tab === 2 ? 'bg-white' : 'bg-[#1F2937]'} p-2 rounded-xl`} onClick={() => handleChange(2)}>

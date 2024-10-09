@@ -12,8 +12,10 @@ export default {
         'form-input' : '#F6F6F6',
         'success' : '#2e7d32',
         'discard' : '#d32f2f',
-        'discard-hv' : '#f0baba',
-        'success-hv' : '#bfe7c1'
+        'bg-primary' : '#ECECEC',
+        'discard-hv' : '#f3c8c8',
+        'success-hv' : '#afe1b1',
+        'gray' : '#E3E3E3'
       }
     },
   },
