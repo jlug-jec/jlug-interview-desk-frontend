@@ -8,7 +8,9 @@ import Add_task from './pages/add'
 import Task from './pages/task'
 import Bookmark from './pages/bookmark'
 import Review from './pages/review'
+import User from './pages/User.jsx'
 import Register from './pages/Register'
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Router>
