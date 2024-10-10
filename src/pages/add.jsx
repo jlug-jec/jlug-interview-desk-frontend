@@ -1,7 +1,6 @@
 import {React, useState} from 'react'
 import check from '../assets/check.png'
 import cancel from '../assets/Cancel.png'
-import Nav from '../Nav';
 
 export default function Add() {
 

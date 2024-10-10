@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import avatar1 from '../assets/3d_avatar_1.png';
 import avatar2 from '../assets/3d_avatar_13.png';
 import avatar3 from '../assets/3d_avatar_21.png';
-import Nav from '../Nav';
 
 
 

@@ -32,7 +32,7 @@ function App() {
   useEffect(()=>{
     const timer = setTimeout(()=>{
       setPage(1);
-    }, 5000)
+    }, 4000)
   }, [])
 
   const somefunction = ()=>{

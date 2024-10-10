@@ -2,14 +2,12 @@ import {React, useState} from 'react'
 import {Link} from 'react-router-dom'
 import Home from './assets/Home.png'
 import HomeB from './assets/HomeB.png'
-import Lead from './assets/Lead.png'
-import LeadB from './assets/LeadB.png'
-import Book from './assets/Book.png'
-import BookB from './assets/BookB.png'
-import Pen from './assets/Pen.png'
-import PenB from './assets/PenB.png'
-import Rev from './assets/Rev.png'
-import RevB from './assets/RevB.png'
+import Chat from './assets/Chat.png'
+import ChatB from './assets/ChatB.png'
+import Todo from './assets/Todo.png'
+import TodoB from './assets/TodoB.png'
+import User from './assets/User.png'
+import UserB from './assets/UserB.png'
 import dp from './assets/21.png'
 import log from './assets/Logout.png'
 import set from './assets/Settings.png'
@@ -53,20 +51,17 @@ const Nav = ()=>{
         </div>
         <div className='w-[70px] bg-[#1F2937] fixed h-screen left-0 p-2'>
             <div className='flex flex-col gap-8 items-center w-full h-full mt-5'>                
-                <Link to='/admin'><div className={`w-12 h-12 ${tab === 0 ? 'bg-white' : 'bg-[#1F2937]'} p-2 rounded-xl`} onClick={() => handleChange(0)}>
+                <Link to='/userd'><div className={`w-12 h-12 ${tab === 0 ? 'bg-white' : 'bg-[#1F2937]'} p-2 rounded-xl`} onClick={() => handleChange(0)}>
                     <img src={tab === 0 ? HomeB : Home} alt='home'></img>
                 </div></Link>
-                <Link to='/leader' className='w-12 h-12'><div className={`w-12 h-12 ${tab === 1 ? 'bg-white' : 'bg-[#1F2937]'} p-2 rounded-xl`} onClick={() => handleChange(1)}>
-                    <img src={tab === 1 ? LeadB : Lead} alt='lead'></img>
+                <Link to='/userd/tasks' className='w-12 h-12'><div className={`w-12 h-12 ${tab === 1 ? 'bg-white' : 'bg-[#1F2937]'} p-2 rounded-xl`} onClick={() => handleChange(1)}>
+                    <img src={tab === 1 ? TodoB : Todo} alt='Todo'></img>
                 </div></Link>
-                <Link to='/review'><div className={`w-12 h-12 ${tab === 2 ? 'bg-white' : 'bg-[#1F2937]'} p-2 rounded-xl`} onClick={() => handleChange(2)}>
-                    <img src={tab === 2 ? RevB : Rev} alt='rev'></img>
+                <Link to='/userd/chat'><div className={`w-12 h-12 ${tab === 2 ? 'bg-white' : 'bg-[#1F2937]'} p-2 rounded-xl`} onClick={() => handleChange(2)}>
+                    <img src={tab === 2 ? ChatB : Chat} alt='Chat'></img>
                 </div></Link>
-                <Link to='/book'><div className={`w-12 h-12 ${tab === 3 ? 'bg-white' : 'bg-[#1F2937]'} p-2 rounded-xl`} onClick={() => handleChange(3)}>
-                    <img src={tab === 3 ? BookB : Book} alt='book'></img>
-                </div></Link>
-                <Link to='/tasks'><div className={`w-12 h-12 ${tab === 4 ? 'bg-white' : 'bg-[#1F2937]'} p-2 rounded-xl`} onClick={() => handleChange(4)}>
-                    <img src={tab === 4 ? PenB : Pen} alt='pen'></img>
+                <Link to='/userd/user'><div className={`w-12 h-12 ${tab === 3 ? 'bg-white' : 'bg-[#1F2937]'} p-2 rounded-xl`} onClick={() => handleChange(3)}>
+                    <img src={tab === 3 ? UserB : User} alt='User'></img>
                 </div></Link>
             </div>
         </div>
