@@ -3,7 +3,6 @@ import people from '../assets/People.png'
 import book from '../assets/Bookmark.png'
 import time from '../assets/Time.png'
 import star from '../assets/Star.png'
-import Nav from '../Nav'
 
 
 function Dashboard() {

@@ -4,7 +4,6 @@ import avatar1 from '../assets/3d_avatar_1.png';
 import avatar2 from '../assets/3d_avatar_13.png';
 import remove from '../assets/Remove.png';
 import star from '../assets/Star.png';
-import Nav from '../Nav';
 
 
 
