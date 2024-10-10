@@ -67,8 +67,7 @@ export default function Add() {
   console.log(data)
 
   return (
-    <div className='flex flex-col m-auto w-screen h-screen'>
-      <Nav />
+    <div className='flex flex-col m-auto w-100 h-screen'>
       <div className='flex flex-row w-[100%] gap-9 pt-1 justify-between'>
         <p className='text-left text-4xl font-medium  p-[1%] pl-[3%]'>
             Add Task
