@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import {React, useState, useEffect} from 'react';
 import Heading from '../components/Heading';
 import Progress from '../components/Progess';
 import Input from '../components/Input'
@@ -30,6 +30,14 @@ const More = ({settings, updateSettings, handleCompletion, data})=>{
         });
     };
 
+    useEffect(()=>{
+        const alerter = setTimeout(()=>{
+          alert('Feel free to fill this information later');
+          return
+        }, 2000)
+      }, [])
+    
+
 
     return (
         <div className='flex flex-col gap-11 w-[70%] h-[80%] m-auto mt-4 bg-white p-6 shadow-xl'>
@@ -49,8 +57,8 @@ const More = ({settings, updateSettings, handleCompletion, data})=>{
                 <Input handleChange={handleChange} label={'Why do you want to join'} type={'text'} value={profile.why} name={'why'} />  
 
                 <div className='flex flex-row gap-4 w-full items-center justify-center mt-2'>
-                    <Button label={'Discard'}  handler={()=>handleNext(0)} variant={0}/>
-                    <Button label={'Continue'} handler={()=>handleNext(1)} variant={1}/>    
+                    <Button label={'Previous'}  handler={()=>handleNext(0)} variant={0}/>
+                    <Button label={'Register'} handler={()=>handleNext(1)} variant={1}/>    
                 </div>
             </div>
         </div>

@@ -1,4 +1,3 @@
-
 import Nav from '../components/Nav';
 import Basic from './Basic';
 import Domain from './Domain'
@@ -7,6 +6,8 @@ import More from './More';
 import Rating from './Rating';
 import { useEffect, useState } from 'react';
 import Loading from './Loading';
+import Final from './Final';
+
 
 function App() {
   const [page, setPage] = useState(0);
@@ -26,7 +27,12 @@ function App() {
     bio:'',
     why:'',
     feed:'',
-    rat:''
+    rat:'',
+    status:'',
+    isblacklisted:'no',
+    submissions:[],
+    mobverified:'no',
+    password:''
   });
 
   useEffect(()=>{
@@ -35,8 +41,26 @@ function App() {
     }, 4000)
   }, [])
 
-  const somefunction = ()=>{
-    // this is some finctino to submit data / validate etc etc
+  const somefunction = async ()=>{
+    try {
+
+      let res= await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(profile),
+      });
+
+
+      res = await res.json();
+      console.log('Profile saved:', res);
+    }
+
+    catch(e){
+      console.log(e)
+    }
+  
   }
 
   const handleProfile = (prof, dir)=>{
@@ -76,6 +100,8 @@ function App() {
         page === 2 ?  <Domain data={profile}  settings={settings} updateSettings={updateSettings} handleCompletion={handleProfile}/>
         :
         page === 3 ? <More  data={profile}  settings={settings} updateSettings={updateSettings} handleCompletion={handleProfile}/>
+        :
+        page === 4 ? <Final data={profile} />
         :
         <Rating data={profile} handleCompletion={handleProfile}/>
       

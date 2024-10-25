@@ -1,4 +1,4 @@
-import {React, useState} from 'react'
+import {React, useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
 import Home from './assets/Home.png'
 import HomeB from './assets/HomeB.png'
@@ -18,9 +18,19 @@ import logo from './assets/logo.png'
 const Nav = ()=>{
     const [tab, setTab] = useState(0);
 
+    const [user, setUser] = useState({});
+
     const handleChange = (v)=>{
         setTab(v);
     }
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+          setUser(JSON.parse(storedUser));
+        }
+      },[]);
+    
 
     return (
         <>
@@ -32,11 +42,11 @@ const Nav = ()=>{
                     <div className='text-3xl font-normal'><span className='font-semibold'>JLUG </span> Interview Desk</div>
                     <div className='w-[20%] h-[90%] flex flex-row items-center gap-2 '>
                         <div className='w-fit flex flex-col justify-center text-right p-2'>
-                            <div className='text-sm font-bold'>Admin Name</div>
-                            <div className='text-xs font-semibold'>Team Name</div>
+                            <div className='text-sm font-bold'>{user.name}</div>
+                            <div className='text-xs font-semibold'>{user.domain}</div>
                         </div>
                         <div className='w-[20%]'>
-                        <Link to='/user'>
+                        <Link to='/userd/user'>
                             <img src={dp} className='w-11 h-11 rounded-full'/>
                         </Link>
                         </div>                        

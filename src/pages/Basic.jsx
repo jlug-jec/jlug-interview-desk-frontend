@@ -11,10 +11,34 @@ const Basic = ({handleCompletion, settings, updateSettings, data})=>{
 
     const handleNext = ()=>{
 
-        if(profile.name !=='' && profile.age !== '' && profile.branch !== '' && profile.sem !== '' && profile.gender !== '' && profile.contact !== '' && profile.email !== ''){
-            handleCompletion(profile, 1);
-            updateSettings({'c2':1, 'h1':1 })
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^[0-9]{10}$/;
+        
+        if (
+            profile.name === '' || 
+            profile.age === '' || 
+            profile.branch === '' || 
+            profile.sem === '' || 
+            profile.gender === '' || 
+            profile.contact === '' || 
+            profile.email === ''
+        ) 
+        {
+            alert("All fields are required");
+            return;
         }
+    
+        if (!emailRegex.test(profile.email)) {
+            alert("Please enter a valid email address");
+            return;
+        }
+
+        if (!phoneRegex.test(profile.contact)) {
+            alert("Please enter a valid 10-digit phone number");
+            return;
+        }
+        handleCompletion(profile, 1);
+        updateSettings({'c2':1, 'h1':1 })
 
     }
 
@@ -73,7 +97,7 @@ const Basic = ({handleCompletion, settings, updateSettings, data})=>{
                     </div>
                 </div>
 
-                <Input handleChange={handleChange} label={'Contact'} type={'number'} value={profile.contact} name={'contact'} />  
+                <Input handleChange={handleChange} label={'Contact'} type={'tel'} value={profile.contact} name={'contact'} />  
                 <Input handleChange={handleChange} label={'Email'} type={'email'} value={profile.email} name={'email'} />  
 
                 <div className='flex flex-row gap-4 w-full items-center justify-center mt-2'>
