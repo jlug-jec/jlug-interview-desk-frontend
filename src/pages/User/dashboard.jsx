@@ -6,17 +6,30 @@ import {Link} from 'react-router-dom'
 import Page from '../../assets/Page.png'; 
 import Application from '../../assets/Application.png';
 import Eye from '../../assets/Eye.png'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
 function Dashboard() {
-  
+  const navigate = useNavigate();
   const image=[list,approve,time,book]
+  const [user, setUser] = useState({});
+  console.log(user.name)
   const tasks = [
     { name: 'ToDo Application', type: 'App/Web', by: 'Admin2', status: 'Active', icon: Application },
     { name: 'Portfolio Application', type: 'App/Web', by: 'Admin3', status: 'Active', icon: Application },
     { name: 'Biography', type: 'Document', by: 'You' ,  status: 'Active', icon: Page},
 ];
-  const pop=[{'count':100, 'text':'Total Tasks'},{'count':100, 'text':'Tasks Submitted'},{'count':100, 'text':'Pending Tasks'},{'count':100, 'text':'ISpe kya likhe ?'}]
+  const pop=[{'count':100, 'text':'Total Tasks'},{'count':`${user.submissions}`.length , 'text':'Tasks Submitted'},{'count':100, 'text':'Pending Tasks'},{'count':100, 'text':'ISpe kya likhe ?'}]
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    } else {
+      navigate('/login'); 
+    }
+  }, [navigate]);
 
   return (
     <>
@@ -78,7 +91,7 @@ function Dashboard() {
             <h1 className=' border-b-2 pb-2 border-black font-semibold text-xl'>Application Status</h1>
             
             <div className='flex flex-row gap-5 font-semibold border-2 text-center w-[90%] p-1 mt-4 m-auto items-center justify-center border-[#FF8C23] text-[#FF8C23] rounded-lg '>
-                    <div>Under Review</div>
+                    <div></div>
             </div>
           </div>
               

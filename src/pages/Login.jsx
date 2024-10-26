@@ -10,7 +10,6 @@ import Button from '../components/Button'
 
 const Login = ()=>{     
     const navigate = useNavigate();
-    
     const [profile, setProfile] = useState({
             email:'',
             pass:''
@@ -18,13 +17,27 @@ const Login = ()=>{
 
     const [load, setLoad] = useState(1);
 
-    const handleCompletion =()=>{
+    const handleCompletion = async ()=>{
         //function to initate login
-        if(profile.email === 'admin' && profile.pass === '123'){
-            navigate('/admin')
-        }
-        if(profile.email === 'user' && profile.pass === '123'){
-            navigate('/userd')
+        try {
+            let res = await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(profile),
+            });
+            res = await res.json();
+
+            if (res.user) {
+                localStorage.setItem('user', JSON.stringify(res.user));
+                alert(res.message);
+                navigate('/userd')
+            } else {
+                alert('Login failed');
+            }
+        } catch (error) {
+            console.log('Login Failed:', error);
         }
     }
 

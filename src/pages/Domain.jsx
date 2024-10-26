@@ -22,7 +22,10 @@ const Domain = ({settings, updateSettings, handleCompletion, data})=>{
     }
 
     const handleNext = (direction)=>{
-
+        if(!checked.domain){
+            alert('Please Select a domain')
+            return
+        }
         if(direction === 1){
             handleCompletion(checked, 1);
             updateSettings({'c3':1, 'h2':1})
@@ -49,7 +52,7 @@ const Domain = ({settings, updateSettings, handleCompletion, data})=>{
                 <DomainCard label={'Management'} id='e' status={checked} handleCheck={handleCheck} />
             </div>                
             <div className='flex flex-row gap-4 mt-4 w-full items-center justify-center'>
-                <Button label={'Discard'} handler={()=>handleNext(0)}  variant={0}/>
+                <Button label={'Previous'} handler={()=>handleNext(0)}  variant={0}/>
                 <Button label={'Continue'} handler={()=>handleNext(1)} variant={1}/>    
             </div>
         </div>

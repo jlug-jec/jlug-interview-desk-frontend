@@ -48,10 +48,11 @@ const Main = ()=>{
   )
 }
 
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Router>
-      <Main />
-    </Router>
-  </StrictMode>,
+        <Router>
+          <Main />
+        </Router>
+  </StrictMode>
 )
