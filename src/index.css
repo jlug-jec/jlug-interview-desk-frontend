@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    user-select: none;
+    background-color: #ECECEC;
+    overflow-x: hidden;
+}
+
+input[type="file"]::file-selector-button {
+    background-color: #f73558;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
