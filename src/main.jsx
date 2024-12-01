@@ -35,14 +35,14 @@ const Main = ()=>{
             <Route path="/book" element={<Bookmark />} />
             <Route path="/review" element={<Review />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/user" element={<User />} />
+            <Route path="/user/:id" element={<User />} />
             <Route path="/leader" element={<Leaderboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/userd" element={<Udashboard />} />
             <Route path="/userd/tasks" element={<Tasks />} />
-            <Route path="/userd/view" element={<View />} />
+            <Route path="/userd/view/:id" element={<View />} />
             <Route path="/userd/chat" element={<Chat />} />
-            <Route path="/userd/user" element={<Prof />} />
+            <Route path="/userd/user/" element={<Prof />} />
       </Routes>
     </div>
   )

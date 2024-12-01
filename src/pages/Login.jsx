@@ -18,7 +18,6 @@ const Login = ()=>{
     const [load, setLoad] = useState(1);
 
     const handleCompletion = async ()=>{
-        //function to initate login
         try {
             let res = await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/login', {
                 method: 'POST',
@@ -28,11 +27,19 @@ const Login = ()=>{
                 body: JSON.stringify(profile),
             });
             res = await res.json();
+            console.log(res)
 
             if (res.user) {
                 localStorage.setItem('user', JSON.stringify(res.user));
+                localStorage.setItem('userid', JSON.stringify(res.userID));
                 alert(res.message);
-                navigate('/userd')
+                if(res.user.email.endsWith('@jlug')){
+                    navigate('/admin')
+                }
+                else{
+                    //temporaray change to simulate admin login
+                    navigate('/userd')
+                }
             } else {
                 alert('Login failed');
             }

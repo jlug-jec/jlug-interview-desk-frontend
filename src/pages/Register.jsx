@@ -31,8 +31,11 @@ function App() {
     status:'',
     isblacklisted:'no',
     submissions:[],
+    approvedby:[],
     mobverified:'no',
-    password:''
+    password:'',
+    ups:0,
+    downs:0
   });
 
   useEffect(()=>{

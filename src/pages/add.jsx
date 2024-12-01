@@ -1,7 +1,8 @@
+
+
 import {React, useState} from 'react'
 import check from '../assets/check.png'
 import cancel from '../assets/Cancel.png'
-
 export default function Add() {
 
   const [data, setData] = useState({
@@ -11,17 +12,25 @@ export default function Add() {
     tstat: '',
     tsub:'',
     tdead : new Date().toISOString().split('T')[0],
-    tfile : ''
+    tfile : '',
+    by: ''
   });
 
-  const handleFile = (e)=>{
-    if(e.target.files[0].name.includes('png', 'jpg', 'jpeg')){
-      console.log('to be  saved in firebase or something and then store the reference in data')
-      const alldata = {...data};
-      alldata['tfile'] = e.target.files[0].name
-      setData(alldata)
+  const handleFile = (e) => {
+    const file = e.target.files[0];
+    const fileName = file.name.toLowerCase(); 
+    if (fileName.includes('png') || fileName.includes('jpg') || fileName.includes('jpeg')) {
+      console.log('File selected, preparing to upload...');
+      
+      const alldata = { ...data };
+      alldata['tfile'] = file;
+      setData(alldata);
+    } else {
+      console.log('Invalid file type');
     }
-  }
+  };
+  
+  
 
   const handleChange = (e)=>{
       const alldata = {...data};
@@ -39,11 +48,70 @@ export default function Add() {
   };
   
 
-  const handleSubmit = ()=>{
+  const handleSubmit = async ()=>{
     const {tname, tdesc, tcatg,tstat, tsub, tdead, tfile}  = data;
-    if(tname !== ''  & tdesc !=='' & tcatg !=='' & tstat !== '' & tsub !== '' & tdead !== '' & tfile !== ''){
-      console.log('after checking the data will be sent to api')
+    const admin = localStorage.getItem('user');
+    const adminObj = JSON.parse(admin)
+    if(!admin) {
+      alert("Please Login as admin Continue !")
     }
+
+    //if(tname !== ''  & tdesc !=='' & tcatg !=='' & tstat !== '' & tsub !== '' & tdead !== '' & tfile !== ''){
+      console.log('after checking the data will be sent to api')
+
+      const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dqcqijw3c/image/upload`;
+      const uploadPreset = 'sample-img' 
+  
+      const imageData = new FormData();
+      imageData.append('file', tfile); 
+      imageData.append('upload_preset', uploadPreset);
+      imageData.append('cloud_name', 'dqcqijw3c');
+  
+      const response = await fetch(cloudinaryUrl, {
+        method: 'POST',
+        body: imageData,
+      });
+  
+      const uploadResult = await response.json();
+
+      if (!uploadResult.secure_url) {
+        throw new Error('Image upload failed');
+      }
+
+      else{
+        
+        const taskData = {
+          tname,
+          tdesc,
+          tcatg,
+          tstat,
+          tsub,
+          tdead,
+          tfileUrl: uploadResult.secure_url, 
+          by: adminObj.name
+        };
+
+        console.log(taskData)
+        const apiResponse = await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/add-task', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(taskData),
+        });
+      
+        const apiResult = await apiResponse.json();
+        console.log(apiResult);
+      
+        
+        if (apiResult.message === 'Task successfully added!') {
+          console.log('Task added successfully to Firebase');
+        } else {
+          console.error('Failed to add task to Firebase');
+        }
+      }
+  
+    //}
   }
 
   const handleDiscard = ()=>{
@@ -104,9 +172,9 @@ export default function Add() {
               <p className='text-center self-center text-[20px] w-[25%] font-medium '>Task Category</p>
               <select className='bg-form-input w-full p-4 border-none rounded-xl' name='tcatg' value={data.tcatg} onChange={handleChange}>
                 <option value=''>Select Category</option>
-                <option value='web'>Web</option>
-                <option value='app'>App</option>
-                <option value='docx'>Document / Text</option>
+                <option value='Web'>Web</option>
+                <option value='App'>App</option>
+                <option value='Docx'>Document / Text</option>
               </select>
             </div>
 
@@ -114,20 +182,20 @@ export default function Add() {
               <p className='text-center self-center text-[20px] w-[25%] font-medium '>Task Status</p>
               <select className='bg-form-input w-full p-4 border-none rounded-xl' name='tstat' value={data.tstat} onChange={handleChange}>
                 <option value=''>Select Status</option>
-                <option value='active'>Active</option>
-                <option value='suspended'>Suspended</option>
+                <option value='Active'>Active</option>
+                <option value='Suspended'>Suspended</option>
               </select>
             </div>
 
           </div>
 
           <div className='flex flex-row gap-7 p-5 w-[50%]'>
-              <p className='text-center self-center text-[20px] w-[25%] font-medium '>Submission Category</p>
+              <p className='text-center self-center text-[20px] w-[25%] font-medium '>Submission Type</p>
               <select className='bg-form-input w-full p-4 border-none rounded-xl' name='tsub' value={data.tsub} onChange={handleChange}>
                 <option value=''>Select Submission Type</option>
-                <option value='pdf'>PDF</option>
-                <option value='img'>Image</option>
-                <option value='link'>URL</option>
+                <option value='PDF'>PDF</option>
+                <option value='IMG'>Image</option>
+                <option value='URL'>URL</option>
               </select>
           </div>
 
@@ -139,7 +207,7 @@ export default function Add() {
 
           <div className='flex flex-row gap-8 p-5 w-[50%]'>
               <p className='text-center self-center text-[20px] w-[20%] font-medium '>Add an Example</p>            
-              <input  accept='.pdf, .doc, .docx, image/png, image/jpeg, image/jpg' id='file' type='file' className='self-center' name='tfile' onChange={handleFile} />
+              <input  accept=' image/png, image/jpeg, image/jpg' id='file' type='file' className='self-center' name='tfile' onChange={handleFile} />
           </div>
 
         </div>
