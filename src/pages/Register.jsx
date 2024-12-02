@@ -44,6 +44,15 @@ function App() {
     }, 4000)
   }, [])
 
+
+  useEffect(() => {
+    console.log({"page" : page, "profile" : profile});
+    if (page === 4) {
+      somefunction();
+    }
+  }, [profile]); 
+  
+
   const somefunction = async ()=>{
     try {
 
@@ -67,10 +76,10 @@ function App() {
   }
 
   const handleProfile = (prof, dir)=>{
-    if(page === 3) somefunction();
     setProfile({...profile, ...prof});
     if(dir === 1) setPage(page + 1);
-    else {
+    console.log({"page" : page, "profile" : profile} )
+    if(dir !== 1) {
       if(page > 1)
       setPage(page - 1);
     }
@@ -90,7 +99,6 @@ function App() {
     });
   }
 
-  console.log(profile)
 
   return (
     <div className='flex flex-col items-center justify-center w-full h-full gap-4'>

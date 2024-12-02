@@ -33,7 +33,7 @@ const Login = ()=>{
                 localStorage.setItem('user', JSON.stringify(res.user));
                 localStorage.setItem('userid', JSON.stringify(res.userID));
                 alert(res.message);
-                if(res.user.email.endsWith('@jlug')){
+                if(res.user.email.includes('admin')){
                     navigate('/admin')
                 }
                 else{
