@@ -4,6 +4,7 @@ import {React, useState} from 'react'
 import check from '../assets/check.png'
 import cancel from '../assets/Cancel.png'
 export default function Add() {
+  const adminid = localStorage.getItem('userid')
 
   const [data, setData] = useState({
     tname : '',
@@ -88,7 +89,8 @@ export default function Add() {
           tsub,
           tdead,
           tfileUrl: uploadResult.secure_url, 
-          by: adminObj.name
+          by: adminObj.name,
+          adminid:adminid
         };
 
         console.log(taskData)

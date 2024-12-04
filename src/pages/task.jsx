@@ -1,17 +1,44 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import Page from '../assets/Page.png'; 
 import Pencil from '../assets/Pencil.png';
 import Application from '../assets/Application.png';
 import {Link} from 'react-router-dom'
 
-// Sample tasks
-const tasks = [
-    { name: 'ToDo Application', type: 'App/Web', by: 'Admin2', status: 'Active', icon: Application },
-    { name: 'Portfolio Application', type: 'App/Web', by: 'Admin3', status: 'Active', icon: Application },
-    { name: 'Biography', type: 'Document', by: 'You' ,  status: 'Active', icon: Page},
-];
 
 const TaskList = () => {
+
+    useEffect(() => {
+        const fetchTasks = async () => {
+          try {
+            const response = await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/get-tasks');
+            if (!response.ok) {
+              throw new Error('Failed to fetch tasks');
+            }
+            const data = await response.json();
+            console.log(data)
+            setTasks(
+              data.map((task) => ({
+                ...task,
+                icon: task.tcatg === 'App/Web' ? Application : Page, 
+              }))
+            );
+          } catch (error) {
+            console.error('Error fetching tasks:', error);
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        fetchTasks();
+      }, []);
+    
+        
+    const [tasks, setTasks] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const userid = localStorage.getItem('userid')
+
+
     return (
         <div className="flex-1 pt-10 w-100">
         <div className= " w-full px-6 md:px-6 lg:px-10  pb-10 lg:pb-20 xl:pb-20">
@@ -31,21 +58,21 @@ const TaskList = () => {
                         <div className="flex w-full gap-x-4 items-center">
                             <img
                                 src={task.icon}
-                                alt={`Avatar of ${task.name}`}
+                                alt='task-snap'
                                 className="h-12 w-12 flex-none rounded-full bg-gray-50"
                             />
                             <div className="w-[25%] flex flex-auto items-center">
-                                <p className="text-4 font-medium leading-6 text-center text-gray-900">{task.name}</p>
+                                <p className="text-4 font-medium leading-6 text-center text-gray-900">{task.tname}</p>
                             </div>
                             <div className="min-w-[15%] flex flex-auto items-center">
-                                <p className="text-4 font-bold leading-6 text-center text-gray-900">{task.type}</p>
+                                <p className="text-4 font-bold leading-6 text-center text-gray-900">{task.tcatg}</p>
                             </div>                        
                             <div className="min-w-[15%] flex flex-auto items-center text-center">
-                                <p className="text-4 font-medium leading-6 text-center text-gray-900">{task.by}</p>
+                                <p className="text-4 font-medium leading-6 text-center text-gray-900">by {task.id === userid ? 'You' : task.by}</p>
                             </div>
                             <div className='flex flex-row w-[45%] items-center  text-center justify-end gap-12'>
                                 { 
-                                task.by === 'You' ?
+                                task.adminid === userid ?
                                     (<>
                                     <div className='  h-7 w-7 flex justify-center items-center '>
                                         <img src={Pencil} alt="edit" />
@@ -57,9 +84,9 @@ const TaskList = () => {
                                     ) 
                                 : (<></>)}         
                                 <div className='font-semibold border-2 text-center h-[50%] border-[#01ED01] text-[#01ED01] px-4  rounded-lg '>
-                                    {task.status}
+                                    {task.tstat}
                                 </div>                          
-                                <Link to='/add'>
+                                <Link to={`/userd/view/${task.id}`}>
                                     <div className='font-semibold border-2 text-center h-[50%] border-[#23B0FF] text-[#23B0FF] px-4  rounded-lg '>
                                         View
                                     </div>
@@ -72,36 +99,12 @@ const TaskList = () => {
             </div>
             ) : (
                 <div className="text-center justify-center font-semibold text-lg text-gray-500">
-                    <p>No bookmarks available</p>
+                    <p>No Tasks available</p>
                 </div>
             )}
           </div>
         </div>
-{/* 
-            <table className="min-w-full bg-white rounded-lg shadow">
-              
-                <tbody>
-                    {tasks.map((task, index) => (
-                        <tr key={index} className="border-t">
-                            <td className="p-4">
-                                <img src={task.icon} alt="icon" className="inline-block w-6 h-6 mr-2" />
-                                {task.name}
-                            </td>
-                            <td className="p-4 font-bold">{task.type}</td>
-                            <td className="p-4">{task.by}</td>
-                            <td className="p-4">
-                                <span className="active-status-btn">{task.status}</span>
-                            </td>
-                            <td className="p-4">
-                            {task.by === 'You' && (
-                                    <button className="delete-btn">Delete</button> 
-                                    )}
-                                <button className="view-btn">View</button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table> */}
+
         </div>
     );
 };
