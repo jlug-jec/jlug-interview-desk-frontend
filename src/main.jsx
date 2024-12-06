@@ -18,6 +18,7 @@ import View from './pages/User/View.jsx'
 import Tasks from './pages/User/Tasks.jsx'
 import Chat from './pages/User/Chat.jsx'
 import Prof from './pages/User/Prof.jsx'
+import EditTask from './pages/edittask.jsx'
 
 const Main = ()=>{
   const loc = useLocation();
@@ -43,6 +44,7 @@ const Main = ()=>{
             <Route path="/userd/view/:id" element={<View />} />
             <Route path="/userd/chat" element={<Chat />} />
             <Route path="/userd/user/" element={<Prof />} />
+            <Route path="/edittask/:id" element={<EditTask />} />
       </Routes>
     </div>
   )

@@ -38,6 +38,7 @@ const TaskList = () => {
     const [loading, setLoading] = useState(true);
     const userid = localStorage.getItem('userid')
 
+    console.log(tasks)
 
     return (
         <div className="flex-1 pt-10 w-100">
@@ -86,9 +87,9 @@ const TaskList = () => {
                                 <div className='font-semibold border-2 text-center h-[50%] border-[#01ED01] text-[#01ED01] px-4  rounded-lg '>
                                     {task.tstat}
                                 </div>                          
-                                <Link to={`/userd/view/${task.id}`}>
+                                <Link to={`/edittask/${task.id}`}>
                                     <div className='font-semibold border-2 text-center h-[50%] border-[#23B0FF] text-[#23B0FF] px-4  rounded-lg '>
-                                        View
+                                        View here
                                     </div>
                                 </Link>
                             </div>
