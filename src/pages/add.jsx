@@ -90,7 +90,8 @@ export default function Add() {
           tdead,
           tfileUrl: uploadResult.secure_url, 
           by: adminObj.name,
-          adminid:adminid
+          adminid:adminid,
+          domain: adminObj.domain
         };
 
         console.log(taskData)
