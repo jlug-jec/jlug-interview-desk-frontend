@@ -35,7 +35,11 @@ function App() {
     mobverified:'no',
     password:'',
     ups:0,
-    downs:0
+    downs:0,
+    dp:'https://res.cloudinary.com/dqcqijw3c/image/upload/v1733690991/ejurictxm8qqqwp8givv.png',
+    skills:[],
+    projects:[]
+
   });
 
   useEffect(()=>{

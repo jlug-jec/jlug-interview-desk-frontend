@@ -113,8 +113,9 @@ function User() {
       </div>
 
       <div className='flex flex-row w-full gap-2 mt-10'>
-        <div className='w-[25vw] p-7 bg-white flex flex-col rounded-md shadow-lg gap-8 items-center'>
-          <img src={user_image} className="w-[12vw] mt-7 shadow-lg rounded-full" alt="" />
+        <div className=' w-[25vw]  bg-white flex flex-col rounded-md shadow-lg  gap-8 items-center '>
+            <img src={userDetails.dp} className="w-[12vw] h-[12vw]  border-8 border-double border-spacing-3 border-zinc-500 mt-7  rounded-full" alt="" />
+
           <div className='flex gap-4'>
             <a href={userDetails?.git || '#'} target="_blank" rel="noopener noreferrer">
               <img className="w-10" src="https://firebasestorage.googleapis.com/v0/b/user-assets-6616a.appspot.com/o/github-stroke-rounded.svg?alt=media&token=ad8bc54b-c9c7-46cf-a935-39166bab7b5b" alt="GitHub" />
@@ -141,16 +142,37 @@ function User() {
           <div className='grid grid-cols-2 m-4'>
             <ul className='bg-[#ECECEC] py-2 px-4 m-2 rounded-lg'>
               <h4 className='text-xl font-semibold mb-4 '>Skills</h4>
-              <li>Python</li>
-              <li>Javascript</li>
-              <li>C++</li>
-              <li>C</li>
+              {userDetails.skills && userDetails.skills.length > 0 ? (
+                    userDetails.skills.map((skill, index) => (
+                      <li key={index}>{skill}</li>
+                    ))
+                  ) : (
+                    <li>No skills available</li>
+                  )}
             </ul>
-            <ul className='bg-[#ECECEC] py-2 px-4 m-2 rounded-lg'>
-              <h4 className='text-xl font-semibold mb-4'>Projects</h4>
-              <li>School Admission System</li>
-              <li>Todo List</li>
-            </ul>
+            
+            <ul className="bg-[#ECECEC] py-2 px-4 m-2 rounded-lg">
+            <h4 className="text-xl font-semibold mb-4">Projects</h4>
+            {userDetails.projects && Object.keys(userDetails.projects).length > 0 ? (
+                    Object.entries(userDetails.projects).map(([name, url], index) => (
+                      <li key={index} className="flex items-center justify-between py-2">
+                        <span>{name}</span>
+                        <a 
+                          href={url} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="text-blue-500 hover:underline flex items-center"
+                        >                        
+                        <div className="font-semibold border-2 text-center border-[#23B0FF] text-[#23B0FF] px-4 rounded-lg">
+                          View
+                        </div>
+                        </a>
+                      </li>
+                    ))
+                  ) : (
+                    <li>No projects available</li>
+                  )}
+                </ul>
           </div>
 
           <h4 className='text-xl font-semibold m-4'>Tasks</h4>

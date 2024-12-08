@@ -30,12 +30,6 @@ const More = ({settings, updateSettings, handleCompletion, data})=>{
         });
     };
 
-    useEffect(()=>{
-        const alerter = setTimeout(()=>{
-          alert('Feel free to fill this information later');
-          return
-        }, 2000)
-      }, [])
     
 
 
