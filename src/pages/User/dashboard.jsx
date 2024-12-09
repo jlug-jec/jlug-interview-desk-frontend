@@ -8,6 +8,7 @@ import Application from '../../assets/Application.png';
 import Eye from '../../assets/Eye.png'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Ripple from '../../components/Ripple';
 
 
 function Dashboard() {
@@ -18,6 +19,7 @@ function Dashboard() {
   const [user, setUser] = useState({});
   const [tasks, setTasks] = useState([]);
   const [userSubmissions, setUserSubmissions] = useState([]);
+  const [pageload, setPageLoad] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,6 +40,7 @@ function Dashboard() {
 
 
   const fetchDomainTasks = async () => {
+    setPageLoad(true)
     const storedUser = localStorage.getItem('user');
     const userObj = JSON.parse(storedUser)
     const domain  = userObj.domain
@@ -61,6 +64,8 @@ function Dashboard() {
     } catch (error) {
       console.error('Error fetching tasks:', error);
       return [];
+    }finally{
+      setPageLoad(false)
     }
   };
 
@@ -76,7 +81,9 @@ function Dashboard() {
 
   return (
     <>
-      <div className=' bg-zinc-100 pb-10 w-100 h-full'>
+    {pageload && <Ripple/>}
+      { !pageload && 
+      (<div className=' bg-zinc-100 pb-10 w-100 h-full'>
         <h1 className='font-semibold p-10 text-4xl'>Dashboard</h1>
         <div className='flex justify-between ml-14 mb-14 mr-14 pl-8 pr-8'>
 
@@ -145,7 +152,7 @@ function Dashboard() {
           
         </div>
         
-      </div>
+      </div> )}
     </>
   )
 }

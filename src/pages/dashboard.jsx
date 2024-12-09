@@ -175,7 +175,7 @@ function Dashboard() {
             </div>
           ))}
           <Link to={`/leader`}>
-            <div className="font-semibold border-2 w-[50%] text-center h-[10%] border-[#23B0FF] text-[#23B0FF] px-4 py-2 rounded-lg m-auto">
+            <div className="font-semibold border-2 w-[50%] text-center h-[10%] border-[#23B0FF] text-[#23B0FF] px-4  rounded-lg m-auto mt-3">
               View Leaderboard
             </div>
           </Link>

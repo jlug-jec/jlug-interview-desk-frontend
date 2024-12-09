@@ -2,6 +2,8 @@ import React from 'react'
 import PencilB from '../../assets/PencilB.png'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import Ripple from '../../components/Ripple'
+import { use } from 'react'
 
 function User() {
     const [isModalOpen, setIsModalOpen] = useState(false)
@@ -11,6 +13,9 @@ function User() {
     const [updatedUser, setUpdatedUser] = useState({});
     const [dp, setDp] = useState();
     const [pass, setPass] = useState();
+    const [pageload, setPageLoad] = useState(true)
+    const [actionload, setActionLoad] = useState(false)
+
 //pas == orignal passwoed, changes in pas handle by handlepass, in save only if pas == 8 add to newUser
 
     let id = localStorage.getItem('userid')
@@ -27,6 +32,7 @@ function User() {
     const [projects, setProjects] = useState([]); 
 
     useEffect(() => {
+      setPageLoad(true)
       const fetchData = async () => {
          try {
           const userResponse = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/get-user/${id}`);
@@ -56,6 +62,8 @@ function User() {
           setSubmissions(submissionsData);
         } catch (error) {
           console.error('Error fetching data:', error);
+        }finally{
+          setPageLoad(false)
         }
       };
   
@@ -138,6 +146,7 @@ function User() {
     
 
     const handleSaveChanges = async (e) => {
+      setActionLoad(true)
       e.preventDefault();
       let { password, ...newUser } = updatedUser;
 
@@ -207,7 +216,7 @@ function User() {
       } catch (error) {
         console.error(error);
         alert('Failed to update profile. Please try again.');
-      }
+      }finally{setActionLoad(false)}
     };
     
     const handleProfilePicture = (e) => {
@@ -228,245 +237,278 @@ function User() {
     console.log(updatedUser)
     console.log(pass)
   return (
-    <div className='bg-[#ECECEC] h-screen w-full p-10 mb-11'>
-      <div className='flex flex-row w-full justify-between items-center'>
-        <div className='text-4xl font-semibold '>Profile</div>
-        <div className='flex gap-3 p-2 items-center border-2 border-primary text-primary px-4 py-1 rounded-lg cursor-pointer' onClick={handleEdit} >
-            <img src={PencilB} className='w-7 h-7' alt='pencil'></img>
-            <button className='font-semibold' >Edit Profile</button>
-        </div>
-      </div>
-
-
-      <div className='flex flex-row w-full gap-2 mt-10'>
-          <div className=' w-[25vw]  bg-white flex flex-col rounded-md shadow-lg  gap-8 items-center '>
-            <img src={user.dp} className="w-[12vw] h-[12vw]  border-8 border-double border-spacing-3 border-zinc-500 mt-7  rounded-full" alt="" />
-            <div className='flex  gap-4 '>
-                { user.git &&  <a href={user.git}><img className="w-10 " src={git} alt="" /></a>}
-               { user.link && <a href={user.link}><img className="w-10 " src={link} alt="" /></a>}
-            </div>
-            <div className='flex flex-col gap-2'>
-                <h4 className=' text-xl text-center font-semibold'>{user.name}</h4>
-                <ul className=' flex flex-col gap-5'>
-                    <li className='flex'><img className='mr-2' src={loc} alt="" />{user.loc}</li>
-                    <li><a className='flex' href={user.port}><img className='mr-2' src={port} alt="" />{user.port || 'No portfolio'}</a></li>
-                    <li><a className='flex' href='#'><img className='mr-2' src={mail} alt="" />{user.email}</a></li>
-                    <li><a className='flex' href='#'><img className='mr-2' src={whats} alt="" />{user.contact}</a></li>
-                </ul>
-            </div>
-            
-            
-          </div>
-          <div className=' w-[68vw] bg-white shadow-lg rounded-lg'>
-            <h4 className='text-xl font-semibold m-4'>Bio</h4>
-            <p className='text-md font-normal m-4 py-2 px-2 rounded-lg'>{user.bio}</p>
-            
-
-            <div className="grid grid-cols-2 m-4">
-                <ul className="bg-[#ECECEC] py-2 px-4 m-2 rounded-lg">
-                  <h4 className="text-xl font-semibold mb-4">Skills</h4>
-                  {user.skills && user.skills.length > 0 ? (
-                    user.skills.map((skill, index) => (
-                      <li key={index}>{skill}</li>
-                    ))
-                  ) : (
-                    <li>No skills available</li>
-                  )}
-                </ul>
-
-                <ul className="bg-[#ECECEC] py-2 px-4 m-2 rounded-lg">
-                  <h4 className="text-xl font-semibold mb-4">Projects</h4>
-                  {user.projects && Object.keys(user.projects).length > 0 ? (
-                    Object.entries(user.projects).map(([name, url], index) => (
-                      <li key={index} className="flex items-center justify-between py-2">
-                        <span>{name}</span>
-                        <a 
-                          href={url} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
-                          className="text-blue-500 hover:underline flex items-center"
-                        >                        
-                        <div className="font-semibold border-2 text-center border-[#23B0FF] text-[#23B0FF] px-4 rounded-lg">
-                          View
-                        </div>
-                        </a>
-                      </li>
-                    ))
-                  ) : (
-                    <li>No projects available</li>
-                  )}
-                </ul>
+    <>
+      {pageload && <Ripple />}
+  
+      <div className="bg-[#ECECEC] h-full w-full p-10 mb-5">
+        {!pageload && (
+          <>
+            <div className="flex flex-row w-full justify-between items-center ">
+              <div className="text-4xl font-semibold">Profile</div>
+              <div
+                className="flex gap-3 p-2 items-center border-2 border-primary text-primary px-4 py-1 rounded-lg cursor-pointer"
+                onClick={handleEdit}
+              >
+                <img src={PencilB} className="w-7 h-7" alt="pencil" />
+                <button className="font-semibold">Edit Profile</button>
               </div>
+            </div>
+  
+            <div className="flex flex-row w-full gap-2 mt-10">
+              <div className="w-[25vw] bg-white flex flex-col rounded-md shadow-lg gap-8 items-center">
+                <img
+                  src={user.dp}
+                  className="w-[12vw] h-[12vw] border-8 border-double border-spacing-3 border-zinc-500 mt-7 rounded-full"
+                  alt=""
+                />
+                <div className="flex gap-4">
+                  {user.git && (
+                    <a href={user.git}>
+                      <img className="w-10" src={git} alt="" />
+                    </a>
+                  )}
+                  {user.link && (
+                    <a href={user.link}>
+                      <img className="w-10" src={link} alt="" />
+                    </a>
+                  )}
+                </div>
+                <div className="flex flex-col gap-2">
+                  <h4 className="text-xl text-center font-semibold">{user.name}</h4>
+                  <ul className="flex flex-col gap-5">
+                    <li className="flex">
+                      <img className="mr-2" src={loc} alt="" />
+                      {user.loc}
+                    </li>
+                    <li>
+                      <a className="flex" href={user.port}>
+                        <img className="mr-2" src={port} alt="" />
+                        {user.port || "No portfolio"}
+                      </a>
+                    </li>
+                    <li>
+                      <a className="flex" href="#">
+                        <img className="mr-2" src={mail} alt="" />
+                        {user.email}
+                      </a>
+                    </li>
+                    <li>
+                      <a className="flex" href="#">
+                        <img className="mr-2" src={whats} alt="" />
+                        {user.contact}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+  
+              <div className="w-[68vw] bg-white shadow-lg rounded-lg">
+                <h4 className="text-xl font-semibold m-4">Bio</h4>
+                <p className="text-md font-normal m-4 py-2 px-2 rounded-lg">{user.bio}</p>
+  
+                <div className="grid grid-cols-2 m-4">
+                  <ul className="bg-[#ECECEC] py-2 px-4 m-2 rounded-lg">
+                    <h4 className="text-xl font-semibold mb-4">Skills</h4>
+                    {user.skills && user.skills.length > 0 ? (
+                      user.skills.map((skill, index) => <li key={index}>{skill}</li>)
+                    ) : (
+                      <li>No skills available</li>
+                    )}
+                  </ul>
+  
+                  <ul className="bg-[#ECECEC] py-2 px-4 m-2 rounded-lg">
+                    <h4 className="text-xl font-semibold mb-4">Projects</h4>
+                    {user.projects && Object.keys(user.projects).length > 0 ? (
+                      Object.entries(user.projects).map(([name, url], index) => (
+                        <li key={index} className="flex items-center justify-between py-2">
+                          <span>{name}</span>
+                          <a
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-500 hover:underline flex items-center"
+                          >
+                            <div className="font-semibold border-2 text-center border-[#23B0FF] text-[#23B0FF] px-4 rounded-lg">
+                              View
+                            </div>
+                          </a>
+                        </li>
+                      ))
+                    ) : (
+                      <li>No projects available</li>
+                    )}
+                  </ul>
+                </div>
+  
+                <h4 className="text-xl font-semibold m-4">Tasks</h4>
+                <ul className="bg-[#ECECEC] py-2 px-4 m-5 rounded-lg">
+                  {submissions.map((submission, index) => (
+                    <li key={index} className="flex flex-row justify-between m-2">
+                      {submission.taskName}
+                      <div className="text-green-400 border-green-400 border-2 rounded-lg px-2">
+                        Completed
+                      </div>
+                      <div className="text-blue-500">
+                        <a href={submission.fileUrl}>
+                          <div className="font-semibold border-2 text-center border-[#23B0FF] text-[#23B0FF] px-4 rounded-lg">
+                            View
+                          </div>
+                        </a>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+  
+                <h4 className="text-xl font-semibold m-2 ml-5">
+                  Why do you want to join the {user.domain} team
+                </h4>
+                <p className="text-md font-normal m-4 py-2 px-2 rounded-lg">{user.why}</p>
+              </div>
+            </div>
+          </>
+        )}
+  
+        {isModalOpen && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start overflow-hidden">
+            <div
+              className="bg-white w-11/12 md:w-3/4 max-h-[90vh] p-8 rounded-lg shadow-lg overflow-y-auto"
+              style={{ marginTop: "5vh" }}
+            >
+              <h2 className="text-3xl font-bold mb-6 text-gray-800">Edit Profile</h2>
+              <form onSubmit={!actionload ? handleSaveChanges : null} className="space-y-6">
+                <div>
+                  <label className="block mb-2 font-semibold text-gray-700">Bio</label>
+                  <textarea
+                    value={updatedUser.bio || ""}
+                    onChange={(e) => handleInputChange("bio", e.target.value)}
+                    className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    rows="4"
+                  />
+                </div>
+      
+                    <div>
+              <label className="block mb-2 font-semibold text-gray-700">
+                Profile Picture
+              </label>
+              <input  accept=' image/png, image/jpeg, image/jpg' id='file' type='file' className='self-center' name='tfile' onChange={handleProfilePicture} />
+            </div>
 
-            <h4 className='text-xl font-semibold m-4'>Tasks</h4>
-            <ul className='bg-[#ECECEC] py-2 px-4 m-5 rounded-lg'>
-            {submissions.map((submission, index) => (
-              <li key={index} className='flex flex-row justify-between m-2'>
-                {submission.taskName} 
-                <div className='text-green-400 border-green-400 border-2 rounded-lg px-2 '>Completed</div>
-                <div className='text-blue-500'><a href={submission.fileUrl}>                        
-                  <div className="font-semibold border-2 text-center  border-[#23B0FF] text-[#23B0FF] px-4 rounded-lg">
-                          View
-                  </div>
-                  </a></div>
-              </li>
-            ))}
-          </ul>
-
-            <h4 className='text-xl font-semibold m-2 ml-5'>Why do you want to join the {user.domain} team</h4>
-            <p className='text-md font-normal m-4 py-2 px-2 rounded-lg'>{user.why}</p>
-          </div>
-
-
-          {isModalOpen && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start overflow-hidden">
-    <div
-      className="bg-white w-11/12 md:w-3/4 max-h-[90vh] p-8 rounded-lg shadow-lg overflow-y-auto"
-      style={{ marginTop: "5vh" }}
-    >
-      <h2 className="text-3xl font-bold mb-6 text-gray-800">Edit Profile</h2>
-      <form onSubmit={handleSaveChanges} className="space-y-6">
-        <div>
-          <label className="block mb-2 font-semibold text-gray-700">Bio</label>
-          <textarea
-            value={updatedUser.bio || ""}
-            onChange={(e) => handleInputChange("bio", e.target.value)}
-            className="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            rows="4"
-          />
-        </div>
-
-        <div>
-          <label className="block mb-2 font-semibold text-gray-700">
-            Profile Picture
-          </label>
-          <input  accept=' image/png, image/jpeg, image/jpg' id='file' type='file' className='self-center' name='tfile' onChange={handleProfilePicture} />
-        </div>
-
-        <div>
-          <label className="block mb-2 font-semibold text-gray-700">Skills</label>
-          {updatedUser.skills?.map((skill, index) => (
-            <div key={index} className="flex gap-4 mb-3 items-center">
-              <input
-                type="text"
-                value={skill}
-                onChange={(e) => handleSkillChange(index, e.target.value)}
-                className="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+            <div>
+              <label className="block mb-2 font-semibold text-gray-700">Skills</label>
+              {updatedUser.skills?.map((skill, index) => (
+                <div key={index} className="flex gap-4 mb-3 items-center">
+                  <input
+                    type="text"
+                    value={skill}
+                    onChange={(e) => handleSkillChange(index, e.target.value)}
+                    className="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveSkill(index)}
+                    className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-lg"
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
               <button
                 type="button"
-                onClick={() => handleRemoveSkill(index)}
-                className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-lg"
+                onClick={handleAddSkill}
+                className="text-blue-500 hover:underline"
               >
-                Remove
+                + Add Skill
               </button>
             </div>
-          ))}
-          <button
-            type="button"
-            onClick={handleAddSkill}
-            className="text-blue-500 hover:underline"
-          >
-            + Add Skill
-          </button>
-        </div>
 
-        <div>
-          <label className="block mb-2 font-semibold text-gray-700">Projects</label>
-          {projects && projects.length > 0 ? (
-          projects.map(({ id, name, url }) => (
-            <li key={id} className="flex items-center justify-between py-2">
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => handleProjectChange(id, "name", e.target.value)}
-                className="flex-1 mr-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-              <input
-                type="text"
-                value={url}
-                onChange={(e) => handleProjectChange(id, "url", e.target.value)}
-                className="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mr-2"
-              />
-             
+            <div>
+              <label className="block mb-2 font-semibold text-gray-700">Projects</label>
+              {projects && projects.length > 0 ? (
+              projects.map(({ id, name, url }) => (
+                <li key={id} className="flex items-center justify-between py-2">
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => handleProjectChange(id, "name", e.target.value)}
+                    className="flex-1 mr-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <input
+                    type="text"
+                    value={url}
+                    onChange={(e) => handleProjectChange(id, "url", e.target.value)}
+                    className="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mr-2"
+                  />
+                
+                  <button
+                    onClick={() => handleRemoveProject(id)}
+                    className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-lg"
+                  >
+                    Remove
+                  </button>
+                </li>
+              ))
+            ) : (
+              <li>No projects available</li>
+            )}
               <button
-                onClick={() => handleRemoveProject(id)}
-                className="px-3 py-1 bg-red-500 hover:bg-red-600 text-white rounded-lg"
+                type="button"
+                onClick={handleAddProject}
+                className="text-blue-500 hover:underline"
               >
-                Remove
+                + Add Project
               </button>
-            </li>
-          ))
-        ) : (
-          <li>No projects available</li>
-        )}
-          <button
-            type="button"
-            onClick={handleAddProject}
-            className="text-blue-500 hover:underline"
-          >
-            + Add Project
-          </button>
-        </div>
+            </div>
 
 
-        <fieldset className="mt-6">
-          <legend className="font-semibold text-lg text-gray-700 pb-4">Social Links</legend>
-          {["git", "link", "contact", "why"].map((field) => (
-            <div key={field} className="mb-4">
-              <label className="block mb-1 text-sm font-semibold text-gray-700">{field.toUpperCase()}</label>
+            <fieldset className="mt-6">
+              <legend className="font-semibold text-lg text-gray-700 pb-4">Social Links</legend>
+              {["git", "link", "contact", "why"].map((field) => (
+                <div key={field} className="mb-4">
+                  <label className="block mb-1 text-sm font-semibold text-gray-700">{field.toUpperCase()}</label>
+                  <input
+                    type="text"
+                    value={updatedUser[field] || ""}
+                    onChange={(e) => handleInputChange(field, e.target.value)}
+                    className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              ))}
+            </fieldset>
+
+            
+            <div>
+              <label className="block mb-2 font-semibold text-gray-700">Update Password</label>
               <input
-                type="text"
-                value={updatedUser[field] || ""}
-                onChange={(e) => handleInputChange(field, e.target.value)}
+                type="password"
+                value={pass.length > 8 ? '' : pass}
+                maxLength={8}
+                onChange={(e) => handlePass(e)}
                 className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                placeholder="New Password"
               />
             </div>
-          ))}
-        </fieldset>
 
-        
-        <div>
-          <label className="block mb-2 font-semibold text-gray-700">Update Password</label>
-          <input
-            type="password"
-            value={pass.length > 8 ? '' : pass}
-            maxLength={8}
-            onChange={(e) => handlePass(e)}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="New Password"
-          />
-        </div>
-
-        <div className="flex justify-end mt-8 gap-6">
-          <button
-            type="button"
-            onClick={() => setIsModalOpen(false)}
-            className="px-6 border-2 border-black py-3 bg-gray-300 hover:bg-gray-400 rounded-lg"
-          >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg"
-          >
-            Save Changes
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-)}
-
-
-
-
+            <div className="flex justify-end mt-8 gap-6">
+              <button
+                type="button"
+                onClick={actionload ? null : () => setIsModalOpen(false)}
+                className={`${actionload && 'cursor-not-allowed opacity-45'} px-6 border-2 border-black py-3 bg-gray-300 hover:bg-gray-400 rounded-lg cursor-pointer`}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className={`${actionload && 'animate-pulse cursor-not-allowed'} px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg cursor-pointer`}
+              >
+                Save Changes
+              </button>
+            </div>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
-
-      
-    
-    </div>
-  )
+    </>
+  );
 }
-
-export default User
+export default User;

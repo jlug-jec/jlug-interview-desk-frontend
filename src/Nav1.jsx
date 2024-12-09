@@ -1,5 +1,5 @@
 import {React, useState, useEffect} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import Home from './assets/Home.png'
 import HomeB from './assets/HomeB.png'
 import Chat from './assets/Chat.png'
@@ -16,21 +16,24 @@ import set from './assets/Settings.png'
 import logo from './assets/logo.png'
 
 const Nav = ()=>{
-    const [tab, setTab] = useState(0);
+    const initialTab = Number(localStorage.getItem('activeTab')) || 0
+    const [tab, setTab] = useState(initialTab);
 
-    const [user, setUser] = useState({});
+    let user = localStorage.getItem('user')
+    user = JSON.parse(user)
+    const navigate = useNavigate()
+
 
     const handleChange = (v)=>{
         setTab(v);
+        localStorage.setItem('activeTab', v);
     }
 
-    useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-          setUser(JSON.parse(storedUser));
-        }
-      },[]);
-    
+    const handleLogOut = ()=>{
+        localStorage.clear();
+        navigate('/login')
+    }
+
 
     return (
         <>
@@ -47,13 +50,13 @@ const Nav = ()=>{
                         </div>
                         <div className='w-[20%]'>
                         <Link to='/userd/user'>
-                            <img src={dp} className='w-11 h-11 rounded-full'/>
+                            <img src={user.dp} className='w-11 h-11 rounded-full' onClick={()=>handleChange(3)}/>
                         </Link>
                         </div>                        
                         <div className='h-[80%] w-[3px] rounded-md bg-[#D1CFCF]'></div>
                         <div className='flex flex-row gap-2 items-center'>
-                            <img src={log} className='w-8 h-8' alt='logout'/>
-                            <img src={set} className='w-8 h-8' alt='logout'></img>
+                            <img src={log} className='w-8 h-8 cursor-pointer' onClick={handleLogOut} alt='logout'/>
+                            <Link to='/userd/user' ><img src={set} className=' w-8 h-8 cursor-pointer'  alt='setttings' onClick={()=>handleChange(3)}></img></Link>
                         </div>
                     </div>
                 </div>

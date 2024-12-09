@@ -3,13 +3,16 @@ import { Link } from 'react-router-dom';
 import Page from '../../assets/Page.png';
 import Pencil from '../../assets/Pencil.png';
 import Application from '../../assets/Application.png';
+import Ripple from '../../components/Ripple';
 
 const TaskList = () => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [pageload, setPageLoad] = useState(true)
 
   useEffect(() => {
     const fetchTasks = async () => {
+      setPageLoad(true)
       try {
         const response = await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/get-tasks');
         if (!response.ok) {
@@ -27,6 +30,7 @@ const TaskList = () => {
         console.error('Error fetching tasks:', error);
       } finally {
         setLoading(false);
+        setPageLoad(false)
       }
     };
 
@@ -34,7 +38,10 @@ const TaskList = () => {
   }, []);
 
   return (
-    <div className="flex-1 pt-10 w-100">
+    <>
+    {pageload && <Ripple/>}
+    { !pageload && (
+      <div className="flex-1 pt-10 w-100">
       <div className="w-full px-6 md:px-6 lg:px-10 pb-10 lg:pb-20 xl:pb-20">
         <header className="w-full h-16">
           <div className="mt-auto max-w-full pl-6 ">
@@ -101,7 +108,8 @@ const TaskList = () => {
           )}
         </div>
       </div>
-    </div>
+    </div>)}
+    </>
   );
 };
 

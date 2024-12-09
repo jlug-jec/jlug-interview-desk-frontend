@@ -17,8 +17,9 @@ import set from './assets/Settings.png'
 
 import logo from './assets/logo.png'
 
-const Nav = ()=>{
-    const [tab, setTab] = useState(0);
+const Nav = ()=>{const initialTab = Number(localStorage.getItem('activeTab')) || 0
+    const [tab, setTab] = useState(initialTab);
+
     let user = localStorage.getItem('user')
     user = JSON.parse(user)
     const navigate = useNavigate()
@@ -26,6 +27,7 @@ const Nav = ()=>{
 
     const handleChange = (v)=>{
         setTab(v);
+        localStorage.setItem('activeTab', v);
     }
 
     const handleLogOut = ()=>{
@@ -54,7 +56,7 @@ const Nav = ()=>{
                         <div className='h-[80%] w-[3px] rounded-md bg-[#D1CFCF]'></div>
                         <div className='flex flex-row gap-2 items-center'>
                             <img src={log} className='w-8 h-8 cursor-pointer ' onClick={handleLogOut} alt='logout'/>
-                            <Link to={''} ><img src={set} className='w-8 h-8' alt='logout'></img></Link>
+                            <Link to={'/settings'} ><img src={set} className='w-8 h-8' alt='logout'></img></Link>
                         </div>
                     </div>
                 </div>
