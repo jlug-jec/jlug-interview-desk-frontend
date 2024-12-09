@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import logo from '../assets/logo.png'
 import approve from '../assets/Approval.png';
 import people from '../assets/People.png';
 import book from '../assets/Bookmark.png';
@@ -6,6 +7,7 @@ import time from '../assets/Time.png';
 import star from '../assets/Star.png';
 import { Link } from 'react-router-dom';
 import avatar1 from '../assets/3d_avatar_1.png';
+import Ripple from '../components/Ripple';
 
 function Dashboard() {
   const [stats, setStats] = useState({
@@ -14,6 +16,7 @@ function Dashboard() {
     pendingApplications: 0,
     applicationsBookmarked: 0,
   });
+  const [pageload, setPageLoad] = useState(true);
 
   const [leaderboard, setLeaderboard] = useState([]);
   const [pendingApplicants, setPendingApplicants] = useState([]);
@@ -21,6 +24,9 @@ function Dashboard() {
   const image = [people, approve, time, book];
 
   useEffect(() => {
+
+
+    setPageLoad(true);
     const user = JSON.parse(localStorage.getItem('user'));
 
     if (!user) {
@@ -54,10 +60,7 @@ function Dashboard() {
       })
       .catch((error) => console.error('Error fetching users:', error));
 
-  }, []);
 
-
-  useEffect(() => {
     const fetchLeaderboard = async () => {
       try {
         const user = JSON.parse(localStorage.getItem('user'));
@@ -86,11 +89,7 @@ function Dashboard() {
         console.error('Error fetching leaderboard:', error);
       }
     };
-  
-    fetchLeaderboard();
-  }, []);
-
-  useEffect(() => {
+    
     const fetchPendingApplicants = async () => {
       try {
         const user = JSON.parse(localStorage.getItem('user'));
@@ -110,18 +109,25 @@ function Dashboard() {
         setPendingApplicants(data);
       } catch (error) {
         console.error('Error fetching pending applicants:', error);
+      } finally {
+        setPageLoad(false)
       }
     };
   
     fetchPendingApplicants();
+    
+    fetchLeaderboard();
+
   }, []);
   
 
   console.log(stats)
 
   return (
-    <>{(stats.totalApplicants != 0) &&
-      <div className="bg-zinc-100 pb-10 w-100 h-full">
+    <>
+    {pageload ? 
+    ( <Ripple />) : 
+    ( <div className="bg-zinc-100 pb-10 w-100 h-full">
         <h1 className="font-semibold p-10 text-4xl">Dashboard</h1>
         <div className="flex justify-between ml-14 mb-14 mr-14 pl-8 pr-8">
           {[
@@ -178,6 +184,7 @@ function Dashboard() {
 
         <div className="w-2/5 h-auto mr-10 p-10 bg-white shadow-md shadow-zinc-400 rounded-lg">
           <h1 className="border-b-2 pb-2 border-black font-semibold text-xl">Pending Applicants</h1>
+          {pendingApplicants.length === 0 ? <div className='text-lg text-center p-3 text-blue-500'>No Pending Applicants</div> : ''}
           {pendingApplicants.map((applicant, i) => (
             <div
               key={i}
@@ -193,15 +200,15 @@ function Dashboard() {
               </div>
             </div>
           ))}
-          <Link to={`/userd/view/}`}>
+          {pendingApplicants.length != 0 && <Link to={`/review}`}>
             <div className="font-semibold border-2 mt-2 text-center  w-[50%]  h-[10%] border-[#23B0FF] text-[#23B0FF] px-4 py-2 rounded-lg m-auto">
               View Pending Applicants
             </div>
-          </Link>
+          </Link>}
         </div>
       </div>
 
-      </div>}
+      </div>)}
     </>
   );
 }

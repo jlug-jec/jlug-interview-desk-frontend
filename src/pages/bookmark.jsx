@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import remove from '../assets/Remove.png';
+import Ripple from '../components/Ripple';
 
 const Bookmark = () => {
   const [bookmarks, setBookmarks] = useState([]);
   let adminid = localStorage.getItem('userid');
   const adminId =  adminid.replace(/['"]+/g, '');
   const navigate = useNavigate();
+  
+  const [pageload, setPageLoad] = useState(true);
 
   useEffect(() => {
+    setPageLoad(true)
     const fetchBookmarks = async () => {
       try {
         const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/bookmarked/${adminId}`);
@@ -16,6 +20,8 @@ const Bookmark = () => {
         setBookmarks(data);
       } catch (error) {
         console.error('Error fetching bookmarks:', error);
+      } finally{
+        setPageLoad(false)
       }
     };
 
@@ -32,7 +38,9 @@ const Bookmark = () => {
   };
 
   return (
-    <div className="flex-1 pt-10 w-100">
+    <>
+    {pageload && <Ripple /> }
+    { !pageload && (<div className="flex-1 pt-10 w-100">
       <div className="w-full px-6 md:px-6 lg:px-10 pb-10 lg:pb-20 xl:pb-20">
         <header className="w-full h-16">
           <div className="mt-auto max-w-full pl-6">
@@ -71,7 +79,8 @@ const Bookmark = () => {
           )}
         </div>
       </div>
-    </div>
+    </div> )}
+    </>
   );
 };
 

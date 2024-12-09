@@ -10,6 +10,7 @@ export default function Add() {
   adminid =  adminid.replace(/['"]+/g, '');
   const name = localStorage.getItem('user').name
   const [file, setFile] = useState(null);
+  const [actionload, setActionLoad] = useState(false)
 
   const [originalData, setOriginalData] = useState(null); 
   const [data, setData] = useState({
@@ -53,6 +54,7 @@ export default function Add() {
 
 
   const handleSubmit = async () => {
+    setActionLoad(true)
     const { tname, tdesc, tcatg, tstat, tsub, tdead } = data;
     const admin = localStorage.getItem('user');
 
@@ -63,32 +65,32 @@ export default function Add() {
       return;
     }
   
-    if (!tname || !tdesc || !tcatg || !tstat || !tsub || !tdead || !file) {
-      alert("Please fill all the fields and select a file!");
-      return;
-    }
   
     try {
-      const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dqcqijw3c/image/upload`;
-      const uploadPreset = 'sample-img';
-  
-      const imageData = new FormData();
-      imageData.append('file', file);
-      imageData.append('upload_preset', uploadPreset);
-      imageData.append('cloud_name', 'dqcqijw3c');
-  
-      const response = await fetch(cloudinaryUrl, {
-        method: 'POST',
-        body: imageData,
-      });
-  
-      const uploadResult = await response.json();
-  
-      if (!uploadResult.secure_url) {
-        alert('Image upload failed!');
-        return;
+      let uploadResult = 'nothing'
+      if(file != null){
+          const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dqcqijw3c/image/upload`;
+          const uploadPreset = 'sample-img';
+      
+          const imageData = new FormData();
+          imageData.append('file', file);
+          imageData.append('upload_preset', uploadPreset);
+          imageData.append('cloud_name', 'dqcqijw3c');
+      
+          const response = await fetch(cloudinaryUrl, {
+            method: 'POST',
+            body: imageData,
+          });
+      
+          uploadResult = await response.json();
+      
+          if (!uploadResult.secure_url) {
+            alert('Image upload failed!');
+            return;
+          }
+      
       }
-  
+      
       const taskData = {
         tname,
         tdesc,
@@ -96,7 +98,7 @@ export default function Add() {
         tstat,
         tsub,
         tdead,
-        tfileUrl: uploadResult.secure_url, 
+        tfileUrl: uploadResult === 'nothing' ? originalData.tfileUrl : uploadResult.secure_url, 
         by: adminObj.name,
         adminid: adminid, 
       };
@@ -119,12 +121,18 @@ export default function Add() {
         setData(taskData);
         setOriginalData(taskData);
         setFile(null);
+        setActionLoad(false)
       } else {
+        setActionLoad(false)
         alert('Failed to add task!');
       }
     } catch (error) {
       console.error('Error during save:', error);
       alert('An error occurred. Please try again.');
+    }
+    finally{
+      setActionLoad(false)
+      setIsEditing(false)
     }
   };
   
@@ -157,16 +165,16 @@ export default function Add() {
           {isEditing && (
             <>
               <div
-                className="cursor-pointer flex flex-column gap-2 justify-between items-center bg-bgprimary text-success border-2 hover:bg-success-hv border-success py-2 px-4 rounded"
-                onClick={handleSubmit}
+                className={`${actionload && 'animate-pulse cursor-not-allowed '} cursor-pointer flex flex-column gap-2 justify-between items-center bg-bgprimary text-success border-2 hover:bg-success-hv border-success py-2 px-4 rounded`}
+                onClick={!actionload ? handleSubmit : null}
               >
                 <img src={check} className="w-6 h-6" alt="Save" />
                 <div>Save</div>
               </div>
 
               <div
-                className="cursor-pointer flex flex-column gap-2 justify-between items-center bg-bgprimary text-discard border-2 hover:bg-discard-hv border-discard py-2 px-4 rounded"
-                onClick={handleDiscard}
+                className={`${actionload && 'opacity-50 cursor-not-allowed '}cursor-pointer flex flex-column gap-2 justify-between items-center bg-bgprimary text-discard border-2 hover:bg-discard-hv border-discard py-2 px-4 rounded`}
+                onClick={!actionload ? handleDiscard : null}
               >
                 <img src={cancel} className="w-6 h-6" alt="Cancel" />
                 <div>Cancel</div>
@@ -244,9 +252,8 @@ export default function Add() {
             onChange={handleInputChange}
           >
             <option value="">Select Submission Type</option>
-            <option value="PDF">PDF</option>
-            <option value="IMG">Image</option>
-            <option value="URL">URL</option>
+                <option value='DRV'>Google Drive</option>
+                <option value='GIT'>Github Repositry</option>
           </select>
         </div>
 

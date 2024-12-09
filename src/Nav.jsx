@@ -1,5 +1,5 @@
 import {React, useState} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import Home from './assets/Home.png'
 import HomeB from './assets/HomeB.png'
 import Lead from './assets/Lead.png'
@@ -19,9 +19,18 @@ import logo from './assets/logo.png'
 
 const Nav = ()=>{
     const [tab, setTab] = useState(0);
+    let user = localStorage.getItem('user')
+    user = JSON.parse(user)
+    const navigate = useNavigate()
+
 
     const handleChange = (v)=>{
         setTab(v);
+    }
+
+    const handleLogOut = ()=>{
+        localStorage.clear();
+        navigate('/login')
     }
 
     return (
@@ -34,18 +43,18 @@ const Nav = ()=>{
                     <div className='text-3xl font-normal'><span className='font-semibold'>JLUG </span> Interview Desk</div>
                     <div className='w-[20%] h-[90%] flex flex-row items-center gap-2 '>
                         <div className='w-fit flex flex-col justify-center text-right p-2'>
-                            <div className='text-sm font-bold'>Admin Name</div>
-                            <div className='text-xs font-semibold'>Team Name</div>
+                            <div className='text-sm font-bold'>{user.name}</div>
+                            <div className='text-xs font-semibold'>{user.domain}</div>
                         </div>
                         <div className='w-[20%]'>
-                        <Link to='/user'>
-                            <img src={dp} className='w-11 h-11 rounded-full'/>
+                        <Link to='#'>
+                            <img src={user.dp} className='w-11 h-11 rounded-full'/>
                         </Link>
                         </div>                        
                         <div className='h-[80%] w-[3px] rounded-md bg-[#D1CFCF]'></div>
                         <div className='flex flex-row gap-2 items-center'>
-                            <img src={log} className='w-8 h-8' alt='logout'/>
-                            <img src={set} className='w-8 h-8' alt='logout'></img>
+                            <img src={log} className='w-8 h-8 cursor-pointer ' onClick={handleLogOut} alt='logout'/>
+                            <Link to={''} ><img src={set} className='w-8 h-8' alt='logout'></img></Link>
                         </div>
                     </div>
                 </div>

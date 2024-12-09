@@ -16,8 +16,10 @@ const Login = ()=>{
     })
 
     const [load, setLoad] = useState(1);
+    const [pageload, setPageLoad] = useState(0);
 
     const handleCompletion = async ()=>{
+        setPageLoad(1);
         try {
             let res = await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/login', {
                 method: 'POST',
@@ -46,6 +48,7 @@ const Login = ()=>{
         } catch (error) {
             console.log('Login Failed:', error);
         }
+        setPageLoad(0)
     }
 
     const handleNext = ()=>{
@@ -98,7 +101,7 @@ const Login = ()=>{
                     </div>
 
                     <div className='flex flex-row gap-4 w-full items-center justify-center mt-2'>
-                        <Button extraStyles={'w-[40%]'} label={'Login'} handler={handleCompletion} variant={1}/>    
+                        <Button  label={'Login'} handler={handleCompletion} variant={1} isloading = {pageload}/>    
                     </div>
                 </div>
             </div>

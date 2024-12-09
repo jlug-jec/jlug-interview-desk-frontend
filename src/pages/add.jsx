@@ -5,6 +5,7 @@ import check from '../assets/check.png'
 import cancel from '../assets/Cancel.png'
 export default function Add() {
   const adminid = localStorage.getItem('userid')
+  const [actionload, setActionLoad] = useState(false)
 
   const [data, setData] = useState({
     tname : '',
@@ -50,6 +51,7 @@ export default function Add() {
   
 
   const handleSubmit = async ()=>{
+    setActionLoad(true)
     const {tname, tdesc, tcatg,tstat, tsub, tdead, tfile}  = data;
     const admin = localStorage.getItem('user');
     const adminObj = JSON.parse(admin)
@@ -57,7 +59,7 @@ export default function Add() {
       alert("Please Login as admin Continue !")
     }
 
-    //if(tname !== ''  & tdesc !=='' & tcatg !=='' & tstat !== '' & tsub !== '' & tdead !== '' & tfile !== ''){
+    if(tname !== ''  & tdesc !=='' & tcatg !=='' & tstat !== '' & tsub !== '' & tdead !== '' & tfile !== ''){
       console.log('after checking the data will be sent to api')
 
       const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dqcqijw3c/image/upload`;
@@ -90,7 +92,7 @@ export default function Add() {
           tdead,
           tfileUrl: uploadResult.secure_url, 
           by: adminObj.name,
-          adminid:adminid,
+          adminid:adminObj.id,
           domain: adminObj.domain
         };
 
@@ -109,12 +111,16 @@ export default function Add() {
         
         if (apiResult.message === 'Task successfully added!') {
           console.log('Task added successfully to Firebase');
+          alert('Task was added Successfully!')
+          setActionLoad(false)
         } else {
           console.error('Failed to add task to Firebase');
+          alert('Oops! Something went wrong')
+          setActionLoad(false)
         }
       }
   
-    //}
+    }
   }
 
   const handleDiscard = ()=>{
@@ -144,12 +150,12 @@ export default function Add() {
         </p>
         <div className='flex flex-row gap-5 p-3 justify-center pr-9'>
 
-          <div className='cursor-pointer flex flex-column gap-2 justify-between items-center bg-bgprimary text-success border-2 hover:bg-success-hv border-success py-2 px-4 rounded' onClick={handleSubmit}> 
+          <div className={`${actionload && 'animate-pulse cursor-not-allowed '} cursor-pointer flex flex-column gap-2 justify-between items-center bg-bgprimary text-success border-2 hover:bg-success-hv border-success py-2 px-4 rounded`} onClick={!actionload ? handleSubmit : null}> 
             <img src={check} className=' w-6 h-6'></img>
             <div>Confirm</div>
           </div> 
 
-          <div className='cursor-pointer flex flex-column gap-2 justify-between items-center bg-bgprimary text-discard border-2 hover:bg-discard-hv border-discard py-2 px-4 rounded' onClick={handleDiscard}> 
+          <div className={`${actionload && 'cursor-not-allowed  opacity-50'} cursor-pointer flex flex-column gap-2 justify-between items-center bg-bgprimary text-discard border-2 hover:bg-discard-hv border-discard py-2 px-4 rounded`} onClick={!actionload ? handleDiscard : null}> 
             <img src={cancel} className=' w-6 h-6'></img>
             <div>Cancel</div>
           </div> 
@@ -196,9 +202,8 @@ export default function Add() {
               <p className='text-center self-center text-[20px] w-[25%] font-medium '>Submission Type</p>
               <select className='bg-form-input w-full p-4 border-none rounded-xl' name='tsub' value={data.tsub} onChange={handleChange}>
                 <option value=''>Select Submission Type</option>
-                <option value='PDF'>PDF</option>
-                <option value='IMG'>Image</option>
-                <option value='URL'>URL</option>
+                <option value='DRV'>Google Drive</option>
+                <option value='GIT'>Github Repositry</option>
               </select>
           </div>
 
