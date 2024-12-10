@@ -4,58 +4,28 @@ import { Link } from 'react-router-dom';
 import avatar2 from '../assets/3d_avatar_13.png';
 import star from '../assets/Star.png';
 import Ripple from '../components/Ripple';
+import { useAdminContext } from '../contexts/Admin';
+  
+
 
 const Leader = () => {
-  const avatars = {
-    1: avatar1,
-    2: avatar2,
-  };
+  const {    
+    stats,
+    leaderboard,
+    pendingApplicants,
+    load,
+    fetchDashboardleaderboard,
+    fetchLeaderboardleaderboard,
+    fetchPendingApplicants
+  } = useAdminContext();
 
-  const [data, setdata] = useState([]);
-  const [pageload, setPageLoad] = useState(true);
-  
-  useEffect(() => {
-    setPageLoad(true)
-    const fetchLeaderboard = async () => {
-      try {
-        const domain = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).domain : '';
-        console.log(domain)
-        if (!domain) {
-          console.error("Domain not found in localStorage");
-          return;
-        }
-
-        const response = await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/leaderboard', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ domain : domain}),
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch leaderboard');
-        }
-
-        const data = await response.json();
-        setdata(data);
-      } catch (error) {
-        console.error('Error fetching leaderboard:', error);
-      } finally{
-        setPageLoad(false)
-      }
-    };
-
-    fetchLeaderboard();
-  }, []);
-
-  console.log(data)
+  console.log(leaderboard)
 
 
   return (
 <>
-    {pageload && <Ripple />} 
-      {!pageload && (
+    {load && <Ripple />} 
+      {!load && (
         <div className="flex-1 pt-10 w-100">
           <div className="w-full px-6 md:px-6 lg:px-10 pb-10 lg:pb-20 xl:pb-20">
             <header className="w-full h-16">
@@ -64,9 +34,9 @@ const Leader = () => {
               </div>
             </header>
             <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col p-10 rounded-xl drop-shadow-lg">
-              {data.length > 0 ? (
+              {leaderboard.length > 0 ? (
                 <div role="list" className="flex flex-col gap-4">
-                  {data.map((bookmark) => (
+                  {leaderboard.map((bookmark) => (
                     <div
                       key={bookmark.name}
                       className="flex justify-between items-center gap-x-6 py-4 w-full min-h-[10px]"

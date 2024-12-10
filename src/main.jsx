@@ -21,6 +21,7 @@ import Prof from './pages/User/Prof.jsx'
 import EditTask from './pages/edittask.jsx'
 import Settings from './pages/Settings.jsx'
 import Reset from './pages/Reset.jsx'
+import { AdminProvider } from './contexts/Admin.jsx'
 
 const Main = ()=>{
   const loc = useLocation();
@@ -58,7 +59,10 @@ const Main = ()=>{
 createRoot(document.getElementById('root')).render(
   <StrictMode>
         <Router>
+          
+        <AdminProvider>
           <Main />
+          </AdminProvider>
         </Router>
   </StrictMode>
 )
