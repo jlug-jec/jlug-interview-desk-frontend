@@ -73,7 +73,7 @@ const Leader = () => {
                     >
                       <div className="flex min-w-0 gap-x-4">
                         <img
-                          src={avatar1}
+                          src={bookmark.dp}
                           alt={`Avatar of ${bookmark.name}`}
                           className="h-12 w-12 flex-none rounded-full bg-gray-50"
                         />

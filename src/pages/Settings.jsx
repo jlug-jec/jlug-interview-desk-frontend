@@ -7,6 +7,9 @@ function Settings() {
   const [user, setUser] = useState();
   const [dp, setDp] = useState(null); 
   const [pass, setPass] = useState(''); 
+  const [reload, setReload] = useState(false);
+  let id = localStorage.getItem('userid')
+  id = JSON.parse(id);
   const [fileModal, setFileModal] = useState(false); 
   const [passModal, setPassModal] = useState(false); 
   const [actionLoad, setActionLoad] = useState(false);
@@ -15,7 +18,7 @@ function Settings() {
     let user = localStorage.getItem('user');
     user = JSON.parse(user);
     setUser(user);
-  }, []);
+  }, [reload]);
 
   const handleSaveChanges = async (type) => {
     setActionLoad(true);
@@ -55,7 +58,7 @@ function Settings() {
 
       
       const response = await fetch(
-        `http://127.0.0.1:5001/fir-api-5316a/us-central1/app/update-user/${user.id}`,
+        `http://127.0.0.1:5001/fir-api-5316a/us-central1/app/update-user/${id}`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -70,6 +73,7 @@ function Settings() {
       localStorage.setItem('user', JSON.stringify(updatedUser));
       setFileModal(false);
       setPassModal(false);
+      setReload(!reload)
     } catch (error) {
       console.error(error);
       alert('Failed to update profile. Please try again.');
@@ -121,14 +125,14 @@ function Settings() {
                   <input
                     type="password"
                     maxLength={8}
-                    className="mb-4 flex-1 mr-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="mb-4 w-[90%] flex-1 mr-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     value={pass}
                     onChange={(e) => setPass(e.target.value)}
                   />
                   <div className="flex justify-end gap-2">
                   <button
                       className={`${actionLoad && 'opacity-45 cursor-not-allowed'} px-6 py-3 bg-white text-black border-2 border-black rounded-lg cursor-pointer`}
-                      onClick={() => setFileModal(false)}
+                      onClick={() => setPassModal(false)}
                     >
                       Cancel
                     </button>

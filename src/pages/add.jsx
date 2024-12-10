@@ -4,7 +4,8 @@ import {React, useState} from 'react'
 import check from '../assets/check.png'
 import cancel from '../assets/Cancel.png'
 export default function Add() {
-  const adminid = localStorage.getItem('userid')
+  let adminid = localStorage.getItem('userid')
+  adminid = JSON.parse(adminid)
   const [actionload, setActionLoad] = useState(false)
 
   const [data, setData] = useState({
@@ -92,7 +93,7 @@ export default function Add() {
           tdead,
           tfileUrl: uploadResult.secure_url, 
           by: adminObj.name,
-          adminid:adminObj.id,
+          adminid:adminid,
           domain: adminObj.domain
         };
 

@@ -43,6 +43,7 @@ function User() {
 
       const data = await response.json();
       alert(data.message || `Action ${actionType} completed successfully.`);
+      localStorage.setItem('refresh', new Date())
     } catch (error) {
       console.error(`Error during ${actionType}:`, error);
       alert(`Error during ${actionType}.`);
@@ -113,7 +114,7 @@ function User() {
       </div>
 
       <div className='flex flex-row w-full gap-2 mt-10'>
-        <div className=' w-[25vw]  bg-white flex flex-col rounded-md shadow-lg  gap-8 items-center '>
+        <div className=' w-[25vw]  bg-white flex flex-col rounded-md shadow-lg  gap-8 items-center p-5'>
             <img src={userDetails.dp} className="w-[12vw] h-[12vw]  border-8 border-double border-spacing-3 border-zinc-500 mt-7  rounded-full" alt="" />
 
           <div className='flex gap-4'>
@@ -137,7 +138,7 @@ function User() {
         </div>
         <div className='w-[68vw] bg-white shadow-lg rounded-lg'>
           <h4 className='text-xl font-semibold m-4'>Bio</h4>
-          <p className='text-md font-normal m-4 py-2 px-2 rounded-lg'>{userDetails.bio}</p>
+          <p className='text-md font-normal m-4 py-2 px-2 rounded-lg'>{userDetails.bio != '' ? userDetails.bio : 'No Data'}</p>
 
           <div className='grid grid-cols-2 m-4'>
             <ul className='bg-[#ECECEC] py-2 px-4 m-2 rounded-lg'>
@@ -184,10 +185,17 @@ function User() {
                 <div className='text-blue-500'><a href={submission.fileUrl}>View</a></div>
               </li>
             ))}
+            {
+                submissions.length === 0 && (
+                  <div className="text-orange-400 border-orange-400 w-fit m-auto border-2 rounded-lg px-2">
+                  No Submissions made yet!
+                </div>
+                )
+              }
           </ul>
 
           <h4 className='text-xl font-semibold m-2 ml-5'>Why do you want to join the team?</h4>
-          <p className='text-md font-normal m-4 py-2 px-2 rounded-lg'>{userDetails.why}</p>
+          <p className='text-md font-normal m-4 py-2 px-2 rounded-lg'>{userDetails.why != '' ? userDetails.why : 'No Data' }</p>
         </div>
       </div>
     </div>

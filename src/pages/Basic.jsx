@@ -11,8 +11,12 @@ const Basic = ({handleCompletion, settings, updateSettings, data})=>{
 
     const handleNext = ()=>{
 
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const phoneRegex = /^[0-9]{10}$/;
+
+        if(profile.sem > 8){
+            alert('Please recheck your information and continue!')
+            return;
+        }
         
         if (
             profile.name === '' || 
@@ -28,7 +32,7 @@ const Basic = ({handleCompletion, settings, updateSettings, data})=>{
             return;
         }
     
-        if (!emailRegex.test(profile.email)) {
+        if (!profile.email.includes('@')) {
             alert("Please enter a valid email address");
             return;
         }
@@ -55,7 +59,7 @@ const Basic = ({handleCompletion, settings, updateSettings, data})=>{
         })
     }
 
-
+console.log(profile)
 
     const handleChange = (e) => {
         setProfile({
@@ -79,13 +83,25 @@ const Basic = ({handleCompletion, settings, updateSettings, data})=>{
 
                 <Input handleChange={handleChange} label={'Full Name'} type={'text'} value={profile.name} name={'name'} /> 
 
-                <div className='flex flex-row w-full justify-between '>
-                    <SmallInput handleChange={handleChange} label={'Branch'} type={'text'} value={profile.branch} styles={50} name={'branch'} />  
-                    <SmallInput handleChange={handleChange} label={'Semester'} type={'number'} value={profile.sem}  styles={50}   name={'sem'} />   
+                <div className='flex flex-row w-full justify-between '>                        
+                    <label htmlFor='gender' className='w-[15%] font-medium text-lg text-center'>Branch</label>
+                        <select onChange={(e) => handleChange(e)} label={'Branch'} value={profile.branch} className='w-[35%] bg-form-input hover:border-[1px] p-1 font-normal text-base hover:border-zinc-400 rounded-lg h-8 ' name={'branch'}>
+                            <option disabled unselectable='true' value={''}>Select</option>
+                            <option value={'CSE'}>CSE</option>
+                            <option value={'IT'}>IT</option>
+                            <option value={'ECE'}>ECE</option>
+                            <option value={'EE'}>EE</option>
+                            <option value={'AI'}>AI</option>
+                            <option value={'MT'}>MT</option>
+                            <option value={'CIVIL'}>CIVIL</option>
+                            <option value={'MECH'}>MECH</option>
+                            <option value={'IP'}>IP</option>
+                        </select>  
+                    <SmallInput handleChange={handleChange} max={8} min={1} label={'Semester'} type={'number'} value={profile.sem}  styles={50}   name={'sem'} />   
                 </div>
 
                 <div className='flex flex-row  w-full justify-between '>
-                    <SmallInput handleChange={handleChange} label={'Age'} type={'number'} value={profile.age}   styles={50}  name={'age'} />  
+                    <SmallInput handleChange={handleChange} label={'Age'} min={14} type={'number'} value={profile.age}   styles={50}  name={'age'} />  
                     
                     <div className={`flex flex-row gap-2 w-[50%] items-center`}>  
                         <label htmlFor='gender' className='w-[30%] font-medium text-lg text-center'>Gender</label>

@@ -117,7 +117,7 @@ function Dashboard() {
                                 <div className='font-semibold border-2 text-center h-[50%] border-[#01ED01] text-[#01ED01] px-4  rounded-lg '>
                                     {task.tstat}
                                 </div>                          
-                                <Link to='/add'>
+                                <Link to={`/userd/view/${task.id}`}>
                                     <div className='font-semibold border-2 text-center h-[50%] border-[#23B0FF] text-[#23B0FF] px-4  rounded-lg '>
                                         View
                                     </div>

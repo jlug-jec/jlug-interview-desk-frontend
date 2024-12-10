@@ -13,8 +13,19 @@ const TaskList = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       setPageLoad(true)
+      let user = localStorage.getItem('user')
+      user = JSON.parse(user);
+
       try {
-        const response = await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/get-tasks');
+
+        let response= await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/get-tasks-by-domain', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({domain : user.domain}),
+        });
+
         if (!response.ok) {
           throw new Error('Failed to fetch tasks');
         }

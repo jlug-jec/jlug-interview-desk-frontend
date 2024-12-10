@@ -7,6 +7,8 @@ import Rating from './Rating';
 import { useEffect, useState } from 'react';
 import Loading from './Loading';
 import Final from './Final';
+import Ripple from '../components/Ripple';
+
 
 
 function App() {
@@ -51,7 +53,7 @@ function App() {
 
   useEffect(() => {
     console.log({"page" : page, "profile" : profile});
-    if (page === 4) {
+    if (page === 4 ) {
       somefunction();
     }
   }, [profile]); 
@@ -70,18 +72,37 @@ function App() {
 
 
       res = await res.json();
-      console.log('Profile saved:', res);
+      console.log(res.ok)
+
+      if(res.ok){
+        alert(res.message)
+        console.log('value of page', page)
+        setPage(5)
+      }
+      else{
+        alert(res.message)
+        setPage(3)
+      }
     }
 
     catch(e){
       console.log(e)
+      alert(res.message)
+      setPage(3)
     }
   
   }
 
   const handleProfile = (prof, dir)=>{
     setProfile({...profile, ...prof});
-    if(dir === 1) setPage(page + 1);
+    if(dir === 1 && page < 5) {
+      // if(page === 3 && !success){
+      //   alert('Email id already exists!')
+      // }
+      // else{
+        setPage(page + 1)
+      // }
+  }
     console.log({"page" : page, "profile" : profile} )
     if(dir !== 1) {
       if(page > 1)
@@ -116,12 +137,14 @@ function App() {
         :
         page === 3 ? <More  data={profile}  settings={settings} updateSettings={updateSettings} handleCompletion={handleProfile}/>
         :
-        page === 4 ? <Final data={profile} />
+        page === 4  ? <Ripple styles={'flex mt-[20%]'} />
         :
-        <Rating data={profile} handleCompletion={handleProfile}/>
+        page === 5  ? <Final data={profile} />
+        :
+        <More  data={profile}  settings={settings} updateSettings={updateSettings} handleCompletion={handleProfile}/>
       
       }
-      {page !== 0 ? <Social /> : null}
+      {page !== 0 && page !== 4 ? <Social /> : null}
     </div>
 
 

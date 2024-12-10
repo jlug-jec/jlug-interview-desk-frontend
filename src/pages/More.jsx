@@ -9,12 +9,17 @@ import SmallInput from '../components/SmallInput';
 const More = ({settings, updateSettings, handleCompletion, data})=>{  
     
     const [profile, setProfile] = useState(data)
+    const [load, setLoad] = useState(false)
 
 
     const handleNext = (direction)=>{
 
         if(direction === 1){
+            setLoad(true)
             handleCompletion(profile, 1);
+            setTimeout(() => {
+                setLoad(false)
+            }, 2000);
         }
         else{
             handleCompletion(profile, 0);
@@ -51,8 +56,8 @@ const More = ({settings, updateSettings, handleCompletion, data})=>{
                 <Input handleChange={handleChange} label={'Why do you want to join'} type={'text'} value={profile.why} name={'why'} />  
 
                 <div className='flex flex-row gap-4 w-full items-center justify-center mt-2'>
-                    <Button label={'Previous'}  handler={()=>handleNext(0)} variant={0}/>
-                    <Button label={'Register'} handler={()=>handleNext(1)} variant={1}/>    
+                    <Button isloading={load} label={'Previous'}  handler={()=>handleNext(0)} variant={0}/>
+                    <Button isloading={load} label={'Register'} handler={()=>handleNext(1)} variant={1}/>    
                 </div>
             </div>
         </div>

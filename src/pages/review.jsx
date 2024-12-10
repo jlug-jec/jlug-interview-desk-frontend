@@ -33,7 +33,6 @@ const Review = () => {
   }, [adminId]);
 
 
-  console.log(adminId)
   console.log(applicants)
   return (
     <>
@@ -58,7 +57,7 @@ const Review = () => {
                       className="flex items-center gap-4 w-full p-4 mb-4 "
                     >
                       <img
-                        src={avatar1}
+                        src={applicant.dp}
                         alt={`Avatar of ${applicant.name}`}
                         className="h-12 w-12 flex-none rounded-full bg-gray-50"
                       />

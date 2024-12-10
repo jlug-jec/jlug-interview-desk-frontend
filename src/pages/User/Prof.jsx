@@ -234,13 +234,12 @@ function User() {
 
 
 
-    console.log(updatedUser)
-    console.log(pass)
+    console.log(submissions)
   return (
     <>
       {pageload && <Ripple />}
   
-      <div className="bg-[#ECECEC] h-full w-full p-10 mb-5">
+      <div className="bg-[#ECECEC] h-full w-full p-10 mb-5 ">
         {!pageload && (
           <>
             <div className="flex flex-row w-full justify-between items-center ">
@@ -255,7 +254,7 @@ function User() {
             </div>
   
             <div className="flex flex-row w-full gap-2 mt-10">
-              <div className="w-[25vw] bg-white flex flex-col rounded-md shadow-lg gap-8 items-center">
+              <div className="w-[25vw] bg-white flex flex-col rounded-md shadow-lg gap-8 items-center p-5">
                 <img
                   src={user.dp}
                   className="w-[12vw] h-[12vw] border-8 border-double border-spacing-3 border-zinc-500 mt-7 rounded-full"
@@ -342,14 +341,14 @@ function User() {
   
                 <h4 className="text-xl font-semibold m-4">Tasks</h4>
                 <ul className="bg-[#ECECEC] py-2 px-4 m-5 rounded-lg">
-                  {submissions.map((submission, index) => (
+                  {submissions.length > 0 && submissions.map((submission, index) => (
                     <li key={index} className="flex flex-row justify-between m-2">
                       {submission.taskName}
                       <div className="text-green-400 border-green-400 border-2 rounded-lg px-2">
                         Completed
                       </div>
                       <div className="text-blue-500">
-                        <a href={submission.fileUrl}>
+                        <a href={submission.fileUrl} target="_blank"  rel="noopener noreferrer">
                           <div className="font-semibold border-2 text-center border-[#23B0FF] text-[#23B0FF] px-4 rounded-lg">
                             View
                           </div>
@@ -357,6 +356,13 @@ function User() {
                       </div>
                     </li>
                   ))}
+                  {
+                    submissions.length === 0 && (
+                      <div className="text-orange-400 border-orange-400 w-fit m-auto border-2 rounded-lg px-2">
+                      No Submissions made yet!
+                    </div>
+                    )
+                  }
                 </ul>
   
                 <h4 className="text-xl font-semibold m-2 ml-5">

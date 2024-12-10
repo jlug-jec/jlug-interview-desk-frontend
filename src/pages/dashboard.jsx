@@ -10,6 +10,7 @@ import avatar1 from '../assets/3d_avatar_1.png';
 import Ripple from '../components/Ripple';
 
 function Dashboard() {
+  
   const [stats, setStats] = useState({
     totalApplicants: 0,
     applicationsReviewed: 0,
@@ -36,7 +37,8 @@ function Dashboard() {
 
     const { domain, submissions, approvedby } = user;
     console.log(submissions, approvedby)
-
+    const dashboard = async ()=>{
+      
     fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/users/${domain}`)
       .then((response) => response.json())
       .then((users) => {
@@ -61,9 +63,11 @@ function Dashboard() {
       .catch((error) => console.error('Error fetching users:', error));
 
 
+    }
     const fetchLeaderboard = async () => {
       try {
         const user = JSON.parse(localStorage.getItem('user'));
+        
         if (!user || !user.domain) {
           console.error('User domain not found in localStorage');
           return;
@@ -93,12 +97,13 @@ function Dashboard() {
     const fetchPendingApplicants = async () => {
       try {
         const user = JSON.parse(localStorage.getItem('user'));
-        if (!user || !user.adminId) {
+        let adminId = localStorage.getItem('userid')
+        if (!user) {
           console.error('Admin ID not found in localStorage');
           return;
         }
   
-        const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/pending/${user.adminId}`);
+        const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/pending/${adminId}/${user.domain}`);
         if (!response.ok) {
           throw new Error('Failed to fetch pending applicants');
         }
@@ -106,7 +111,7 @@ function Dashboard() {
         const data = await response.json();
         console.log('Pending Applicants:', data);
   
-        setPendingApplicants(data);
+        setPendingApplicants(data.slice(0, 3));
       } catch (error) {
         console.error('Error fetching pending applicants:', error);
       } finally {
@@ -114,6 +119,7 @@ function Dashboard() {
       }
     };
   
+    dashboard();
     fetchPendingApplicants();
     
     fetchLeaderboard();
@@ -121,7 +127,7 @@ function Dashboard() {
   }, []);
   
 
-  console.log(stats)
+  console.log(pendingApplicants)
 
   return (
     <>
@@ -162,8 +168,8 @@ function Dashboard() {
             >
               <div className="flex items-center gap-6">
                 <img
-                  className="w-16 h-16 bg-red-400 rounded-full"
-                  src={student.image || avatar1} 
+                  className="w-16 h-16  rounded-full"
+                  src={student.dp} 
                   alt=""
                 />
                 <h1>{student.name}</h1>
@@ -184,7 +190,7 @@ function Dashboard() {
 
         <div className="w-2/5 h-auto mr-10 p-10 bg-white shadow-md shadow-zinc-400 rounded-lg">
           <h1 className="border-b-2 pb-2 border-black font-semibold text-xl">Pending Applicants</h1>
-          {pendingApplicants.length === 0 ? <div className='text-lg text-center p-3 text-blue-500'>No Pending Applicants</div> : ''}
+          {pendingApplicants.length === 0 && <div className='text-lg text-center p-3 text-blue-500'>No Pending Applicants</div> }
           {pendingApplicants.map((applicant, i) => (
             <div
               key={i}
@@ -192,15 +198,15 @@ function Dashboard() {
             >
               <div className="flex items-center gap-6">
                 <img
-                  className="w-16 h-16 bg-red-400 rounded-full"
-                  src={avatar1} 
+                  className="w-16 h-16  rounded-full"
+                  src={applicant.dp} 
                   alt=""
                 />
                 <h1>{applicant.name}</h1>
               </div>
             </div>
           ))}
-          {pendingApplicants.length != 0 && <Link to={`/review}`}>
+          {pendingApplicants.length != 0 && <Link to={`/review`}>
             <div className="font-semibold border-2 mt-2 text-center  w-[50%]  h-[10%] border-[#23B0FF] text-[#23B0FF] px-4 py-2 rounded-lg m-auto">
               View Pending Applicants
             </div>

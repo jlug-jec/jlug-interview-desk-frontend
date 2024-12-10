@@ -11,7 +11,7 @@ export default function Final({data}) {
         <Heading label={'🎉 Congratulations! 🎉'} />
         <div className='w-full font-medium text-3xl text-center mt-[-2rem]'>You are successfully registered !</div>
         <div className='text-black text-lg  text-center p-4 font-medium'>
-            Your unique password has been mailed to your registerd email id <span className='text-primary'>{profile.email}</span>.<br/> Do check your spam folder too . You can change the password in account settings.
+            Your unique password has been mailed to your registerd email id <span className='text-primary'>{profile.email}</span>.<br/> Do check your spam folder too . You can change your password in account settings.
         </div>
 
         <div className='flex flex-row gap-4 w-full items-center justify-center'>

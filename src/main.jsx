@@ -20,6 +20,7 @@ import Chat from './pages/User/Chat.jsx'
 import Prof from './pages/User/Prof.jsx'
 import EditTask from './pages/edittask.jsx'
 import Settings from './pages/Settings.jsx'
+import Reset from './pages/Reset.jsx'
 
 const Main = ()=>{
   const loc = useLocation();
@@ -27,8 +28,8 @@ const Main = ()=>{
   const userp = loc.pathname.startsWith('/userd');
 
   return(
-    <div className= {`${loc.pathname === '/register' || loc.pathname === '/login' ? '' : styles}`}>
-      {loc.pathname !== '/register' && loc.pathname !== '/login' && !userp && <Nav />}
+    <div className= {`${loc.pathname === '/register' || loc.pathname === '/login' || loc.pathname === '/reset' ? '' : styles}`}>
+      {loc.pathname !== '/register' && loc.pathname !== '/login' && loc.pathname !== '/reset' && !userp && <Nav />}
       {userp && <Nav1 />}
       <Routes>
             <Route path="/admin" element={<Dashboard />} />
@@ -47,6 +48,7 @@ const Main = ()=>{
             <Route path="/userd/user/" element={<Prof />} />
             <Route path="/edittask/:id" element={<EditTask />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/reset" element={<Reset />} />
       </Routes>
     </div>
   )

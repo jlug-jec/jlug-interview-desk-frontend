@@ -1,6 +1,6 @@
 import React from 'react';
 //generated using loading.io
-const Ripple = () => {
+const Ripple = ({styles}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -8,7 +8,7 @@ const Ripple = () => {
       preserveAspectRatio="xMidYMid"
       width="100"
       height="100"
-      className='translate-y-[40vh] translate-x-[45vw]'
+      className={`${!styles  ? 'translate-y-[40vh] translate-x-[45vw]' : styles} `}
       style={{
         shapeRendering: 'auto',
         display: 'block',
