@@ -33,7 +33,7 @@ const Chat = () => {
             <h1 className="text-4xl tracking-tight font-semibold text-left">Discussion</h1>
           </div>
         </header>
-        <div className="bg-white m-auto w-[95%] h-[80vh] flex flex-col p-4 rounded-xl drop-shadow-lg">
+        <div className="bg-white m-auto w-[95%] h-[70vh] flex flex-col p-4 rounded-xl drop-shadow-lg">
           <div className="bg-[#EEEEEE] w-full h-full flex flex-col rounded-lg drop-shadow-lg justify-between">
             <div className="flex flex-col items-center p-4 pl-5 pr-5 w-full h-[60vh] overflow-auto gap-3">
               {chats.map((chat, index) => (

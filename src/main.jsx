@@ -26,7 +26,7 @@ import { UserProvider } from './contexts/User.jsx'
 
 const Main = ()=>{
   const loc = useLocation();
-  const styles = 'ml-[70px] mt-[64px]'
+  const styles = 'md:ml-[70px] md:mt-[64px] mt-[60px]'
   const userp = loc.pathname.startsWith('/userd');
 
   return(

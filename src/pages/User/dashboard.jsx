@@ -1,20 +1,19 @@
-import approve from '../../assets/Approval.png'
-import list from '../../assets/List.png'
-import book from '../../assets/Bookmark.png'
-import time from '../../assets/Time.png'
-import {Link} from 'react-router-dom'
-import Page from '../../assets/Page.png'; 
+import approve from '../../assets/Approval.png';
+import list from '../../assets/List.png';
+import book from '../../assets/Bookmark.png';
+import time from '../../assets/Time.png';
+import { Link } from 'react-router-dom';
+import Page from '../../assets/Page.png';
 import Application from '../../assets/Application.png';
-import Eye from '../../assets/Eye.png'
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import Eye from '../../assets/Eye.png';
+import { useUserContext } from '../../contexts/User';
 import Ripple from '../../components/Ripple';
-import { useUserContext } from '../../contexts/User'
-
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
   const navigate = useNavigate();
-  const image=[list,approve,time,book]
+  const image = [list, approve, time, book];
 
   const {
     fetchDomainTasks,
@@ -22,94 +21,89 @@ function Dashboard() {
     userSubmissions,
     pageload,
     userData,
-    fetchUserData
+    fetchUserData,
   } = useUserContext();
- 
+
   const totalTasks = tasks.length;
   const submittedTasks = userSubmissions.length;
   const pendingTasks = totalTasks - submittedTasks;
 
-  const pop=[{'count':totalTasks, 'text':'Total Tasks'},{'count':submittedTasks , 'text':'Tasks Submitted'},{'count':pendingTasks, 'text':'Pending Tasks'},{'count':100, 'text':'ISpe kya likhe ?'}]
-
-
-  console.log({"tasks" : tasks, "usersubmisssion" : userSubmissions, "user" : userData})
+  const pop = [
+    { count: totalTasks, text: 'Total Tasks' },
+    { count: submittedTasks, text: 'Tasks Submitted' },
+    { count: pendingTasks, text: 'Pending Tasks' },
+    { count: 100, text: 'What to write here?' },
+  ];
 
   return (
     <>
-    {pageload && <Ripple/>}
-      { !pageload && 
-      (<div className=' bg-zinc-100 pb-10 w-100 h-full'>
-        <h1 className='font-semibold p-10 text-4xl'>Dashboard</h1>
-        <div className='flex justify-between ml-14 mb-14 mr-14 pl-8 pr-8'>
+      {pageload && <Ripple />}
+      {!pageload && (
+        <div className="bg-zinc-100 pb-10 w-full min-h-screen md:mb-0 mb-10">
+          <h1 className="font-semibold p-6 text-3xl md:text-4xl">Dashboard</h1>
 
-         {pop.map((pop,i)=>(<div key={i} className='w-64 h-32 flex justify-center items-center rounded-lg  bg-white shadow-md shadow-zinc-400'>
-          <div className='flex items-center'> <img className='w-16 h-16' src={image[i]} alt="" /></div>
-          <div className='flex-col w-32 text-center items-center justify-center'>
-            <h1 className='text-2xl'>{pop.count}</h1>
-            <h3 className='text-zinc-500'>{pop.text}</h3>
-          </div></div> ))}
-        </div>
-        
-        <div className='w-full h-full flex gap-3'>
-          <div className='w-3/5 h-[65vh] ml-12  p-10 flex flex-col justify-between  bg-white shadow-md shadow-zinc-400  rounded-lg'>
-            <div>
-            <h1 className='w-full border-b-2 pb-2 border-black font-semibold text-xl'>All Tasks</h1>
-            {tasks.slice(0,3).map((task, i) => (
-                    <div key={task.tname} className="flex justify-between items-center mt-3 gap-x-6 py-2 w-full min-h-[10px]">
-                        <div className="flex w-full gap-x-4 items-center">
-                            <img
-                                src={task.tcatg === 'App' || task.tcatg === 'Web' ? Application : Page}
-                                alt={`Avatar of ${task.name}`}
-                                className="h-12 w-12 flex-none rounded-full bg-gray-50"
-                            />
-                            <div className="w-[25%] flex flex-auto items-center">
-                                <p className="text-4 font-medium leading-6 text-center text-gray-900">{task.tname}</p>
-                            </div>
-                            <div className="min-w-[15%] flex flex-auto items-center">
-                                <p className="text-4 font-bold leading-6 text-center text-gray-900">{task.tcatg}</p>
-                            </div> 
-                            <div className='flex flex-row w-[45%] items-center  text-center justify-end gap-12'>       
-                                <div className='font-semibold border-2 text-center h-[50%] border-[#01ED01] text-[#01ED01] px-4  rounded-lg '>
-                                    {task.tstat}
-                                </div>                          
-                                <Link to={`/userd/view/${task.id}`}>
-                                    <div className='font-semibold border-2 text-center h-[50%] border-[#23B0FF] text-[#23B0FF] px-4  rounded-lg '>
-                                        View
-                                    </div>
-                                </Link>
-                            </div>
-
-                        </div>
-                    </div>
-                ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-6 md:px-14 mb-8">
+            {pop.map((item, i) => (
+              <div
+                key={i}
+                className="flex flex-row items-center justify-between w-full h-28 p-4 bg-white shadow-md rounded-lg"
+              >
+                <img className="w-12 h-12 md:w-16 md:h-16" src={image[i]} alt="icon" />
+                <div className="flex flex-col items-center text-center">
+                  <h1 className="text-xl md:text-2xl font-bold">{item.count}</h1>
+                  <h3 className="text-zinc-500 text-sm md:text-base">{item.text}</h3>
                 </div>
-                <Link to='/userd/tasks'>
-                <div className='flex flex-row gap-5 font-semibold border-2 text-center w-fit items-center ml-auto mr-auto  justify-end border-primary text-primary px-4  rounded-lg '>
-                    <img src={Eye} className='w-7 h-7' alt='i'></img>
-                    <div>View All Tasks</div>
-                </div>
-                </Link>
+              </div>
+            ))}
           </div>
-         
-          <div className='w-2/5 h-auto mr-10 p-10  bg-white shadow-md shadow-zinc-400  rounded-lg'>
 
-            <h1 className=' border-b-2 pb-2 border-black font-semibold text-xl'>Application Status</h1>
-            
-            <div className='flex flex-row gap-5 font-semibold border-2 text-center w-[90%] p-1 mt-4 m-auto items-center justify-center border-[#FF8C23] text-[#FF8C23] rounded-lg '>
-                    <div>
-                      {
-                        userData['approvedby'] && userData['approvedby'].length > 0 ? 'In Review' : 'In Queue'
-                      }
+          <div className="flex flex-col md:flex-row gap-6 px-6 md:px-14">
+            <div className="w-full md:w-3/5 h-auto bg-white shadow-md p-6 rounded-lg">
+              <h1 className="border-b pb-2 border-black font-semibold text-lg md:text-xl mb-4">All Tasks</h1>
+              {tasks.slice(0, 3).map((task, i) => (
+                <div
+                  key={task.tname}
+                  className="flex flex-col md:flex-row justify-between items-center mt-3 gap-4 py-2 "
+                >
+                  <div className="flex items-center gap-4">
+                    <img
+                      src={task.tcatg === 'App' || task.tcatg === 'Web' ? Application : Page}
+                      alt={task.tname}
+                      className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-gray-50"
+                    />
+                    <p className="text-sm md:text-base font-medium text-gray-900">{task.tname}</p>
+                  </div>
+                  <div className="text-sm md:text-base font-bold text-gray-900">{task.tcatg}</div>
+                  <div className="flex items-center gap-4">
+                    <div className="text-xs md:text-sm font-semibold border-2 border-green-500 text-green-500 px-3 py-1 rounded-lg">
+                      {task.tstat}
                     </div>
+                    <Link to={`/userd/view/${task.id}`} className="text-xs md:text-sm font-semibold border-2 border-blue-500 text-blue-500 px-3 py-1 rounded-lg">
+                      View
+                    </Link>
+                  </div>
+                </div>
+              ))}
+              <Link
+                to="/userd/tasks"
+                className="flex items-center gap-3 font-semibold border-2 text-primary border-primary px-4 py-2 mt-4 w-fit mx-auto rounded-lg"
+              >
+                <img src={Eye} className="w-5 h-5 md:w-7 md:h-7" alt="view-all" />
+                View All Tasks
+              </Link>
+            </div>
+
+            <div className="w-full md:w-2/5 h-auto bg-white shadow-md p-6 rounded-lg">
+              <h1 className="border-b pb-2 border-black font-semibold text-lg md:text-xl">Application Status</h1>
+              <div className="flex justify-center items-center mt-4 border-2 border-orange-500 text-orange-500 px-4 py-2 rounded-lg text-sm md:text-base font-semibold">
+                {userData['approvedby'] && userData['approvedby'].length > 0 ? 'In Review' : 'In Queue'}
+              </div>
             </div>
           </div>
-              
-          
         </div>
-        
-      </div> )}
+      )}
     </>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;
