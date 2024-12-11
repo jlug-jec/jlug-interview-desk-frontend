@@ -9,67 +9,22 @@ import Eye from '../../assets/Eye.png'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Ripple from '../../components/Ripple';
+import { useUserContext } from '../../contexts/User'
 
 
 function Dashboard() {
   const navigate = useNavigate();
   const image=[list,approve,time,book]
 
-
-  const [user, setUser] = useState({});
-  const [tasks, setTasks] = useState([]);
-  const [userSubmissions, setUserSubmissions] = useState([]);
-  const [pageload, setPageLoad] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      
-      const storedUser = localStorage.getItem('user');
-      const userObj = JSON.parse(storedUser)
-      setUser(userObj)
-      const domainTasks = await fetchDomainTasks();
-      console.log(domainTasks)
-      setTasks(domainTasks);
-
-      const submissions = userObj.submissions
-      setUserSubmissions(submissions);
-    };
-
-    fetchData();
-  }, []);
-
-
-  const fetchDomainTasks = async () => {
-    setPageLoad(true)
-    const storedUser = localStorage.getItem('user');
-    const userObj = JSON.parse(storedUser)
-    const domain  = userObj.domain
-    console.log(domain)
-
-    try {
-      const response = await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/get-tasks-by-domain', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ domain }),
-      });
-  
-      if (!response.ok) {
-        throw new Error('Error fetching tasks');
-      }
-  
-      const tasks = await response.json();
-      return tasks;
-    } catch (error) {
-      console.error('Error fetching tasks:', error);
-      return [];
-    }finally{
-      setPageLoad(false)
-    }
-  };
-
-  
+  const {
+    fetchDomainTasks,
+    tasks,
+    userSubmissions,
+    pageload,
+    userData,
+    fetchUserData
+  } = useUserContext();
+ 
   const totalTasks = tasks.length;
   const submittedTasks = userSubmissions.length;
   const pendingTasks = totalTasks - submittedTasks;
@@ -77,7 +32,7 @@ function Dashboard() {
   const pop=[{'count':totalTasks, 'text':'Total Tasks'},{'count':submittedTasks , 'text':'Tasks Submitted'},{'count':pendingTasks, 'text':'Pending Tasks'},{'count':100, 'text':'ISpe kya likhe ?'}]
 
 
-  console.log({"tasks" : tasks, "usersubmisssion" : userSubmissions, "user" : user})
+  console.log({"tasks" : tasks, "usersubmisssion" : userSubmissions, "user" : userData})
 
   return (
     <>
@@ -143,7 +98,7 @@ function Dashboard() {
             <div className='flex flex-row gap-5 font-semibold border-2 text-center w-[90%] p-1 mt-4 m-auto items-center justify-center border-[#FF8C23] text-[#FF8C23] rounded-lg '>
                     <div>
                       {
-                        user['approvedby'] && user['approvedby'].length > 0 ? 'In Review' : 'In Queue'
+                        userData['approvedby'] && userData['approvedby'].length > 0 ? 'In Review' : 'In Queue'
                       }
                     </div>
             </div>

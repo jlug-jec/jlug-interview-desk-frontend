@@ -10,32 +10,34 @@ export const AdminProvider = ({ children }) => {
         pendingApplications: 0,
         applicationsBookmarked: 0,
       });
+      const [userData, setUserData] = useState();
+      const [submission, setSubmission] = useState();
       const [load, setLoading] = useState(false);
       const [leaderboard, setLeaderboard] = useState([]);
       const [pendingApplicants, setPendingApplicants] = useState([]);
       const [bookmarks, setBookmarks] = useState({});
 
+      let adminId = localStorage.getItem('userid');
       const user = JSON.parse(localStorage.getItem('user'));
-      const adminId = localStorage.getItem('userid');
-
-        if (!user) {
-        console.error('User not found in localStorage');
-        return;
-        }
-
-        console.log(user)
-        const { domain, submissions, approvedby } = user;
-    
+      console.log(user)
+  
 
   const fetchDashboardData = useCallback(async () => {
+    
     setLoading(true);
     try {
-      const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/users/${domain}`); 
+      const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/users/${user.domain}`); 
       const data = await response.json();
       const filteredUsers = data.filter(
-        (u) => u.domain === domain && !u.email.includes('admin')
+        (u) => u.domain === user.domain && !u.email.includes('admin')
       );
 
+      const adminResponse = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/get-user/${adminId}`);
+      if (!adminResponse.ok) throw new Error('Failed to fetch admin details.');
+      const adminData = await adminResponse.json();
+      localStorage.setItem('user', JSON.stringify(adminData))
+
+      let { domain, submissions, approvedby } = adminData
       
       const totalApplicants = filteredUsers.length;
       const applicationsReviewed = approvedby.length;
@@ -78,7 +80,7 @@ export const AdminProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }, [ ]);
 
   const fetchPendingApplicants = useCallback(async () => {
     setLoading(true);
@@ -104,6 +106,7 @@ export const AdminProvider = ({ children }) => {
   }, []);
 
   const fetchBookmarks = useCallback(async () => {
+    adminId = adminId.replace(/['"]+/g, '');
     console.log(adminId)
     setLoading(true);
     try {
@@ -124,12 +127,55 @@ export const AdminProvider = ({ children }) => {
       const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/delete-bookmark/${adminId}/${userId}`, { method: 'DELETE' });
       if (!response.ok) throw new Error('Failed to delete bookmark');
       setBookmarks((prev) => prev.filter((bookmark) => bookmark.id !== userId));
+      await fetchDashboardData()
+      await fetchBookmarks()
     } catch (error) {
       console.error('Error deleting bookmark:', error);
     } finally {
       setLoading(false);
     }
   }, [adminId]);
+
+  const fetchUserData = useCallback(async (id) => {
+    try {
+      const userResponse = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/get-user/${id}`);
+      if (!userResponse.ok) throw new Error('Failed to fetch user details.');
+      const userData = await userResponse.json();
+      setUserData(userData);
+
+      const submissionsResponse = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/get-submissions/${id}`);
+      if (!submissionsResponse.ok) throw new Error('Failed to fetch submissions.');
+      const submissionsData = await submissionsResponse.json();
+      setSubmission(submissionsData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+
+},[]);
+
+const handleAction = useCallback(async (actionType, id) => {
+  try {
+    const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/${actionType}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId: id , adminId : adminId}),
+    });
+
+    const data = await response.json();
+    alert(data.message || `Action ${actionType} completed successfully.`);
+    await fetchUserData(id)
+    await fetchPendingApplicants()
+    await fetchDashboardData();
+    await fetchLeaderboardData()
+    await fetchBookmarks()
+  } catch (error) {
+
+    console.error(`Error during ${actionType}:`, error);
+    alert(`Error during ${actionType}.`);
+  }
+},[]);
 
   console.log(bookmarks)
 
@@ -138,7 +184,7 @@ useEffect(() => {
   fetchLeaderboardData();
   fetchPendingApplicants();
   fetchBookmarks();
-}, [fetchDashboardData, fetchLeaderboardData, fetchPendingApplicants, fetchBookmarks]);
+}, [fetchDashboardData, fetchLeaderboardData, fetchPendingApplicants, fetchBookmarks,]);
 
 
   const value = {
@@ -151,7 +197,11 @@ useEffect(() => {
     fetchPendingApplicants,
     fetchBookmarks,
     bookmarks,
-    handleRemoveBookmark
+    handleRemoveBookmark,
+    userData,
+    fetchUserData,
+    submission,
+    handleAction
   };
 
   return <AdminContext.Provider value={value}>{children}</AdminContext.Provider>;

@@ -4,50 +4,18 @@ import Page from '../../assets/Page.png';
 import Pencil from '../../assets/Pencil.png';
 import Application from '../../assets/Application.png';
 import Ripple from '../../components/Ripple';
+import { useUserContext } from '../../contexts/User';
 
 const TaskList = () => {
-  const [tasks, setTasks] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [pageload, setPageLoad] = useState(true)
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      setPageLoad(true)
-      let user = localStorage.getItem('user')
-      user = JSON.parse(user);
-
-      try {
-
-        let response= await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/get-tasks-by-domain', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({domain : user.domain}),
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to fetch tasks');
-        }
-        const data = await response.json();
-        console.log(data)
-        setTasks(
-          data.map((task) => ({
-            ...task,
-            icon: task.tcatg === 'App/Web' ? Application : Page, 
-          }))
-        );
-      } catch (error) {
-        console.error('Error fetching tasks:', error);
-      } finally {
-        setLoading(false);
-        setPageLoad(false)
-      }
-    };
-
-    fetchTasks();
-  }, []);
-
+  const {
+    fetchDomainTasks,
+    tasks,
+    userSubmissions,
+    pageload,
+    userData,
+    fetchUserData
+  } = useUserContext();
+ 
   return (
     <>
     {pageload && <Ripple/>}
@@ -60,17 +28,15 @@ const TaskList = () => {
           </div>
         </header>
         <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col p-10 rounded-xl drop-shadow-lg">
-          {loading ? (
-            <div className="text-center justify-center font-semibold text-lg text-gray-500">
-              <p>Loading tasks...</p>
-            </div>
+          {pageload ? (
+            <Ripple />
           ) : tasks.length > 0 ? (
             <div role="list" className="flex flex-col gap-6 pl-4 pr-4">
               {tasks.map((task) => (
                 <div key={task.id} className="flex justify-between items-center gap-x-6 py-2 w-full min-h-[10px]">
                   <div className="flex w-full gap-x-4 items-center">
                     <img
-                      src={task.icon}
+                      src={task.tcatg === 'Page' ? Page : Application}
                       alt={`Icon of ${task.tname}`}
                       className="h-12 w-12 flex-none rounded-full bg-gray-50"
                     />

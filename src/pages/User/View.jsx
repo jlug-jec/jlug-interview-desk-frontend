@@ -1,104 +1,45 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import upload from '../../assets/Upload.png';
+import { useUserContext } from '../../contexts/User';
+import Ripple from '../../components/Ripple';
 
 export default function View() {
+  const {
+    fetchDomainTasks,
+    tasks,
+    userSubmissions,
+    pageload,
+    usertask,
+    fetchUsertask,
+    fetchTask,
+    task,
+    load,
+    actionload,
+    handleModalSubmit
+  } = useUserContext();
+ 
   const { id } = useParams(); 
-  console.log(id)
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [isModalOpen, setIsModalOpen] = useState(false); 
-  const [submissionUrl, setSubmissionUrl] = useState(''); 
-  const [actionload, setActionLoad] = useState(false)
+
 
   useEffect(() => {
-    const fetchTask = async () => {
-      try {
-        const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/tasks/${id}`); 
-        const result = await response.json();
-        setData(result); 
-      } catch (error) {
-        console.error('Error fetching task:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTask();
-  }, [id]);
-
-  const handleModalSubmit = async () => {
-    setActionLoad(true)
-    let userId = localStorage.getItem('userid');
-    userId = userId.replace(/['"]+/g, '');
-    const today = new Date();
-    const deadline = new Date(data.tdead); 
-
-    if (!userId || !submissionUrl) {
-      alert('Missing user ID or submission URL');
-      return;
+    fetchTask(id);
+  }, [id, fetchTask]);
+  
+  useEffect(() => {
+    if (task) {
+      setData(task);
     }
+  }, [task]);
+  
 
-    if (today > deadline) {
-      alert('The task deadline has passed. Submissions are no longer accepted.');
-      return;
-    }
+  console.log(task)
+  const [data, setData] = useState(task);
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [submissionUrl, setSubmissionUrl] = useState(''); 
   
-    if (data.tstat === 'suspended') {
-      alert('The task is no longer accepting submissions.');
-      return;
-    }
-
-    console.log(userId, submissionUrl)
-  
-    try {
-      const submitTaskResponse = await fetch(
-        'http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/submit-task',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId, taskId: id, submissionUrl }),
-        }
-      );
-  
-      if (!submitTaskResponse.ok) {
-        const errorData = await submitTaskResponse.json();
-        throw new Error(errorData.error || 'Task submission failed');
-      }
-  
-      const { submissionId } = await submitTaskResponse.json();
-      console.log(submissionId)
-  
-      const updateUserResponse = await fetch(
-        `http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/update/${userId}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ submissionId }),
-        }
-      );
-
-      console.log(updateUserResponse)
-  
-      if (!updateUserResponse.ok) {
-        const errorData = await updateUserResponse.json();
-        throw new Error(errorData.error || 'Failed to update user submissions');
-      }
-  
-      alert('Task submitted successfully!');
-      setIsModalOpen(false);
-    } catch (error) {
-      console.error('Error handling submission:', error);
-      alert('Submission failed. Please try again.');
-    }
-    finally{
-      setActionLoad(false)
-    }
-  };
-  
-  
-  if (loading) {
-    return <div className="text-center">Loading...</div>;
+  if (load) {
+    return <Ripple />;
   }
 
   if (!data) {
@@ -109,7 +50,7 @@ export default function View() {
     <div className="flex flex-col m-auto w-100 h-screen">
       <div className="flex flex-row w-[100%] gap-9 pt-1 justify-between">
         <p className="text-left text-3xl font-medium  p-[1%] pl-[3%]">
-          Task / {data.tname}
+          Task / {task.tname}
         </p>
         <div className="flex flex-row gap-5 p-3 justify-center pr-9">
           <div
@@ -146,7 +87,7 @@ export default function View() {
               </button>
               <button
                 className={`${actionload && 'animate-pulse cursor-not-allowed'} bg-blue-500 text-white px-4 py-2 rounded cursor-pointer`}
-                onClick={!actionload ? handleModalSubmit : null}
+                onClick={!actionload ? ()=>handleModalSubmit(task, id, submissionUrl) : null}
               >
                 Submit
               </button>
@@ -161,7 +102,7 @@ export default function View() {
               Task Name
             </p>
             <div className="bg-form-input w-[90%] p-4 border-none rounded-xl text-[18px]">
-              {data.tname}
+              {task.tname}
             </div>
           </div>
 
@@ -170,7 +111,7 @@ export default function View() {
               Task Description
             </p>
             <div className="bg-form-input w-[90%] p-4 border-none rounded-xl text-[18px]">
-              {data.tdesc}
+              {task.tdesc}
             </div>
           </div>
 
@@ -180,7 +121,7 @@ export default function View() {
                 Task Category
               </p>
               <div className="bg-form-input w-full p-4 border-none rounded-xl">
-                {data.tcatg}
+                {task.tcatg}
               </div>
             </div>
 
@@ -189,7 +130,7 @@ export default function View() {
                 Task Status
               </p>
               <div className="bg-form-input w-full p-4 border-none rounded-xl">
-                {data.tstat}
+                {task.tstat}
               </div>
             </div>
           </div>
@@ -199,7 +140,7 @@ export default function View() {
               Submission Category
             </p>
             <div className="bg-form-input w-full p-4 border-none rounded-xl">
-              {data.tsub}
+              {task.tsub}
             </div>
           </div>
 
@@ -208,7 +149,7 @@ export default function View() {
               Deadline
             </p>
             <div className="bg-form-input w-[100%] p-4 border-none rounded-xl">
-              {data.tdead}
+              {task.tdead}
             </div>
           </div>
 
@@ -217,7 +158,7 @@ export default function View() {
               Sample Image
             </p>
             <div className="flex items-center bg-[#f73558] h-10 pl-10 pr-10 font-semibold text-white  text-center border-none rounded-xl">
-              {data.tfileUrl ? ( <a href={data.tfileUrl} target='blank'  >View</a>
+              {task.tfileUrl ? ( <a href={task.tfileUrl} target='blank'  >View</a>
                 ) : (
                   'No file uploaded'
                 )}

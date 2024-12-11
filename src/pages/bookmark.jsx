@@ -5,9 +5,10 @@ import Ripple from '../components/Ripple';
 import { useAdminContext } from '../contexts/Admin';
 
 const Bookmark = () => {
+  const navigate = useNavigate();
   const {    
     bookmarks,
-    handleRemoveBookmarks,
+    handleRemoveBookmark,
     fetchBookmarks,
     load
   } = useAdminContext();
@@ -40,7 +41,7 @@ const Bookmark = () => {
                     </button>
                     <button
                       className="bg-red-500 text-white px-3 py-1 rounded"
-                      onClick={() => handleRemoveBookmarks(bookmark.id)}
+                      onClick={() => handleRemoveBookmark(bookmark.id)}
                     >
                       <img src={remove} className='w-4 h-4' alt="remove" />
                     </button>
