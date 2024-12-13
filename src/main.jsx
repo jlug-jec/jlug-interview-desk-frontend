@@ -42,7 +42,7 @@ const Main = ()=>{
             <Route path="/register" element={<Register />} />
             <Route path="/user/:id" element={<User />} />
             <Route path="/leader" element={<Leaderboard />} />
-            <Route path="https://jlug-interview-desk-frontend.vercel.app/login" element={<Login />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/userd" element={<Udashboard />} />
             <Route path="/userd/tasks" element={<Tasks />} />
             <Route path="/userd/view/:id" element={<View />} />
