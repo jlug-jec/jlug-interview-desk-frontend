@@ -60,6 +60,7 @@ function App() {
   
 
   const somefunction = async ()=>{
+    setPage(5)
     try {
 
       let res= await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/register', {

@@ -40,9 +40,9 @@ function Dashboard() {
       {pageload && <Ripple />}
       {!pageload && (
         <div className="bg-zinc-100 pb-10 w-full min-h-screen md:mb-0 mb-10">
-          <h1 className="font-semibold p-6 text-3xl md:text-4xl">Dashboard</h1>
+          <h1 className="font-semibold p-6 md:pl-10 md:p-10 text-3xl md:text-4xl">Dashboard</h1>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 px-6 md:px-14 mb-8">
+          <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-4 gap-6 px-6 md:px-14 mb-8">
             {pop.map((item, i) => (
               <div
                 key={i}

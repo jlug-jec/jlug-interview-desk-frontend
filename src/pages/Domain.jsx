@@ -39,15 +39,15 @@ const Domain = ({settings, updateSettings, handleCompletion, data})=>{
 
 
     return (
-        <div className='flex flex-col gap-11 w-[70%] h-[80%] m-auto mt-4 bg-white p-6 shadow-xl'>
+        <div className='flex flex-col gap-11 md:w-[70%] w-[90%] md:h-[80%] m-auto mb:mt-4 mt-8 bg-white p-6 shadow-xl'>
             <Progress setting={settings} />
             <Heading label={'Select a Domain you wanna join'} />
-            <div className='flex flex-row gap-8 w-[90%] items-center m-auto'>
+            <div className='flex md:flex-row flex-col gap-8 w-[90%] items-center m-auto'>
                 <DomainCard label={'Technical'} id='a' status={checked} handleCheck={handleCheck} />
                 <DomainCard label={'Graphics'} id='b' status={checked} handleCheck={handleCheck} />
                 <DomainCard label={'Video Editing'} id='c' status={checked} handleCheck={handleCheck} />
             </div>    
-            <div className='flex flex-row gap-8 w-[90%] items-center m-auto justify-center'>
+            <div className='flex md:flex-row flex-col gap-8 w-[90%] items-center m-auto justify-center'>
                 <DomainCard label={'Content'} id='d' status={checked} handleCheck={handleCheck} />
                 <DomainCard label={'Management'} id='e' status={checked} handleCheck={handleCheck} />
             </div>                

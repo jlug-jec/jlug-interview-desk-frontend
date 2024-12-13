@@ -39,7 +39,7 @@ const Review = () => {
                   pendingApplicants.map((applicant) => (
                     <div
                       key={applicant.id}
-                      className="flex items-center gap-4 w-full p-4 mb-4 "
+                      className="flex items-center gap-4 w-full md:p-4 md:mb-4 p-0 "
                     >
                       <img
                         src={applicant.dp}
@@ -52,7 +52,7 @@ const Review = () => {
                         </span>
 
                         <Link to={`/user/${applicant.id}`}>
-                          <div className="font-semibold shadow-md border-2 border-primary text-primary px-4 py-1 rounded-lg hover:bg-primary hover:text-white">
+                          <div className="font-semibold shadow-md border-2 border-primary text-primary md:px-4 py-1 rounded-lg hover:bg-primary hover:text-white px-2 text-sm ">
                             View Profile
                           </div>
                         </Link>

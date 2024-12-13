@@ -33,7 +33,7 @@ const Nav = () => {
 
     return (
         <>
-            {/* Top Navbar */}
+        
             <div className="flex flex-row w-full shadow-md fixed top-0 left-0 bg-white">
                 <div className="bg-primary flex items-center justify-center p-2 w-16 md:w-20">
                     <img src={logo} alt="logo" className="w-10 h-10 md:w-14 md:h-14" />
@@ -50,8 +50,11 @@ const Nav = () => {
                                 <img src={user.dp} alt="User" className="w-full h-full rounded-full cursor-pointer" onClick={() => handleChange(3)} />
                             </Link>
                         </div>
-                        <div className="hidden md:block h-10 w-[1px] bg-gray-300"></div>
-                        <div className="flex items-center gap-2">
+                        <div className="hidden md:block h-10 w-[1px] bg-gray-300">
+                            <div className='h-[100%] w-[3px] rounded-md bg-[#D1CFCF]'></div>
+                        </div>
+         
+                    <div className="flex items-center gap-2">
                             <img src={log} alt="Logout" className="w-6 h-6 md:w-8 md:h-8 cursor-pointer" onClick={handleLogOut} />
                             <Link to="/userd/user">
                                 <img src={set} alt="Settings" className="w-6 h-6 md:w-8 md:h-8 cursor-pointer" onClick={() => handleChange(3)} />

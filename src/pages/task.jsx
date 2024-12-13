@@ -5,6 +5,9 @@ import Pencil from '../assets/Pencil.png';
 import Application from '../assets/Application.png';
 import {Link} from 'react-router-dom'
 import Ripple from '../components/Ripple';
+import remove from '../assets/Remove.png';
+import View from '../assets/Eye.png'
+
 
 
 
@@ -83,7 +86,7 @@ const TaskList = () => {
       <>
       {pageload && <Ripple />}
       { !pageload &&  ( <div className="flex-1 pt-10 w-100">
-        <div className= " w-full px-6 md:px-6 lg:px-10  pb-10 lg:pb-20 xl:pb-20">
+        <div className= " w-full  md:px-6 lg:px-10  px-5 md:pb-10 lg:pb-20 xl:pb-20">
           <header className="w-full h-16">
             <div className="flex flex-row justify-between mt-auto max-w-full pl-6 items-center">
               <h1 className="text-4xl tracking-tight font-semibold text-left">Tasks</h1>                    
@@ -92,46 +95,48 @@ const TaskList = () => {
                 </div></Link> 
             </div>
           </header>
-          <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col p-10 rounded-xl drop-shadow-lg">
+          <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col md:p-10 p-2 rounded-xl drop-shadow-lg">
           {tasks.length > 0 ? (
             <div role="list" className="flex flex-col gap-8">
                 {tasks.map((task, index) => (
-                    <div key={task.id} className="flex justify-between items-center gap-x-6 py-2 w-full min-h-[10px]">
-                        <div className="flex w-full gap-x-4 items-center">
+                    <div key={task.id} className="flex justify-between items-center gap-x-3 md:gap-x-6 py-2 w-full min-h-[10px]">
+                        <div className="flex w-full gap-x-2 items-center">
                             <img
                                 src={task.icon}
                                 alt='task-snap'
                                 className="h-12 w-12 flex-none rounded-full bg-gray-50"
                             />
-                            <div className="w-[25%] flex flex-auto items-center">
+                            <div className="w-[30%] text-sm md:text-lg md:w-[25%] flex flex-auto items-center">
                                 <p className="text-4 font-medium leading-6 text-center text-gray-900">{task.tname}</p>
                             </div>
-                            <div className="min-w-[15%] flex flex-auto items-center">
+                            <div className="w-[10%] text-sm md:text-lg  md:min-w-[15%] flex flex-auto items-center">
                                 <p className="text-4 font-bold leading-6 text-center text-gray-900">{task.tcatg}</p>
                             </div>                        
-                            <div className="min-w-[15%] flex flex-auto items-center text-center">
+                            <div className="w-[10%] md:min-w-[15%] flex flex-auto items-center text-center">
                                 <p className="text-4 font-medium leading-6 text-center text-gray-900">by {task.adminid === userid ? 'You' : task.by}</p>
                             </div>
-                            <div className='flex flex-row w-[45%] items-center  text-center justify-end gap-12'>
+                            <div className='w-[20%] flex flex-row md:w-[45%] items-center  text-center gap-4 md:gap-12'>
                                 { 
                                 task.adminid === userid ?
                                     (<>
-                                    <div className='  h-7 w-7 flex justify-center items-center '>
+                                    <div className='  h-7 w-7 md:flex justify-center items-center hidden'>
                                         <img src={Pencil} alt="edit" />
                                     </div>                          
-                                    <div className='font-semibold border-2 text-center h-[50%] border-[#FF3A3A] text-[#FF3A3A] px-4  rounded-lg cursor-pointer' onClick={() => handleDelete(task.id)}>
+                                    <div className='font-semibold border-2 text-center h-[50%] border-[#FF3A3A] text-[#FF3A3A] px-4  rounded-lg cursor-pointer md:flex hidden' onClick={() => handleDelete(task.id)}>
                                         Delete
                                     </div> 
+                                    <img src={remove} className='w-7 h-7 md:hidden visible flex bg-[#FF3A3A] rounded-lg p-1'></img>
                                     </> 
                                     ) 
                                 : (<></>)}         
-                                <div className='font-semibold border-2 text-center h-[50%] border-[#01ED01] text-[#01ED01] px-4  rounded-lg '>
+                                <div className='font-semibold border-2 text-center h-[50%] border-[#01ED01] text-[#01ED01] px-4  rounded-lg hidden md:flex'>
                                     {task.tstat}
                                 </div>                          
                                 <Link to={`/edittask/${task.id}`}>
-                                    <div className='font-semibold border-2 text-center h-[50%] border-[#23B0FF] text-[#23B0FF] px-4  rounded-lg '>
+                                    <div className='font-semibold border-2 text-center h-[50%] border-[#23B0FF] text-[#23B0FF] px-4  rounded-lg hidden md:block'>
                                         View here
-                                    </div>
+                                    </div>                                    
+                                    <img src={View} className='w-16 h-8 md:hidden visible flex  border-2 border-primary rounded-md '></img>
                                 </Link>
                             </div>
 

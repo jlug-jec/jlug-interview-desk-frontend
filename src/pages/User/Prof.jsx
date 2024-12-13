@@ -163,7 +163,7 @@ function User() {
       setPass('')
       
 
-      const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dqcqijw3c/image/upload`;
+      const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/dqcqijw3c/image/upload';
       const uploadPreset = 'sample-img' 
   
       let uploadResult;
@@ -238,142 +238,137 @@ function User() {
   return (
     <>
       {pageload && <Ripple />}
-  
-      <div className="bg-[#ECECEC] h-full w-full p-10 mb-5 ">
-        {!pageload && (
-          <>
-            <div className="flex flex-row w-full justify-between items-center ">
-              <div className="text-4xl font-semibold">Profile</div>
-              <div
-                className="flex gap-3 p-2 items-center border-2 border-primary text-primary px-4 py-1 rounded-lg cursor-pointer"
-                onClick={handleEdit}
-              >
-                <img src={PencilB} className="w-7 h-7" alt="pencil" />
-                <button className="font-semibold">Edit Profile</button>
-              </div>
-            </div>
-  
-            <div className="flex flex-row w-full gap-2 mt-10">
-              <div className="w-[25vw] bg-white flex flex-col rounded-md shadow-lg gap-8 items-center p-5">
-                <img
-                  src={user.dp}
-                  className="w-[12vw] h-[12vw] border-8 border-double border-spacing-3 border-zinc-500 mt-7 rounded-full"
-                  alt=""
-                />
-                <div className="flex gap-4">
-                  {user.git && (
-                    <a href={user.git}>
-                      <img className="w-10" src={git} alt="" />
-                    </a>
-                  )}
-                  {user.link && (
-                    <a href={user.link}>
-                      <img className="w-10" src={link} alt="" />
-                    </a>
-                  )}
-                </div>
-                <div className="flex flex-col gap-2">
-                  <h4 className="text-xl text-center font-semibold">{user.name}</h4>
-                  <ul className="flex flex-col gap-5">
-                    <li className="flex">
-                      <img className="mr-2" src={loc} alt="" />
-                      {user.loc}
-                    </li>
-                    <li>
-                      <a className="flex" href={user.port}>
-                        <img className="mr-2" src={port} alt="" />
-                        {user.port || "No portfolio"}
-                      </a>
-                    </li>
-                    <li>
-                      <a className="flex" href="#">
-                        <img className="mr-2" src={mail} alt="" />
-                        {user.email}
-                      </a>
-                    </li>
-                    <li>
-                      <a className="flex" href="#">
-                        <img className="mr-2" src={whats} alt="" />
-                        {user.contact}
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-  
-              <div className="w-[68vw] bg-white shadow-lg rounded-lg">
-                <h4 className="text-xl font-semibold m-4">Bio</h4>
-                <p className="text-md font-normal m-4 py-2 px-2 rounded-lg">{user.bio}</p>
-  
-                <div className="grid grid-cols-2 m-4">
-                  <ul className="bg-[#ECECEC] py-2 px-4 m-2 rounded-lg">
-                    <h4 className="text-xl font-semibold mb-4">Skills</h4>
-                    {user.skills && user.skills.length > 0 ? (
-                      user.skills.map((skill, index) => <li key={index}>{skill}</li>)
-                    ) : (
-                      <li>No skills available</li>
-                    )}
-                  </ul>
-  
-                  <ul className="bg-[#ECECEC] py-2 px-4 m-2 rounded-lg">
-                    <h4 className="text-xl font-semibold mb-4">Projects</h4>
-                    {user.projects && Object.keys(user.projects).length > 0 ? (
-                      Object.entries(user.projects).map(([name, url], index) => (
-                        <li key={index} className="flex items-center justify-between py-2">
-                          <span>{name}</span>
-                          <a
-                            href={url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-500 hover:underline flex items-center"
-                          >
-                            <div className="font-semibold border-2 text-center border-[#23B0FF] text-[#23B0FF] px-4 rounded-lg">
-                              View
-                            </div>
-                          </a>
-                        </li>
-                      ))
-                    ) : (
-                      <li>No projects available</li>
-                    )}
-                  </ul>
-                </div>
-  
-                <h4 className="text-xl font-semibold m-4">Tasks</h4>
-                <ul className="bg-[#ECECEC] py-2 px-4 m-5 rounded-lg">
-                  {submissions.length > 0 && submissions.map((submission, index) => (
-                    <li key={index} className="flex flex-row justify-between m-2">
-                      {submission.taskName}
-                      <div className="text-green-400 border-green-400 border-2 rounded-lg px-2">
-                        Completed
+
+<div className="bg-[#ECECEC] h-full w-full p-4 md:p-10 md:mb-5 mb-20">
+  {!pageload && (
+    <>
+      <div className="flex md:flex-row w-full justify-between items-center">
+        <div className="text-2xl md:text-4xl font-semibold">Profile</div>
+        <div
+          className="flex gap-3 p-2 items-center border-2 border-primary text-primary px-4 py-1 rounded-lg cursor-pointer"
+          onClick={handleEdit}
+        >
+          <img src={PencilB} className="w-5 h-5 md:w-7 md:h-7" alt="pencil" />
+          <button className="font-semibold">Edit Profile</button>
+        </div>
+      </div>
+
+      <div className="flex flex-col md:flex-row w-full gap-4 mt-6">
+        
+        <div className="w-full md:w-[25%] bg-white flex flex-col rounded-md shadow-lg gap-6 items-center p-4">
+          <img
+            src={user.dp}
+            className="w-32 h-32 md:w-[12vw]  md:h-[12vw] border-4 md:border-8 border-double border-spacing-3 border-zinc-500 mt-7 rounded-full"
+            alt=""
+          />
+          <div className="flex gap-4">
+            {user.git && (
+              <a href={user.git}>
+                <img className="w-6 md:w-10" src={git} alt="" />
+              </a>
+            )}
+            {user.link && (
+              <a href={user.link}>
+                <img className="w-6 md:w-10" src={link} alt="" />
+              </a>
+            )}
+          </div>
+          <div className="flex flex-col gap-2 text-center">
+            <h4 className="text-lg md:text-xl font-semibold">{user.name}</h4>
+            <ul className="flex flex-col gap-3">
+              <li className="flex items-center">
+                <img className="mr-2" src={loc} alt="" />
+                {user.loc}
+              </li>
+              <li>
+                <a className="flex items-center" href={user.port}>
+                  <img className="mr-2" src={port} alt="" />
+                  {user.port || "No portfolio"}
+                </a>
+              </li>
+              <li>
+                <a className="flex items-center" href="#">
+                  <img className="mr-2" src={mail} alt="" />
+                  {user.email}
+                </a>
+              </li>
+              <li>
+                <a className="flex items-center" href="#">
+                  <img className="mr-2" src={whats} alt="" />
+                  {user.contact}
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="w-full md:w-[70%] md:p-5 bg-white shadow-lg rounded-lg">
+          <h4 className="text-lg md:text-xl font-semibold m-4">Bio</h4>
+          <p className="text-sm md:text-md font-normal m-4 py-2 px-2 rounded-lg">{user.bio}</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 m-4 gap-4">
+            <ul className="bg-[#ECECEC] py-2 px-4 rounded-lg">
+              <h4 className="text-lg md:text-xl font-semibold mb-4">Skills</h4>
+              {user.skills && user.skills.length > 0 ? (
+                user.skills.map((skill, index) => <li key={index}>{skill}</li>)
+              ) : (
+                <li>No skills available</li>
+              )}
+            </ul>
+
+            <ul className="bg-[#ECECEC] py-2 px-4 rounded-lg">
+              <h4 className="text-lg md:text-xl font-semibold mb-4">Projects</h4>
+              {user.projects && Object.keys(user.projects).length > 0 ? (
+                Object.entries(user.projects).map(([name, url], index) => (
+                  <li key={index} className="flex items-center justify-between py-2">
+                    <span>{name}</span>
+                    <a
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-500 hover:underline flex items-center"
+                    >
+                      <div className="font-semibold border-2 text-center border-[#23B0FF] text-[#23B0FF] px-4 rounded-lg">
+                        View
                       </div>
-                      <div className="text-blue-500">
-                        <a href={submission.fileUrl} target="_blank"  rel="noopener noreferrer">
-                          <div className="font-semibold border-2 text-center border-[#23B0FF] text-[#23B0FF] px-4 rounded-lg">
-                            View
-                          </div>
-                        </a>
+                    </a>
+                  </li>
+                ))
+              ) : (
+                <li>No projects available</li>
+              )}
+            </ul>
+          </div>
+
+          <h4 className="text-lg md:text-xl font-semibold m-4">Tasks</h4>
+          <ul className=" py-2 px-4 rounded-lg">
+            {submissions.length > 0 &&
+              submissions.map((submission, index) => (
+                <li key={index} className="flex justify-between py-2">
+                  {submission.taskName}
+                  <div className="text-green-400 border-green-400 border-2 rounded-lg px-2 hidden md:visible">
+                    Completed
+                  </div>
+                  <div className="text-blue-500">
+                    <a href={submission.fileUrl} target="_blank" rel="noopener noreferrer">
+                      <div className="font-semibold border-2 text-center border-[#23B0FF] text-[#23B0FF] px-4 rounded-lg">
+                        View
                       </div>
-                    </li>
-                  ))}
-                  {
-                    submissions.length === 0 && (
-                      <div className="text-orange-400 border-orange-400 w-fit m-auto border-2 rounded-lg px-2">
-                      No Submissions made yet!
-                    </div>
-                    )
-                  }
-                </ul>
-  
-                <h4 className="text-xl font-semibold m-2 ml-5">
-                  Why do you want to join the {user.domain} team
-                </h4>
-                <p className="text-md font-normal m-4 py-2 px-2 rounded-lg">{user.why}</p>
+                    </a>
+                  </div>
+                </li>
+              ))}
+            {submissions.length === 0 && (
+              <div className="text-orange-400 border-orange-400 w-fit m-auto border-2 rounded-lg px-2">
+                No Submissions made yet!
               </div>
-            </div>
-          </>
-        )}
-  
+            )}
+          </ul>
+        </div>
+      </div>
+    </>
+  )}
+
         {isModalOpen && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start overflow-hidden">
             <div
@@ -436,13 +431,13 @@ function User() {
                     type="text"
                     value={name}
                     onChange={(e) => handleProjectChange(id, "name", e.target.value)}
-                    className="flex-1 mr-2 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-1 mr-2 p-3 border border-gray-300 rounded-lg w-[45%] focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                   <input
                     type="text"
                     value={url}
                     onChange={(e) => handleProjectChange(id, "url", e.target.value)}
-                    className="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mr-2"
+                    className="flex-1 p-3 border border-gray-300 rounded-lg focus:outline-none w-[45%] focus:ring-2 focus:ring-blue-500 mr-2"
                   />
                 
                   <button
@@ -483,32 +478,32 @@ function User() {
 
             
             <div>
-              <label className="block mb-2 font-semibold text-gray-700">Update Password</label>
-              <input
-                type="password"
-                value={pass.length > 8 ? '' : pass}
-                maxLength={8}
-                onChange={(e) => handlePass(e)}
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="New Password"
-              />
-            </div>
+                      <label className="block mb-2 font-semibold text-gray-700">Update Password</label>
+                      <input
+                        type="password"
+                        value={pass.length > 8 ? '' : pass}
+                        maxLength={8}
+                        onChange={(e) => handlePass(e)}
+                        className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        placeholder="New Password"
+                      />
+                    </div>
 
-            <div className="flex justify-end mt-8 gap-6">
-              <button
-                type="button"
-                onClick={actionload ? null : () => setIsModalOpen(false)}
-                className={`${actionload && 'cursor-not-allowed opacity-45'} px-6 border-2 border-black py-3 bg-gray-300 hover:bg-gray-400 rounded-lg cursor-pointer`}
-              >
-                Cancel
-              </button>
-              <button
-                type="submit"
-                className={`${actionload && 'animate-pulse cursor-not-allowed'} px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg cursor-pointer`}
-              >
-                Save Changes
-              </button>
-            </div>
+                    <div className="flex justify-end mt-8 gap-6">
+                      <button
+                        type="button"
+                        onClick={actionload ? null : () => setIsModalOpen(false)}
+                        className={`px-6 border-2 border-black py-3 bg-gray-300 hover:bg-gray-400 rounded-lg cursor-pointer ${actionload && 'cursor-not-allowed opacity-45'}`}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        className={`px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white rounded-lg cursor-pointer ${actionload && 'animate-pulse cursor-not-allowed'}`}
+                      >
+                        Save Changes
+                      </button>
+                    </div>
               </form>
             </div>
           </div>
@@ -517,4 +512,4 @@ function User() {
     </>
   );
 }
-export default User;
+export default User; 

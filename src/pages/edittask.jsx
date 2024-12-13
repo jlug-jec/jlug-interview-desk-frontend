@@ -7,12 +7,12 @@ import cancel from '../assets/Cancel.png';
 export default function Add() {
   const { id } = useParams();
   let adminid = localStorage.getItem('userid');
-  adminid =  adminid.replace(/['"]+/g, '');
-  const name = localStorage.getItem('user').name
+  adminid = adminid.replace(/['"]+/g, '');
+  const name = localStorage.getItem('user').name;
   const [file, setFile] = useState(null);
-  const [actionload, setActionLoad] = useState(false)
+  const [actionload, setActionLoad] = useState(false);
 
-  const [originalData, setOriginalData] = useState(null); 
+  const [originalData, setOriginalData] = useState(null);
   const [data, setData] = useState({
     adminid: '',
     tname: '',
@@ -52,45 +52,42 @@ export default function Add() {
     setIsEditing(false);
   };
 
-
   const handleSubmit = async () => {
-    setActionLoad(true)
+    setActionLoad(true);
     const { tname, tdesc, tcatg, tstat, tsub, tdead } = data;
     const admin = localStorage.getItem('user');
 
     const adminObj = admin ? JSON.parse(admin) : null;
-  
+
     if (!adminObj) {
-      alert("Please Login as admin to continue!");
+      alert('Please Login as admin to continue!');
       return;
     }
-  
-  
+
     try {
-      let uploadResult = 'nothing'
-      if(file != null){
-          const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dqcqijw3c/image/upload`;
-          const uploadPreset = 'sample-img';
-      
-          const imageData = new FormData();
-          imageData.append('file', file);
-          imageData.append('upload_preset', uploadPreset);
-          imageData.append('cloud_name', 'dqcqijw3c');
-      
-          const response = await fetch(cloudinaryUrl, {
-            method: 'POST',
-            body: imageData,
-          });
-      
-          uploadResult = await response.json();
-      
-          if (!uploadResult.secure_url) {
-            alert('Image upload failed!');
-            return;
-          }
-      
+      let uploadResult = 'nothing';
+      if (file != null) {
+        const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dqcqijw3c/image/upload`;
+        const uploadPreset = 'sample-img';
+
+        const imageData = new FormData();
+        imageData.append('file', file);
+        imageData.append('upload_preset', uploadPreset);
+        imageData.append('cloud_name', 'dqcqijw3c');
+
+        const response = await fetch(cloudinaryUrl, {
+          method: 'POST',
+          body: imageData,
+        });
+
+        uploadResult = await response.json();
+
+        if (!uploadResult.secure_url) {
+          alert('Image upload failed!');
+          return;
+        }
       }
-      
+
       const taskData = {
         tname,
         tdesc,
@@ -98,9 +95,9 @@ export default function Add() {
         tstat,
         tsub,
         tdead,
-        tfileUrl: uploadResult === 'nothing' ? originalData.tfileUrl : uploadResult.secure_url, 
+        tfileUrl: uploadResult === 'nothing' ? originalData.tfileUrl : uploadResult.secure_url,
         by: adminObj.name,
-        adminid: adminid, 
+        adminid: adminid,
       };
 
       const apiResponse = await fetch(
@@ -113,49 +110,45 @@ export default function Add() {
           body: JSON.stringify(taskData),
         }
       );
-  
+
       const apiResult = await apiResponse.json();
-  
+
       if (apiResult.message === 'Task successfully updated!') {
         alert('Task added successfully!');
         setData(taskData);
         setOriginalData(taskData);
         setFile(null);
-        setActionLoad(false)
+        setActionLoad(false);
       } else {
-        setActionLoad(false)
+        setActionLoad(false);
         alert('Failed to add task!');
       }
     } catch (error) {
       console.error('Error during save:', error);
       alert('An error occurred. Please try again.');
-    }
-    finally{
-      setActionLoad(false)
-      setIsEditing(false)
+    } finally {
+      setActionLoad(false);
+      setIsEditing(false);
     }
   };
-  
-  
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
   };
-  
 
-  console.log(data)
+  console.log(data);
 
   return (
-    <div className="flex flex-col m-auto w-100 h-screen">
-      <div className="flex flex-row w-[100%] gap-9 pt-1 justify-between">
-        <p className="text-left text-4xl font-medium p-[1%] pl-[3%]">
+    <div className="flex flex-col m-auto w-full ">
+      <div className="flex flex-row w-full gap-9 pt-1 justify-between">
+        <p className="text-left text-nowrap md:text-4xl font-medium p-7  md:pl-10 pl-8 ">
           {isEditing ? 'Edit Task' : 'View Task'}
         </p>
-        <div className="flex flex-row gap-5 p-3 justify-center pr-9">
+        <div className="flex flex-row gap-5 p-3 justify-center md:pr-9 pr-6 items-center">
           {adminid === data.adminid && !isEditing && (
             <div
-              className="cursor-pointer flex flex-column gap-2 justify-between items-center bg-bgprimary text-success border-2 hover:bg-success-hv border-success py-2 px-4 rounded"
+              className="cursor-pointer flex flex-column gap-2 justify-between items-center bg-bgprimary text-success border-2 hover:bg-success-hv border-success md:py-2 h-[70%] px-4 rounded"
               onClick={() => setIsEditing(true)}
             >
               <img src={Pencil} className="w-6 h-6" alt="Edit" />
@@ -165,7 +158,7 @@ export default function Add() {
           {isEditing && (
             <>
               <div
-                className={`${actionload && 'animate-pulse cursor-not-allowed '} cursor-pointer flex flex-column gap-2 justify-between items-center bg-bgprimary text-success border-2 hover:bg-success-hv border-success py-2 px-4 rounded`}
+                className={`${actionload && 'animate-pulse cursor-not-allowed '} cursor-pointer flex flex-column gap-2 justify-between items-center bg-bgprimary text-success border-2 hover:bg-success-hv border-success py-2 md:px-4  px-2 rounded text-sm`}
                 onClick={!actionload ? handleSubmit : null}
               >
                 <img src={check} className="w-6 h-6" alt="Save" />
@@ -173,7 +166,7 @@ export default function Add() {
               </div>
 
               <div
-                className={`${actionload && 'opacity-50 cursor-not-allowed '}cursor-pointer flex flex-column gap-2 justify-between items-center bg-bgprimary text-discard border-2 hover:bg-discard-hv border-discard py-2 px-4 rounded`}
+                className={`${actionload && 'opacity-50 cursor-not-allowed '}cursor-pointer flex flex-column gap-2 justify-between items-center bg-bgprimary text-discard border-2 hover:bg-discard-hv border-discard py-2 md:px-4  px-2 rounded text-sm`}
                 onClick={!actionload ? handleDiscard : null}
               >
                 <img src={cancel} className="w-6 h-6" alt="Cancel" />
@@ -184,11 +177,11 @@ export default function Add() {
         </div>
       </div>
 
-      <div className="bg-white m-auto w-[95%] h-[85%] flex flex-col p-4 rounded-xl drop-shadow-lg">
-        <div className="flex flex-row w-full gap-5 p-5">
-          <p className="text-center self-center text-[20px] w-[10%] font-medium">Task Name</p>
+      <div className="bg-white m-auto md:w-[85%] w-[95%] h-auto flex flex-col p-4 rounded-xl drop-shadow-lg z-[-1] md:mb-0 mb-20">
+        <div className="flex flex-col lg:flex-row gap-5 p-5 md:items-center">
+          <p className="text-left self-left text-[20px] md:w-[20%] font-medium">Task Name</p>
           <input
-            className="bg-form-input w-[90%] p-4 border-none rounded-xl text-[16px]"
+            className="bg-form-input w-full lg:w-[80%] p-4 border-none rounded-xl text-[16px]"
             name="tname"
             value={data.tname}
             type="text"
@@ -197,10 +190,10 @@ export default function Add() {
           />
         </div>
 
-        <div className="flex flex-row w-full gap-5 p-5">
-          <p className="text-center self-center text-[20px] w-[10%] font-medium">Task Description</p>
+        <div className="flex flex-col lg:flex-row gap-5 p-5 md:items-center">
+          <p className="text-left self-left text-[20px] md:w-[20%] font-medium">Task Description</p>
           <input
-            className="bg-form-input w-[90%] p-4 border-none rounded-xl text-[16px]"
+            className="bg-form-input w-full md:w-[80%] p-4 border-none rounded-xl text-[16px]"
             name="tdesc"
             value={data.tdesc}
             type="text"
@@ -209,11 +202,11 @@ export default function Add() {
           />
         </div>
 
-        <div className="flex flex-row w-[100%] gap-9 p-5">
-          <div className="flex flex-row w-[50%] gap-7">
-            <p className="text-center self-center text-[20px] w-[25%] font-medium">Task Category</p>
+        <div className="flex flex-col lg:flex-row gap-7 p-5">
+          <div className="flex flex-col lg:flex-row gap-7 w-full md:items-center">
+            <p className="text-left self-left text-[20px] md:w-[50%] font-medium">Task Category</p>
             <select
-              className="bg-form-input w-full p-4 border-none rounded-xl"
+              className="bg-form-input w-full md:w-[70%] p-4 border-none rounded-xl text-[16px]"
               name="tcatg"
               value={data.tcatg}
               disabled={!isEditing}
@@ -226,10 +219,10 @@ export default function Add() {
             </select>
           </div>
 
-          <div className="flex flex-row w-[50%] gap-7">
-            <p className="text-center self-center text-[20px] w-[25%] font-medium">Task Status</p>
+          <div className="flex flex-col lg:flex-row gap-7 w-full md:items-center">
+            <p className="text-left self-left text-[20px] md:w-[50%] font-medium">Task Status</p>
             <select
-              className="bg-form-input w-full p-4 border-none rounded-xl"
+              className="bg-form-input w-full md:w-[70%] p-4 border-none rounded-xl text-[16px]"
               name="tstat"
               value={data.tstat}
               disabled={!isEditing}
@@ -242,57 +235,29 @@ export default function Add() {
           </div>
         </div>
 
-        <div className="flex flex-row gap-7 p-5 w-[50%]">
-          <p className="text-center self-center text-[20px] w-[25%] font-medium">Submission Type</p>
-          <select
-            className="bg-form-input w-full p-4 border-none rounded-xl"
-            name="tsub"
-            value={data.tsub}
-            disabled={!isEditing}
-            onChange={handleInputChange}
-          >
-            <option value="">Select Submission Type</option>
-                <option value='DRV'>Google Drive</option>
-                <option value='GIT'>Github Repositry</option>
-          </select>
-        </div>
-
-        <div className="flex flex-row gap-8 p-5 w-[50%]">
-          <p className="text-center self-center text-[20px] w-[25%] font-medium">Add a Deadline</p>
+        <div className="flex flex-col lg:flex-row gap-7 p-5 md:items-center ">
+          <p className="text-left self-left text-[20px] md:w-[20%] font-medium">Deadline</p>
           <input
-            type="date"
-            className="bg-form-input w-[100%] p-4 border-none rounded-xl text-[16px]"
-            value={data.tdead}
+            className="bg-form-input w-full md:w-[50%] p-4 border-none rounded-xl text-[16px]"
             name="tdead"
+            type="date"
+            value={data.tdead}
             disabled={!isEditing}
             onChange={handleInputChange}
           />
         </div>
 
-        <div className="flex flex-row gap-8 p-5 w-[50%]">
-          <p className="text-center self-center text-[20px] w-[20%] font-medium">Example File</p>
-          {!isEditing ? (
-            <Link to={data.tfileUrl} >
-                <div className="bg-primary text-white px-4 py-2 rounded">
-                View File
-                </div>
-            </Link>
-          ) : (
-            <input
-              accept="image/png, image/jpeg, image/jpg"
-              id="file"
-              type="file"
-              className="self-center"
-              name="tfile"
-              disabled={!isEditing}
-              onChange={handleFileChange}
-            />
-          )}
+        <div className="flex flex-col lg:flex-row gap-7 p-5 md:items-center">
+          <p className="text-left self-left text-[20px] md:w-[20%] font-medium">Task File</p>
+          <input
+            type="file"
+            accept="image/*"
+            className="p-1 w-full lg:w-[50%] text-gray-700"
+            onChange={handleFileChange}
+            disabled={!isEditing}
+          />
         </div>
       </div>
     </div>
   );
 }
-
-
-

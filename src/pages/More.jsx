@@ -39,21 +39,21 @@ const More = ({settings, updateSettings, handleCompletion, data})=>{
 
 
     return (
-        <div className='flex flex-col gap-11 w-[70%] h-[80%] m-auto mt-4 bg-white p-6 shadow-xl'>
+        <div className='flex flex-col gap-11 md:w-[70%] md:h-[80%] w-[90%] m-auto md:mt-4 mt-8 bg-white md:p-6 p-5 shadow-xl'>
             <Progress setting={settings} />
-            <Heading label={'You are one step away ...'} />
+            <Heading label={'You are one step away...'} />
             <div className='flex flex-col gap-8 w-[90%] items-center m-auto'>
 
                 <Input handleChange={handleChange} label={'Github'} type={'text'} value={profile.git} name={'git'} /> 
                 <Input handleChange={handleChange} label={'Linkedin'} type={'text'} value={profile.link} name={'link'} /> 
 
-                <div className='flex flex-row w-full justify-center gap-4'>
+                <div className='flex md:flex-row flex-col w-full justify-center md:gap-4 gap-8'>
                     <SmallInput handleChange={handleChange} label={'Portfolio'} type={'text'} value={profile.port} styles={50} name={'port'} />  
                     <SmallInput handleChange={handleChange} label={'Location'} type={'text'} value={profile.loc}  styles={50}   name={'loc'} />   
                 </div>
 
                 <Input handleChange={handleChange} label={'Bio'} type={'text'} value={profile.bio} name={'bio'} />  
-                <Input handleChange={handleChange} label={'Why do you want to join'} type={'text'} value={profile.why} name={'why'} />  
+                <Input handleChange={handleChange} label={'Why do you want to join ?'}  lstyles={'w-[40%] '} type={'text'} value={profile.why} name={'why'} />  
 
                 <div className='flex flex-row gap-4 w-full items-center justify-center mt-2'>
                     <Button isloading={load} label={'Previous'}  handler={()=>handleNext(0)} variant={0}/>

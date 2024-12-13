@@ -154,7 +154,7 @@ function Settings() {
               <div className="w-[80%] bg-white flex flex-col rounded-lg shadow-xl gap-8 items-center justify-center p-7 m-auto">
                 <img
                   src={user.dp}
-                  className="w-[12vw] h-[12vw] border-8 border-double border-spacing-3 border-zinc-500 mt-7 rounded-full"
+                  className="md:w-[12vw] md:h-[12vw] w-36 h-36 border-8 border-double border-spacing-3 border-zinc-500 mt-7 rounded-full"
                   alt=""
                 />
                 <div className="flex flex-col gap-2">

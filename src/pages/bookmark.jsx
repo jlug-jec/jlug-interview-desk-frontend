@@ -20,11 +20,11 @@ const Bookmark = () => {
     { !load && (<div className="flex-1 pt-10 w-100">
       <div className="w-full px-6 md:px-6 lg:px-10 pb-10 lg:pb-20 xl:pb-20">
         <header className="w-full h-16">
-          <div className="mt-auto max-w-full pl-6">
+          <div className="mt-auto max-w-full md:pl-6 pl-3">
             <h1 className="text-4xl tracking-tight font-semibold text-left">BookMarks</h1>
           </div>
         </header>
-        <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col p-10 rounded-xl drop-shadow-lg">
+        <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col md:p-10 rounded-xl drop-shadow-lg p-6">
           {bookmarks.length > 0 ? (
             <div role="list" className="flex flex-col gap-4">
               {bookmarks.map((bookmark) => (

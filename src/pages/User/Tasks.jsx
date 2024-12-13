@@ -33,14 +33,14 @@ const TaskList = () => {
               ) : tasks.length > 0 ? (
                 <div role="list" className="flex flex-col gap-6  md:px-0">
                   {tasks.map((task) => (
-                    <div key={task.id} className="flex flex-col md:flex-row justify-between items-center md:gap-x-6 py-2 w-full min-h-[10px]">
+                    <div key={task.id} className="flex flex-col md:flex-row justify-between items-center md:gap-x-10 md:px-6 py-2 w-full min-h-[10px]">
                       <div className="flex w-full gap-x-5 items-center">
                         <img
                           src={task.tcatg === 'Page' ? Page : Application}
                           alt={`Icon of ${task.tname}`}
                           className="h-12 w-12  flex-none rounded-full bg-gray-50"
                         />
-                        <div className="w-[80%] md:w-[25%] flex flex-auto items-center">
+                        <div className="w-[80%] md:w-[35%] flex flex-auto items-center">
                           <p className="text-4 font-medium leading-6 text-center text-gray-900">{task.tname}</p>
                         </div>
                         <div className="min-w-[10%] md:min-w-[15%] flex flex-auto items-center">
@@ -49,7 +49,7 @@ const TaskList = () => {
                         <div className="min-w-[20%] md:min-w-[15%] flex-auto items-center text-center md:flex hidden">
                           <p className="text-4 font-medium leading-6 text-center text-gray-900">{task.by}</p>
                         </div>
-                        <div className="flex min-w-[15%] flex-col md:flex-row w-full md:w-[45%] items-center text-center justify-around gap-4 md:gap-12 mt-4 md:mt-0">
+                        <div className="flex min-w-[15%] flex-col md:flex-row w-full md:w-[20%] items-center text-center justify-around gap-4 md:gap-12 mt-4 md:mt-0">
                           <div
                             className={`font-semibold border-2 text-center h-[50%] md:visible hidden ${
                               task.tsub === 'Submitted'

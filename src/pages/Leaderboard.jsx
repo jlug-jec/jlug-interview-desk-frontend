@@ -29,17 +29,17 @@ const Leader = () => {
         <div className="flex-1 pt-10 w-100">
           <div className="w-full px-6 md:px-6 lg:px-10 pb-10 lg:pb-20 xl:pb-20">
             <header className="w-full h-16">
-              <div className="mt-auto max-w-full pl-6">
+              <div className="mt-auto max-w-full md:pl-6 pl-0">
                 <h1 className="text-4xl tracking-tight font-semibold text-left">Leaderboard</h1>
               </div>
             </header>
-            <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col p-10 rounded-xl drop-shadow-lg">
+            <div className="bg-white m-auto md:w-[95%] min-h-[70vh] flex flex-col md:p-10 p-5 rounded-xl drop-shadow-lg w-[100%]">
               {leaderboard.length > 0 ? (
                 <div role="list" className="flex flex-col gap-4">
                   {leaderboard.map((bookmark) => (
                     <div
                       key={bookmark.name}
-                      className="flex justify-between items-center gap-x-6 py-4 w-full min-h-[10px]"
+                      className="flex justify-between items-center gap-x-4 md:gap-x-6 py-4 w-full min-h-[10px]"
                     >
                       <div className="flex min-w-0 gap-x-4">
                         <img
@@ -55,7 +55,7 @@ const Leader = () => {
                       </div>
                       <div
                         className={`flex items-center justify-between ${
-                          bookmark.net < 10 ? 'gap-6' : 'gap-4'
+                          bookmark.net < 10 ? 'gap-5' : 'gap-3'
                         }`}
                       >
                         <div className="text-yellow-500 h-7 w-7 flex justify-center items-center">
@@ -64,7 +64,7 @@ const Leader = () => {
                         <div>{bookmark.net < 0 ? '0' : bookmark.net}</div>
 
                         <Link to={`/user/${bookmark.id}`}>
-                          <div className="font-semibold shadow-md border-2 border-primary text-primary px-4 py-1 rounded-lg hover:bg-primary hover:text-white">
+                          <div className="font-semibold shadow-md border-2 border-primary text-primary md:px-4 md:py-1 p-1 h-auto rounded-lg hover:bg-primary hover:text-white md:w-auto w-[60px] text-sm ">
                             View Profile
                           </div>
                         </Link>

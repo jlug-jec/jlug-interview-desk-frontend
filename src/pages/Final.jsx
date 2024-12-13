@@ -7,7 +7,7 @@ export default function Final({data}) {
     const [profile, setProfile] = useState(data)
 
   return (        
-    <div className='flex flex-col gap-14 w-[70%] h-[80%] m-auto mt-4 bg-white p-10 shadow-xl'>
+    <div className='flex flex-col gap-14 md:w-[70%] md:h-[80%] w-[90%] m-auto md:mt-8 bg-white md:p-10 md:py-10 md:px-10 py-10 px-5 shadow-xl mt-8'>
         <Heading label={'🎉 Congratulations! 🎉'} />
         <div className='w-full font-medium text-3xl text-center mt-[-2rem]'>You are successfully registered !</div>
         <div className='text-black text-lg  text-center p-4 font-medium'>
