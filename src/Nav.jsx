@@ -66,7 +66,7 @@ const Nav = ()=>{const initialTab = Number(localStorage.getItem('activeTab')) ||
                 </div>
             </div>
 
-            <div className="bg-[#1F2937] bottom-0 fixed left-0 pt-5  md:top-[70px] md:h-screen w-full md:w-20  flex md:flex-col gap-8  py-4  justify-between md:justify-normal items-center p-4 h-16">
+            <div className="bg-[#1F2937] bottom-0 fixed left-0 pt-5  md:top-[70px] md:h-screen w-full md:w-20  flex md:flex-col gap-8  py-4  justify-between md:justify-normal items-center p-4 h-16 md:overflow-y-hidden overflow-y-scroll">
                 <Link to='/admin'><div className={`w-12 h-12 ${tab === 0 ? 'bg-white' : 'bg-[#1F2937]'} p-2 rounded-xl`} onClick={() => handleChange(0)}>
                     <img src={tab === 0 ? HomeB : Home} alt='home'></img>
                 </div></Link>

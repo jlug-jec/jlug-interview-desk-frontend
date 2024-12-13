@@ -82,16 +82,16 @@ const TaskList = () => {
       <>
       {pageload && <Ripple />}
       { !pageload &&  ( <div className="flex-1 pt-10 w-100">
-        <div className= " w-full  md:px-6 lg:px-10  px-5 md:pb-10 lg:pb-20 xl:pb-20">
+        <div className= " w-full  md:px-6 lg:px-10  px-5 md:pb-10 p-2 sm:p-4 pl-4 sm:pl-6">
           <header className="w-full h-16">
             <div className="flex flex-row justify-between mt-auto max-w-full pl-6 items-center">
-              <h1 className="text-4xl tracking-tight font-semibold text-left">Tasks</h1>                    
+              <h1 className="md:text-4xl text-3xl tracking-tight font-semibold text-left">Tasks</h1>                    
                 <Link to='/add'><div className='font-semibold border-2 text-center h-[50%] border-[#23B0FF] text-[#23B0FF] p-2 mr-4 cursor-pointer rounded-lg'>
                     Create a Task
                 </div></Link> 
             </div>
           </header>
-          <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col md:p-10 p-2 rounded-xl drop-shadow-lg">
+          <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col md:p-10 p-2 rounded-xl drop-shadow-lg static z-[-1] md:mb-0 mb-20">
           {tasks.length > 0 ? (
             <div role="list" className="flex flex-col gap-8">
                 {tasks.map((task, index) => (

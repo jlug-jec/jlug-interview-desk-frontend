@@ -2,7 +2,7 @@ import {React} from 'react';
 import { Link } from 'react-router-dom'
 import Heading from '../components/Heading';
 import Button from '../components/Button'
-import Dog from '../assets/dog.png'
+import Dog from '../../dog.png'
 
 export default function Lost({data}) {
 

@@ -141,7 +141,7 @@ export default function Add() {
   return (
     <div className="flex flex-col m-auto w-full ">
       <div className="flex flex-row w-full gap-9 pt-1 justify-between">
-        <p className="text-left text-nowrap md:text-4xl font-medium p-7  md:pl-10 pl-8 ">
+        <p className="text-left text-nowrap md:text-4xl text-3xl font-medium p-7  md:pl-10 pl-6 ">
           {isEditing ? 'Edit Task' : 'View Task'}
         </p>
         <div className="flex flex-row gap-5 p-3 justify-center md:pr-9 pr-6 items-center">

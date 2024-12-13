@@ -24,15 +24,15 @@ const Review = () => {
       
       {!load && (
         <div className="flex-1 pt-10 w-full">
-          <div className="w-full px-6 md:px-6 lg:px-10 pb-10 lg:pb-20 xl:pb-20">
+          <div className="w-full px-6 md:px-6 lg:px-10 pb-10 p-2 sm:p-4 pl-4 sm:pl-6">
             <header className="w-full h-16">
               <div className="mt-auto max-w-full pl-6">
-                <h1 className="text-4xl tracking-tight font-semibold text-left">
+                <h1 className="md:text-4xl tex-3xl text-nowrap tracking-tight font-semibold text-left">
                   Review Applications
                 </h1>
               </div>
             </header>
-            <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col p-4 rounded-xl drop-shadow-lg">
+            <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col p-4 rounded-xl drop-shadow-lg static z-[-1] md:mb-0 mb-20">
               <div className="p-3">
                 {pendingApplicants.length > 0 ? (
                   pendingApplicants.map((applicant) => (
