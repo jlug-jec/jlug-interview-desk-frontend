@@ -37,6 +37,7 @@ console.log(leaderboard)
               {leaderboard.length > 0 ? (
                 <div role="list" className="flex flex-col gap-4">
                   {leaderboard.map((bookmark) => (
+  
                     <div
                       key={bookmark.name}
                       className="flex justify-between items-center gap-x-4 md:gap-x-6 py-4 w-full min-h-[10px]"
@@ -49,7 +50,7 @@ console.log(leaderboard)
                         />
                         <div className="min-w-0 flex flex-auto items-center">
                           <p className="text-4 font-semibold leading-6 text-center text-gray-900">
-                            {bookmark.name}
+                            {bookmark.name} {bookmark.id}
                           </p>
                         </div>
                       </div>
@@ -63,7 +64,7 @@ console.log(leaderboard)
                         </div>
                         <div>{bookmark.net < 0 ? '0' : bookmark.net}</div>
 
-                        <Link to={`/user/${bookmark.id}`}>
+                        <Link to={`https://jlug-interview-desk-frontend.vercel.app/leader/user/${bookmark.id}`}>
                           <div className="font-semibold shadow-md border-2 border-primary text-primary md:px-4 md:py-1 p-1 h-auto rounded-lg hover:bg-primary hover:text-white md:w-auto w-[60px] text-sm ">
                             View Profile
                           </div>
