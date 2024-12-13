@@ -64,7 +64,7 @@ console.log(leaderboard)
                         </div>
                         <div>{bookmark.net < 0 ? '0' : bookmark.net}</div>
 
-                        <Link to={`https://jlug-interview-desk-frontend.vercel.app/leader/user/${bookmark.id}`}>
+                        <Link to={`https://jlug-interview-desk-frontend.vercel.app/user/${bookmark.id}`}>
                           <div className="font-semibold shadow-md border-2 border-primary text-primary md:px-4 md:py-1 p-1 h-auto rounded-lg hover:bg-primary hover:text-white md:w-auto w-[60px] text-sm ">
                             View Profile
                           </div>
