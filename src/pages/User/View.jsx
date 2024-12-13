@@ -31,7 +31,8 @@ export default function View() {
     }
   }, [task]);
 
-  
+  console.log(task)
+
   const [data, setData] = useState(task);
   const [isModalOpen, setIsModalOpen] = useState(false); 
   const [submissionUrl, setSubmissionUrl] = useState(''); 
@@ -63,7 +64,7 @@ export default function View() {
         </div>
       </div>
 
-      <div className="bg-white m-auto w-full sm:w-[95%] h-full flex flex-col md:p-4 mt-2 rounded-xl  z-[-1]">
+      <div className="bg-white m-auto w-full sm:w-[95%] h-full flex flex-col md:p-4 mt-2 rounded-xl   z-[-1]">
         <div className="flex flex-col sm:flex-row w-full gap-5 p-5 pb-0">
           <p className="text-left sm:text-left self-center text-sm sm:text-[18px] w-full md:w-[10%] font-medium">
             Task Name

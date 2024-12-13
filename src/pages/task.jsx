@@ -81,10 +81,10 @@ const TaskList = () => {
     return (
       <>
       {pageload && <Ripple />}
-      { !pageload &&  ( <div className="flex-1 pt-10 w-100">
+      { !pageload &&  ( <div className="flex-1  w-100">
         <div className= " w-full  md:px-6  px-5 md:pb-10 sm:p-4 p-4 sm:pl-6">
           <header className="w-full h-16">
-            <div className="flex flex-row justify-between mt-auto max-w-full pl-6 items-center">
+            <div className="flex flex-row justify-between mt-auto max-w-full md:pl-6 pl-4 items-center">
               <h1 className="md:text-4xl text-3xl tracking-tight font-semibold text-left">Tasks</h1>                    
                 <Link to='/add'><div className='font-semibold border-2 text-center h-[50%] border-[#23B0FF] text-[#23B0FF] p-2 mr-4 cursor-pointer rounded-lg'>
                     Create a Task

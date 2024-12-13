@@ -32,8 +32,8 @@ const Main = ()=>{
 
   return(
     <div className= {`${loc.pathname === '/register' || loc.pathname === '/login' || loc.pathname === '/reset' ? '' : styles}`}>
-      {loc.pathname !== '/register' && loc.pathname !== '/login' && loc.pathname !== '/reset' && !userp && <Nav />}
-      {userp && <Nav1 />}
+      {loc.pathname !== '/register' && loc.pathname !== '/login' && loc.pathname !== '/reset' && !userp && loc.pathname != '*' && <Nav />}
+      {userp && loc.pathname != '*' &&  <Nav1 />}
       <Routes>
             <Route path="/admin" element={<Dashboard />} />
             <Route path="/add" element={<Add_task />} />

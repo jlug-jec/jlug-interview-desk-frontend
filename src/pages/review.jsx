@@ -17,13 +17,13 @@ const Review = () => {
     fetchPendingApplicants
   } = useAdminContext();
 
-
+console.log(pendingApplicants)
   return (
     <>
       {load && <Ripple />} 
       
       {!load && (
-        <div className="flex-1 pt-10 w-full">
+        <div className="flex-1  w-full">
           <div className="w-full px-6 md:px-6 sm:p-4 p-4 sm:pl-6">
             <header className="w-full h-16">
               <div className="mt-auto max-w-full pl-6">
