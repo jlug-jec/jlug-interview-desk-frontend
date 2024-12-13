@@ -23,7 +23,10 @@ const Reset = () => {
     const handleCompletion = async () => {
         setPageLoad(1);
         try {
-            if(profile.newp.length < 8) alert('Password must be 8 characters long !');
+            if(step == 2 && profile.newp.length < 8) {
+                alert('Password must be 8 characters long !');
+                return;
+            }
             let endpoint = step === 1 ? 'send-otp' : 'verify-otp';
             let res = await fetch(`https://firebase-api-hrly.onrender.com/api/${endpoint}`, {
                 method: 'POST',
