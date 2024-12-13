@@ -20,7 +20,7 @@ const Login = () => {
     const handleCompletion = async () => {
         setPageLoad(1);
         try {
-            let res = await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/login', {
+            let res = await fetch('https://firebase-api-hrly.onrender.com/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

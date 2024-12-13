@@ -36,17 +36,17 @@ function Dashboard() {
     }
 
     const { domain, submissions, approvedby } = user;
-    console.log(submissions, approvedby)
+    
     const dashboard = async ()=>{
       
-    fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/users/${domain}`)
+    fetch(`https://firebase-api-hrly.onrender.com/api/users/${domain}`)
       .then((response) => response.json())
       .then((users) => {
         const filteredUsers = users.filter(
           (u) => u.domain === domain && !u.email.includes('admin')
         );
 
-        console.log(filteredUsers)
+        
 
         const totalApplicants = filteredUsers.length;
         const applicationsReviewed = approvedby.length;
@@ -73,7 +73,7 @@ function Dashboard() {
           return;
         }
   
-        const response = await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/leaderboard', {
+        const response = await fetch('https://firebase-api-hrly.onrender.com/leaderboard', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ function Dashboard() {
         }
   
         const data = await response.json();
-        console.log('Leaderboard Data:', data);
+        
   
         setLeaderboard(data.slice(0, 3));
       } catch (error) {
@@ -103,13 +103,12 @@ function Dashboard() {
           return;
         }
   
-        const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/pending/${adminId}/${user.domain}`);
+        const response = await fetch(`https://firebase-api-hrly.onrender.com/pending/${adminId}/${user.domain}`);
         if (!response.ok) {
           throw new Error('Failed to fetch pending applicants');
         }
   
         const data = await response.json();
-        console.log('Pending Applicants:', data);
   
         setPendingApplicants(data.slice(0, 3));
       } catch (error) {
@@ -126,8 +125,6 @@ function Dashboard() {
 
   }, []);
   
-
-  console.log(pendingApplicants)
 
   return (
     <>

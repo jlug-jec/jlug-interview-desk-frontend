@@ -23,7 +23,7 @@ const TaskList = () => {
     
           try {
     
-            let response= await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/get-tasks-by-domain', {
+            let response= await fetch('https://firebase-api-hrly.onrender.com/get-tasks-by-domain', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ const TaskList = () => {
     
       const handleDelete = async (id) => {
         try {
-          const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/delete-task/${id}`, {
+          const response = await fetch(`https://firebase-api-hrly.onrender.com/delete-task/${id}`, {
             method: 'GET',
           });
       
@@ -64,7 +64,6 @@ const TaskList = () => {
           }
       
           const result = await response.json();
-          console.log(result.message); 
 
           setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskid));
         } catch (error) {
@@ -78,9 +77,6 @@ const TaskList = () => {
     const [loading, setLoading] = useState(true);
     let userid = localStorage.getItem('userid')
     userid =  userid.replace(/['"]+/g, '');
-    console.log(tasks.adminid, userid)
-
-    console.log(tasks)
 
     return (
       <>

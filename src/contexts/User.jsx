@@ -23,7 +23,7 @@ export const UserProvider = ({ children }) => {
         const domain  = userObj.domain
     
         try {
-          const response = await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/get-tasks-by-domain', {
+          const response = await fetch('https://firebase-api-hrly.onrender.com/get-tasks-by-domain', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -36,7 +36,6 @@ export const UserProvider = ({ children }) => {
           }
       
           const tasks = await response.json();
-          console.log(tasks)
           setTasks(tasks)
 
         } catch (error) {
@@ -53,12 +52,12 @@ export const UserProvider = ({ children }) => {
         setPageLoad(true)
         try {
             console.log('fetching user data.....')
-          const userResponse = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/get-user/${id}`);
+          const userResponse = await fetch(`https://firebase-api-hrly.onrender.com/api/get-user/${id}`);
           if (!userResponse.ok) throw new Error('Failed to fetch user details.');
           const userData = await userResponse.json();
           setUserData(userData);
     
-          const submissionsResponse = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/get-submissions/${id}`);
+          const submissionsResponse = await fetch(`https://firebase-api-hrly.onrender.com/api/get-submissions/${id}`);
           if (!submissionsResponse.ok) throw new Error('Failed to fetch submissions.');
           const submissionsData = await submissionsResponse.json();
           setUserSubmissions(submissionsData);
@@ -76,7 +75,7 @@ export const UserProvider = ({ children }) => {
     const fetchTask = useCallback(async (id) => {
         setLoading(true)
         try {
-          const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/tasks/${id}`); 
+          const response = await fetch(`https://firebase-api-hrly.onrender.com/tasks/${id}`); 
           const result = await response.json();
           setTask(result); 
         } catch (error) {
@@ -113,7 +112,7 @@ export const UserProvider = ({ children }) => {
       
         try {
           const submitTaskResponse = await fetch(
-            'http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/submit-task',
+            'https://firebase-api-hrly.onrender.com/api/submit-task',
             {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -131,7 +130,7 @@ export const UserProvider = ({ children }) => {
             const { submissionId } = await submitTaskResponse.json();
       
             const updateUserResponse = await fetch(
-              `http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/update/${userId}`,
+              `https://firebase-api-hrly.onrender.com/api/update/${userId}`,
               {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

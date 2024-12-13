@@ -87,7 +87,7 @@ export default function Add() {
           domain: adminObj.domain
         };
 
-        const apiResponse = await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/add-task', {
+        const apiResponse = await fetch('https://firebase-api-hrly.onrender.com/add-task', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ export default function Add() {
 
         const apiResult = await apiResponse.json();
         if (apiResult.message === 'Task successfully added!') {
-          console.log('Task added successfully to Firebase');
+          
           alert('Task was added successfully!');
           setActionLoad(false);
         } else {

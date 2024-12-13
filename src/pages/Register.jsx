@@ -63,7 +63,7 @@ function App() {
     setPage(5)
     try {
 
-      let res= await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/register', {
+      let res= await fetch('https://firebase-api-hrly.onrender.com/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,11 +73,10 @@ function App() {
 
 
       res = await res.json();
-      console.log(res.ok)
-
+      
       if(res.ok){
         alert(res.message)
-        console.log('value of page', page)
+        
         setPage(5)
       }
       else{

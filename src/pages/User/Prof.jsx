@@ -35,14 +35,14 @@ function User() {
       setPageLoad(true)
       const fetchData = async () => {
          try {
-          const userResponse = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/get-user/${id}`);
+          const userResponse = await fetch(`https://firebase-api-hrly.onrender.com/api/get-user/${id}`);
           if (!userResponse.ok) throw new Error('Failed to fetch user details.');
           const userData = await userResponse.json();
           setUpdatedUser(userData)
           setUser(userData)
           setDp(userData.dp)
           setPass(userData.password)
-          console.log(dp)
+          
 
           if (userData && userData.projects) {
             const transformedProjects = Object.entries(userData.projects).map((entry, index)  => ({
@@ -56,7 +56,7 @@ function User() {
             setProjects([]); 
           }
   
-          const submissionsResponse = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/get-submissions/${id}`);
+          const submissionsResponse = await fetch(`https://firebase-api-hrly.onrender.com/api/get-submissions/${id}`);
           if (!submissionsResponse.ok) throw new Error('Failed to fetch submissions.');
           const submissionsData = await submissionsResponse.json();
           setSubmissions(submissionsData);
@@ -200,7 +200,7 @@ function User() {
 
       console.log(newUser)
       try {
-        const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/update-user/${id}`, {
+        const response = await fetch(`https://firebase-api-hrly.onrender.com/update-user/${id}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', 
 
@@ -224,7 +224,6 @@ function User() {
       if(dp){
         setDp(dp[0])
       }
-      console.log(dp)
     }
 
     const handleEdit = ()=>{
@@ -232,9 +231,6 @@ function User() {
       setIsModalOpen(!isModalOpen)
     }
 
-
-
-    console.log(submissions)
   return (
     <>
       {pageload && <Ripple />}

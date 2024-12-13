@@ -30,7 +30,7 @@ export default function Add() {
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/tasks/${id}`);
+        const response = await fetch(`https://firebase-api-hrly.onrender.com/tasks/${id}`);
         const result = await response.json();
         setOriginalData(result);
         setData(result);
@@ -101,7 +101,7 @@ export default function Add() {
       };
 
       const apiResponse = await fetch(
-        `http://127.0.0.1:5001/fir-api-5316a/us-central1/app/update-task/${id}`,
+        `https://firebase-api-hrly.onrender.com/update-task/${id}`,
         {
           method: 'POST',
           headers: {
@@ -137,8 +137,7 @@ export default function Add() {
     setFile(selectedFile);
   };
 
-  console.log(data);
-
+  
   return (
     <div className="flex flex-col m-auto w-full ">
       <div className="flex flex-row w-full gap-9 pt-1 justify-between">

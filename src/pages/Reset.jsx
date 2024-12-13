@@ -25,7 +25,7 @@ const Reset = () => {
         }
         setPageLoad(1);
         try {
-            let res = await fetch('http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/reset', {
+            let res = await fetch('https://firebase-api-hrly.onrender.com/api/reset', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -33,7 +33,6 @@ const Reset = () => {
                 body: JSON.stringify(profile),
             });
             res = await res.json();
-            console.log(res);
 
             if (res.ok) {
                 alert(res.message);

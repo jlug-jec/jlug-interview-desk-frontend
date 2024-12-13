@@ -19,20 +19,18 @@ export const AdminProvider = ({ children }) => {
 
       let adminId = localStorage.getItem('userid');
       const user = JSON.parse(localStorage.getItem('user'));
-      console.log(user)
-  
 
   const fetchDashboardData = useCallback(async () => {
     
     setLoading(true);
     try {
-      const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/users/${user.domain}`); 
+      const response = await fetch(`https://firebase-api-hrly.onrender.com/api/users/${user.domain}`); 
       const data = await response.json();
       const filteredUsers = data.filter(
         (u) => u.domain === user.domain && !u.email.includes('admin')
       );
 
-      const adminResponse = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/get-user/${adminId}`);
+      const adminResponse = await fetch(`https://firebase-api-hrly.onrender.com/api/get-user/${adminId}`);
       if (!adminResponse.ok) throw new Error('Failed to fetch admin details.');
       const adminData = await adminResponse.json();
       localStorage.setItem('user', JSON.stringify(adminData))
@@ -61,7 +59,7 @@ export const AdminProvider = ({ children }) => {
   const fetchLeaderboardData = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/leaderboard`, {
+      const response = await fetch(`https://firebase-api-hrly.onrender.com/leaderboard`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -85,7 +83,7 @@ export const AdminProvider = ({ children }) => {
   const fetchPendingApplicants = useCallback(async () => {
     setLoading(true);
     try {
-        const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/pending/${adminId}/${user.domain}`);
+        const response = await fetch(`https://firebase-api-hrly.onrender.com/pending/${adminId}/${user.domain}`);
         if (!response.ok) {
           throw new Error('Failed to fetch pending applicants');
         }
@@ -110,7 +108,7 @@ export const AdminProvider = ({ children }) => {
     console.log(adminId)
     setLoading(true);
     try {
-        const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/bookmarked/${adminId}`);
+        const response = await fetch(`https://firebase-api-hrly.onrender.com/api/bookmarked/${adminId}`);
 
         const data = await response.json();
         setBookmarks(data)
@@ -124,7 +122,7 @@ export const AdminProvider = ({ children }) => {
   const handleRemoveBookmark = useCallback(async (userId) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/delete-bookmark/${adminId}/${userId}`, { method: 'DELETE' });
+      const response = await fetch(`https://firebase-api-hrly.onrender.com/api/delete-bookmark/${adminId}/${userId}`, { method: 'DELETE' });
       if (!response.ok) throw new Error('Failed to delete bookmark');
       setBookmarks((prev) => prev.filter((bookmark) => bookmark.id !== userId));
       await fetchDashboardData()
@@ -138,12 +136,12 @@ export const AdminProvider = ({ children }) => {
 
   const fetchUserData = useCallback(async (id) => {
     try {
-      const userResponse = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/get-user/${id}`);
+      const userResponse = await fetch(`https://firebase-api-hrly.onrender.com/api/get-user/${id}`);
       if (!userResponse.ok) throw new Error('Failed to fetch user details.');
       const userData = await userResponse.json();
       setUserData(userData);
 
-      const submissionsResponse = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/get-submissions/${id}`);
+      const submissionsResponse = await fetch(`https://firebase-api-hrly.onrender.com/api/get-submissions/${id}`);
       if (!submissionsResponse.ok) throw new Error('Failed to fetch submissions.');
       const submissionsData = await submissionsResponse.json();
       setSubmission(submissionsData);
@@ -155,7 +153,7 @@ export const AdminProvider = ({ children }) => {
 
 const handleAction = useCallback(async (actionType, id) => {
   try {
-    const response = await fetch(`http://127.0.0.1:5001/fir-api-5316a/us-central1/app/api/${actionType}`, {
+    const response = await fetch(`https://firebase-api-hrly.onrender.com/api/${actionType}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -177,7 +175,6 @@ const handleAction = useCallback(async (actionType, id) => {
   }
 },[]);
 
-  console.log(bookmarks)
 
 useEffect(() => {
   fetchDashboardData();

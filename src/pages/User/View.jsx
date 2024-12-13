@@ -31,7 +31,7 @@ export default function View() {
     }
   }, [task]);
 
-  console.log(task)
+  
   const [data, setData] = useState(task);
   const [isModalOpen, setIsModalOpen] = useState(false); 
   const [submissionUrl, setSubmissionUrl] = useState(''); 

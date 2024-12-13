@@ -18,7 +18,6 @@ const Review = () => {
   } = useAdminContext();
 
 
-  console.log(pendingApplicants)
   return (
     <>
       {load && <Ripple />} 

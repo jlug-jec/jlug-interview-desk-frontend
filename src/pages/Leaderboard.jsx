@@ -19,7 +19,7 @@ const Leader = () => {
     fetchPendingApplicants
   } = useAdminContext();
 
-  console.log(leaderboard)
+  
 
 
   return (

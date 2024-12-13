@@ -30,8 +30,6 @@ function User() {
     fetchUserData(id)
   }, [])
 
- console.log(userData)
-
   if (!userData) return <Ripple/>;
 
   return (
