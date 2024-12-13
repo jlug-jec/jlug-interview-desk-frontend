@@ -64,7 +64,7 @@ const Nav = () => {
                 </div>
             </div>
 
-            <div className="bg-[#1F2937] bottom-0 fixed left-0 pt-5  md:top-[70px] md:h-screen w-full md:w-20  flex md:flex-col gap-8  py-4  justify-between md:justify-normal items-center p-4 h-16 md:overflow-y-hidden overflow-y-scroll">
+            <div className="bg-[#1F2937] bottom-0 fixed left-0 pt-5  md:top-[70px] md:h-screen w-full md:w-20  flex md:flex-col gap-8  py-4  justify-between md:justify-normal items-center p-4 h-16 md:overflow-y-hidden overflow-y-scroll md:z-0 z-[10]">
                 <Link to="/userd">
                     <div className={`w-12 h-12 ${tab === 0 ? 'bg-white' : 'bg-[#1F2937]'} p-2 rounded-xl flex items-center justify-center`} onClick={() => handleChange(0)}>
                         <img src={tab === 0 ? HomeB : Home} alt="Home" className="w-8 h-8" />
