@@ -37,7 +37,7 @@ function Dashboard() {
 
   return (
     <>
-      {pageload && <Ripple />}
+      {pageload && !tasks && !userSubmissions && !userData && <Ripple />}
       {!pageload && (
         <div className="bg-zinc-100 pb-10 w-full min-h-screen md:mb-0 mb-10">
           <h1 className="font-semibold p-6 md:pl-10 md:p-10 text-3xl md:text-4xl">Dashboard</h1>
