@@ -19,7 +19,8 @@ export default function View() {
     handleModalSubmit
   } = useUserContext();
  
-  const { id } = useParams(); 
+  let { id } = useParams(); 
+  id = id.replace(/['"]+/g, '');
 
   useEffect(() => {
     fetchTask(id);
