@@ -23,6 +23,7 @@ import Settings from './pages/Settings.jsx'
 import Reset from './pages/Reset.jsx'
 import { AdminProvider } from './contexts/Admin.jsx'
 import { UserProvider } from './contexts/User.jsx'
+import Lost from './pages/Lost.jsx'
 
 const Main = ()=>{
   const loc = useLocation();
@@ -51,6 +52,7 @@ const Main = ()=>{
             <Route path="/edittask/:id" element={<EditTask />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/reset" element={<Reset />} />
+            <Route path="*" element={<Lost />} /> 
       </Routes>
     </div>
   )
