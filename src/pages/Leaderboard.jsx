@@ -50,7 +50,7 @@ console.log(leaderboard)
                         />
                         <div className="min-w-0 flex flex-auto items-center">
                           <p className="text-4 font-semibold leading-6 text-center text-gray-900">
-                            {bookmark.name} {bookmark.id}
+                            {bookmark.name}
                           </p>
                         </div>
                       </div>
