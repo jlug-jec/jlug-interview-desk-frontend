@@ -4,7 +4,8 @@ import Ripple from '../components/Ripple';
 import { useAdminContext } from '../contexts/Admin';
 
 function User() {
-  const { id } = useParams();
+  let { id } = useParams();
+  id = id.replace(/['"]+/g, '');
   console.log(id)
   let adminid = localStorage.getItem('userid')
   adminid = adminid.replace(/['"]+/g, '');
