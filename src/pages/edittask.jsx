@@ -141,7 +141,7 @@ export default function Add() {
   return (
     <div className="flex flex-col m-auto w-full ">
       <div className="flex flex-row w-full gap-9 pt-1 justify-between">
-        <p className="text-left text-nowrap md:text-4xl text-3xl font-medium p-7  md:pl-10 pl-6 ">
+        <p className="text-left text-nowrap md:text-4xl text-3xl font-medium  md:pl-10 p-4 ">
           {isEditing ? 'Edit Task' : 'View Task'}
         </p>
         <div className="flex flex-row gap-5 p-3 justify-center md:pr-9 pr-6 items-center">
@@ -176,7 +176,7 @@ export default function Add() {
         </div>
       </div>
 
-      <div className="bg-white m-auto md:w-[85%] w-[95%] h-auto flex flex-col p-4 rounded-xl drop-shadow-lg z-[-1] md:mb-0 mb-20">
+      <div className="bg-white m-auto md:w-[85%] w-[95%] h-auto flex flex-col p-4 rounded-xl drop-shadow-lg relative z-[-1] md:mb-0 mb-20">
         <div className="flex flex-col lg:flex-row gap-5 p-5 md:items-center">
           <p className="text-left self-left text-[20px] md:w-[20%] font-medium">Task Name</p>
           <input

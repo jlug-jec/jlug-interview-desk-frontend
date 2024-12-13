@@ -27,13 +27,13 @@ const Leader = () => {
     {load && <Ripple />} 
       {!load && (
         <div className="flex-1 pt-10 w-100">
-          <div className="w-full px-6 md:px-6 pb-10  p-2 sm:p-4 pl-4 sm:pl-6">
+          <div className="w-full px-6 md:px-6  sm:p-4 p-4 sm:pl-6">
             <header className="w-full h-16">
               <div className="mt-auto max-w-full md:pl-6 pl-0">
                 <h1 className="md:text-4xl text-3xl tracking-tight font-semibold text-left">Leaderboard</h1>
               </div>
             </header>
-            <div className="bg-white m-auto md:w-[95%] min-h-[70vh] flex flex-col md:p-10 p-5 rounded-xl drop-shadow-lg w-[100%] static z-[-1] md:mb-0 md-20">
+            <div className="bg-white m-auto md:w-[95%] min-h-[70vh] flex flex-col md:p-10 p-5 rounded-xl drop-shadow-lg w-[100%] relative z-[-1] md:mb-0 mb-20">
               {leaderboard.length > 0 ? (
                 <div role="list" className="flex flex-col gap-4">
                   {leaderboard.map((bookmark) => (
