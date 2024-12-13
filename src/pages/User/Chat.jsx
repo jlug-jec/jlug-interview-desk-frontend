@@ -26,14 +26,14 @@ const Chat = () => {
   };
 
   return (
-    <div className="flex-1 w-100">
-      <div className="w-full md:px-6 lg:px-10 pb-10 ">
+    <div className="flex-1 pt-7 w-100">
+      <div className="w-full px-6 md:px-6 lg:px-10 pb-10 lg:pb-20 xl:pb-20">
         <header className="w-full h-16">
-          <div className="mt-auto max-w-full p-4 ">
-            <h1 className="text-4xl tracking-tight font-semibold text-left sm:p-4 p-4">Discussion</h1>
+          <div className="mt-auto max-w-full pl-6 ">
+            <h1 className="text-4xl tracking-tight font-semibold text-left sm:p-4 p-2">Discussion</h1>
           </div>
         </header>
-        <div className="bg-white m-auto w-[95%] h-[70vh] flex flex-col p-4 rounded-xl drop-shadow-lg md:mb-0 mb-20 relative z-[-1]">
+        <div className="bg-white m-auto w-[95%] h-[70vh] flex flex-col p-4 rounded-xl drop-shadow-lg md:mb-0 mb-20 z-[-1]">
           <div className="bg-[#EEEEEE] w-full h-full flex flex-col rounded-lg drop-shadow-lg justify-between">
             <div className="flex flex-col items-center p-4 pl-5 pr-5 w-full h-[60vh] overflow-auto gap-3">
               {chats.map((chat, index) => (
