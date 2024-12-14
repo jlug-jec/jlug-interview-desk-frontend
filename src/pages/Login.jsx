@@ -18,6 +18,10 @@ const Login = () => {
     const [pageload, setPageLoad] = useState(0);
 
     const handleCompletion = async () => {
+        if(profile.pass === '' || profile.email === ''){
+            alert('All fields are required!')
+            return;
+        }
         setPageLoad(1);
         try {
             let res = await fetch('https://firebase-api-hrly.onrender.com/api/login', {
@@ -34,13 +38,13 @@ const Login = () => {
                 localStorage.setItem('user', JSON.stringify(res.user));
                 localStorage.setItem('userid', JSON.stringify(res.userID));
                 alert(res.message);
-                if (res.user.email.includes('jlug')) {
+                if (res.user.email.includes('admin')) {
                     navigate('/admin');
                 } else {
                     navigate('/userd');
                 }
             } else {
-                alert('Login failed');
+                alert('User does not exists!');
             }
         } catch (error) {
             console.log('Login Failed:', error);
