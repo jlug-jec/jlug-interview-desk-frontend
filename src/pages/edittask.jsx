@@ -176,7 +176,7 @@ export default function Add() {
         </div>
       </div>
 
-      <div className="bg-white m-auto md:w-[85%] w-[95%] h-auto flex flex-col p-4 rounded-xl drop-shadow-lg relative z-[-1] md:mb-0 mb-20">
+      <div className="bg-white m-auto md:w-[85%] w-[95%] h-auto flex flex-col p-4 rounded-xl drop-shadow-lg relative  md:mb-0 mb-20">
         <div className="flex flex-col lg:flex-row gap-5 p-5 md:items-center">
           <p className="text-left self-left text-[20px] md:w-[20%] font-medium">Task Name</p>
           <input
