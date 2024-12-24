@@ -49,7 +49,7 @@ const Nav = ()=>{const initialTab = Number(localStorage.getItem('activeTab')) ||
                             <div className="text-xs font-semibold">{user.domain}</div>
                         </div>
                         <div className="w-10 h-10 md:w-12 md:h-12">
-                            <Link to="/userd/user">
+                            <Link to="/settings">
                                 <img src={user.dp} alt="User" className="w-full h-full rounded-full cursor-pointer" onClick={() => handleChange(3)} />
                             </Link>
                         </div>
