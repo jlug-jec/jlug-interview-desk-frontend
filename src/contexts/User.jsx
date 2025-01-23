@@ -146,7 +146,6 @@ export const UserProvider = ({ children }) => {
         
             toast.success('Task submitted successfully!');
           
-          setIsModalOpen(false);
         } catch (error) {
           console.error('Error handling submission:', error);
           toast.error('Submission failed. Please try again.');
