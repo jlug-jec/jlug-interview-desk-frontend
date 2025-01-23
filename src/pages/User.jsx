@@ -34,7 +34,7 @@ function User() {
 
 console.log(id)
 
-  if (load) return <Ripple/>;
+  if (load && !userData) return <Ripple/>;
 
   return (
     
