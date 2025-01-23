@@ -30,7 +30,7 @@ function User() {
   const [isModalOpen, setIsModalOpen] = useState(false); 
   useEffect(()=>{
     fetchUserData(id)
-  }, [id, fetchUserData])
+  }, [id])
 
 console.log(id)
 
