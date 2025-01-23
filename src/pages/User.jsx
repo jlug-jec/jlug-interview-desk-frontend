@@ -30,11 +30,11 @@ function User() {
   const [isModalOpen, setIsModalOpen] = useState(false); 
   useEffect(()=>{
     fetchUserData(id)
-  }, [id])
+  }, [id, fetchUserData])
 
 console.log(id)
 
-  if (load && !userData) return <Ripple/>;
+  if (load || !userData) return <Ripple/>;
 
   return (
     
