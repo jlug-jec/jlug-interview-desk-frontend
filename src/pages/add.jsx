@@ -4,7 +4,7 @@ import cancel from '../assets/Cancel.png';
 import { Toaster, toast } from 'react-hot-toast';
 
 export default function Add() {
-  let adminid = localStorage.getItem('userid');
+  let adminid = sessionStorage.getItem('userid');
   adminid = JSON.parse(adminid);
   const [actionload, setActionLoad] = useState(false);
 
@@ -48,7 +48,7 @@ export default function Add() {
   const handleSubmit = async () => {
     setActionLoad(true);
     const { tname, tdesc, tcatg, tstat, tsub, tdead, tfile } = data;
-    const admin = localStorage.getItem('user');
+    const admin = sessionStorage.getItem('user');
     const adminObj = JSON.parse(admin);
     if (!admin) {
       toast.error('Please Login as admin to Continue!');
