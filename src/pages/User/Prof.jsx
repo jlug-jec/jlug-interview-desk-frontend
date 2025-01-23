@@ -153,6 +153,7 @@ function User() {
 
       if(pass != user.password && pass.length < 8){
           toast.error('Password must be 8 characters long !')
+          setActionLoad(false)
           return;
       }
       else if(pass.length == 8){
