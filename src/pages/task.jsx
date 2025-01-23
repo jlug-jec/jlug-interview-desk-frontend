@@ -64,6 +64,9 @@ const TaskList = () => {
           }
       
           const result = await response.json();
+          if(response.ok){
+            toast.success(result.message)
+          }
 
           setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
         } catch (error) {
