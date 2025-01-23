@@ -55,7 +55,7 @@ export default function View() {
         </p>
         <div className="flex flex-row gap-4 sm:gap-5 p-2 justify-center sm:pr-6">
           <div
-            className="cursor-pointer flex md:flex-col gap-2 justify-between font-semibold items-center bg-bgprimary text-primary border-[3px] border-primary px-2 py-1 rounded"
+            className="cursor-pointer flex md:flex-row gap-2 justify-between font-semibold items-center bg-bgprimary text-primary border-[3px] border-primary px-2 py-1 rounded"
             onClick={() => setIsModalOpen(true)}
           >
             
