@@ -135,7 +135,7 @@ console.log(id)
       {userData.projects && Object.keys(userData.projects).length > 0 ? (
         Object.entries(userData.projects).map(([name, url], index) => (
           <li key={index} className="flex items-center justify-between py-2">
-            <span>{name}</span>
+            <span >{name}</span>
             <a 
               href={url} 
               target="_blank" 
@@ -163,7 +163,7 @@ console.log(id)
     )}
     {submissions.map((submission, index) => (
       <li key={index} className='flex flex-row justify-between items-center gap-5 m-2'>
-        {submission.taskName} 
+        <div className='min-w-[30%]'>{submission.taskName}</div> 
         <div className='text-green-400 border-green-400 border-2 rounded-lg p-1 md:h-auto md:flex hidden'>Completed</div>
         <div  className="font-semibold border-2 text-center border-[#23B0FF] text-[#23B0FF] px-4 rounded-lg">
               <a href={submission.fileUrl} className='text-[#23B0FF]'>View</a> 
