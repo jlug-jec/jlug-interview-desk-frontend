@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Ripple from '../components/Ripple';
 import { useAdminContext } from '../contexts/Admin';
+import { Toaster } from 'react-hot-toast';
 
 function User() {
   let { id } = useParams();
@@ -29,15 +30,16 @@ function User() {
   const [isModalOpen, setIsModalOpen] = useState(false); 
   useEffect(()=>{
     fetchUserData(id)
-  }, [])
+  }, [id])
 
 console.log(id)
 
-  if (!userData) return <Ripple/>;
+  if (load) return <Ripple/>;
 
   return (
     
     <div className="bg-[#ECECEC] min-h-screen w-full p-4 lg:p-10 md:mb-11 mb-20">
+      <Toaster />
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
           <div className="bg-white p-6 rounded-lg w-[90%] lg:w-[50%]">

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useCallback } from 'react';
 import { useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 const AdminContext = createContext();
 
@@ -152,6 +153,7 @@ export const AdminProvider = ({ children }) => {
 },[]);
 
 const handleAction = useCallback(async (actionType, id) => {
+  
   try {
     const response = await fetch(`https://firebase-api-hrly.onrender.com/api/${actionType}`, {
       method: 'POST',
@@ -162,7 +164,7 @@ const handleAction = useCallback(async (actionType, id) => {
     });
 
     const data = await response.json();
-    alert(data.message || `Action ${actionType} completed successfully.`);
+    toast.success(data.message || `Action ${actionType} completed successfully.`);
     await fetchUserData(id)
     await fetchPendingApplicants()
     await fetchDashboardData();
@@ -171,7 +173,7 @@ const handleAction = useCallback(async (actionType, id) => {
   } catch (error) {
 
     console.error(`Error during ${actionType}:`, error);
-    alert(`Error during ${actionType}.`);
+    toast.error(`Error during ${actionType}.`);
   }
 },[]);
 
