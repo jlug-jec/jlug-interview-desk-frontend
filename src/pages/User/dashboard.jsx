@@ -65,7 +65,7 @@ function Dashboard() {
                   key={task.tname}
                   className="flex flex-col md:flex-row justify-between items-center mt-3 gap-4 py-2 "
                 >
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center md:min-w[35%] gap-4">
                     <img
                       src={task.tcatg === 'App' || task.tcatg === 'Web' ? Application : Page}
                       alt={task.tname}
