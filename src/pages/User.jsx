@@ -94,7 +94,7 @@ console.log(id)
       </div>
       <div className="flex flex-col lg:flex-row gap-4 mt-6">
         <div className="w-full lg:w-1/4 bg-white flex flex-col rounded-md shadow-lg gap-8 items-center p-5">
-          <img src={userData.dp} className="w-32 h-32 lg:w-48 lg:h-48 border-8 border-double border-spacing-3 border-zinc-500 mt-7 rounded-full" alt="" />
+          <img src={userData?.dp} className="w-32 h-32 lg:w-48 lg:h-48 border-8 border-double border-spacing-3 border-zinc-500 mt-7 rounded-full" alt="" />
           <div className="flex gap-4">
             <a href={userData.git || '#'} target="_blank" rel="noopener noreferrer">
               <img className="w-8 lg:w-10" src="https://firebasestorage.googleapis.com/v0/b/user-assets-6616a.appspot.com/o/github-stroke-rounded.svg?alt=media&token=ad8bc54b-c9c7-46cf-a935-39166bab7b5b" alt="GitHub" />
