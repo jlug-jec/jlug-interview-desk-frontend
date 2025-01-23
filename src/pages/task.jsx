@@ -65,7 +65,7 @@ const TaskList = () => {
       
           const result = await response.json();
 
-          setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskid));
+          setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
         } catch (error) {
           console.error('Error deleting task:', error);
         }
