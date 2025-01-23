@@ -52,7 +52,7 @@ const More = ({settings, updateSettings, handleCompletion, data})=>{
                     <SmallInput handleChange={handleChange} label={'Location'} type={'text'} value={profile.loc}  styles={50}   name={'loc'} />   
                 </div>
 
-                <Input handleChange={handleChange} label={'Bio'} type={'text'} value={profile.bio} name={'bio'} />  
+                <Input handleChange={handleChange} label={'Tell Us About Yourself'} type={'text'} value={profile.bio} name={'bio'} />  
                 <Input handleChange={handleChange} label={'Why do you want to join ?'}  lstyles={'w-[40%] '} type={'text'} value={profile.why} name={'why'} />  
 
                 <div className='flex flex-row gap-4 w-full items-center justify-center mt-2'>
