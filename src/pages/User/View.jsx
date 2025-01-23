@@ -59,8 +59,8 @@ export default function View() {
             onClick={() => setIsModalOpen(true)}
           >
             
-            <img src={upload} className="md:w-6 md:h-6 md:visible w-8 h-8 " />
-            <div className='md:text-lg hidden md:visible'>Submit Task</div>
+            <img src={upload} className="w-6 h-6 md:visible md:w-8 md:h-8 " />
+            <div className='md:text-lg hidden md:block'>Submit Task</div>
           </div>
         </div>
       </div>
