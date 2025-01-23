@@ -60,7 +60,7 @@ export default function View() {
           >
             
             <img src={upload} className="md:w-6 md:h-6 md:visible w-8 h-8 " />
-            <div className='md:text-lg  md:visible'>Submit Task</div>
+            <div className='md:text-lg hidden md:visible'>Submit Task</div>
           </div>
         </div>
       </div>
