@@ -37,7 +37,6 @@ function Dashboard() {
 
   return (
     <>
-    <Toaster />
       {pageload && !tasks && !userSubmissions && !userData && userData.length===0 && <Ripple />}
       {!pageload && (
         <div className="bg-zinc-100 pb-10 w-full min-h-screen md:mb-0 mb-10">
