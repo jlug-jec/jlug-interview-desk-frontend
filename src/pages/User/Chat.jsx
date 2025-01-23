@@ -34,7 +34,10 @@ const Chat = () => {
           </div>
         </header>
         <div className="bg-white m-auto w-[95%] h-[70vh] flex flex-col p-4 rounded-xl drop-shadow-lg md:mb-0 mb-20 ">
-          <div className="bg-[#EEEEEE] w-full h-full flex flex-col rounded-lg drop-shadow-lg justify-between">
+          <div className='text-lg p-2 font-semibold'>
+            Join this <span className='text-green-500'>Whatsapp group</span> to ask doubts and interact with your team.
+          </div>
+          {/* <div className="bg-[#EEEEEE] w-full h-full flex flex-col rounded-lg drop-shadow-lg justify-between">
             <div className="flex flex-col items-center p-4 pl-5 pr-5 w-full h-[60vh] overflow-auto gap-3">
               {chats.map((chat, index) => (
                 <div key={index} className="flex justify-between items-center gap-x-6 py-2 w-full ">
@@ -70,7 +73,7 @@ const Chat = () => {
                 <img src={send} alt="send" />
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
