@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import check from '../assets/check.png';
 import Pencil from '../assets/Pencil.png';
 import cancel from '../assets/Cancel.png';
+import { Toaster, toast } from 'react-hot-toast';
 
 export default function Add() {
   const { id } = useParams();
@@ -60,7 +61,7 @@ export default function Add() {
     const adminObj = admin ? JSON.parse(admin) : null;
 
     if (!adminObj) {
-      alert('Please Login as admin to continue!');
+      toast.error('Please Login as admin to continue!');
       return;
     }
 
@@ -83,7 +84,7 @@ export default function Add() {
         uploadResult = await response.json();
 
         if (!uploadResult.secure_url) {
-          alert('Image upload failed!');
+          toast.error('Image upload failed!');
           return;
         }
       }
@@ -114,7 +115,7 @@ export default function Add() {
       const apiResult = await apiResponse.json();
 
       if (apiResult.message === 'Task successfully updated!') {
-        alert('Task added successfully!');
+        toast.success('Task added successfully!');
         setData(taskData);
         setOriginalData(taskData);
         setFile(null);
@@ -125,7 +126,7 @@ export default function Add() {
       }
     } catch (error) {
       console.error('Error during save:', error);
-      alert('An error occurred. Please try again.');
+      toast.error('An error occurred. Please try again.');
     } finally {
       setActionLoad(false);
       setIsEditing(false);
@@ -140,6 +141,7 @@ export default function Add() {
   
   return (
     <div className="flex flex-col m-auto w-full ">
+      <Toaster />
       <div className="flex flex-row w-full gap-9 pt-1 justify-between">
         <p className="text-left text-nowrap md:text-4xl text-3xl font-medium  md:pl-10 p-4 ">
           {isEditing ? 'Edit Task' : 'View Task'}

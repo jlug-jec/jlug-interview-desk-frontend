@@ -7,8 +7,7 @@ import {Link} from 'react-router-dom'
 import Ripple from '../components/Ripple';
 import remove from '../assets/Remove.png';
 import View from '../assets/Eye.png'
-
-
+import { Toaster, toast } from 'react-hot-toast';
 
 
 const TaskList = () => {
@@ -60,6 +59,7 @@ const TaskList = () => {
           });
       
           if (!response.ok) {
+            toast.error('Failed to delete task')
             throw new Error('Failed to delete task');
           }
       
@@ -80,6 +80,7 @@ const TaskList = () => {
 
     return (
       <>
+      <Toaster />
       {pageload && <Ripple />}
       { !pageload &&  ( <div className="flex-1  w-100">
         <div className= " w-full  md:px-6  px-5 md:pb-10 sm:p-4 p-4 sm:pl-6">

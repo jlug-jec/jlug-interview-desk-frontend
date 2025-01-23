@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Ripple from '../components/Ripple';
+import { Toaster, toast } from 'react-hot-toast';
 
 function Settings() {
   const [pageload, setPageLoad] = useState(false);
@@ -28,7 +29,7 @@ function Settings() {
 
       if (type === 'password') {
         if (pass.length < 8) {
-          alert('Password must be at least 8 characters long!');
+          toast.error('Password must be at least 8 characters long!');
           return;
         }
         updatedUser.password = pass;
@@ -68,7 +69,7 @@ function Settings() {
 
       if (!response.ok) throw new Error('Update failed');
 
-      alert('Profile updated successfully!');
+      toast.success('Profile updated successfully!');
       setUser(updatedUser);
       localStorage.setItem('user', JSON.stringify(updatedUser));
       setFileModal(false);
@@ -76,7 +77,7 @@ function Settings() {
       setReload(!reload)
     } catch (error) {
       console.error(error);
-      alert('Failed to update profile. Please try again.');
+      toast.error('Failed to update profile. Please try again.');
     } finally {
       setActionLoad(false);
     }
@@ -84,6 +85,7 @@ function Settings() {
 
   return (
     <>
+    <Toaster />
       {pageload ? (
         <Ripple />
       ) : (

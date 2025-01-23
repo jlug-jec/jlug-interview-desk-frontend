@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import check from '../assets/check.png';
 import cancel from '../assets/Cancel.png';
+import { Toaster, toast } from 'react-hot-toast';
 
 export default function Add() {
   let adminid = localStorage.getItem('userid');
@@ -27,7 +28,7 @@ export default function Add() {
       alldata['tfile'] = file;
       setData(alldata);
     } else {
-      console.log('Invalid file type');
+      toast.error('Invalid file type');
     }
   };
 
@@ -50,7 +51,7 @@ export default function Add() {
     const admin = localStorage.getItem('user');
     const adminObj = JSON.parse(admin);
     if (!admin) {
-      alert('Please Login as admin to Continue!');
+      toast.error('Please Login as admin to Continue!');
     }
 
     if (tname !== '' && tdesc !== '' && tcatg !== '' && tstat !== '' && tsub !== '' && tdead !== '' && tfile !== '') {
@@ -72,6 +73,7 @@ export default function Add() {
       const uploadResult = await response.json();
 
       if (!uploadResult.secure_url) {
+        toast.error("Image upload failed")
         throw new Error('Image upload failed');
       } else {
         const taskData = {
@@ -98,11 +100,11 @@ export default function Add() {
         const apiResult = await apiResponse.json();
         if (apiResult.message === 'Task successfully added!') {
           
-          alert('Task was added successfully!');
+          toast.success('Task was added successfully!');
           setActionLoad(false);
         } else {
           console.error('Failed to add task to Firebase');
-          alert('Oops! Something went wrong');
+          toast.error('Oops! Something went wrong');
           setActionLoad(false);
         }
       }
@@ -128,6 +130,7 @@ export default function Add() {
 
   return (
     <div className='flex flex-col m-auto w-full  '>
+      <Toaster />
       <div className='flex flex-row w-full gap-7 pt-1 justify-between'>
         <p className='text-left md:text-4xl text-2xl text-nowrap font-medium p-10 md:pl-10 pl-7'>
           Add Task

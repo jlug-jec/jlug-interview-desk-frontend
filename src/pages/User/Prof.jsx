@@ -3,6 +3,7 @@ import PencilB from '../../assets/PencilB.png'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Ripple from '../../components/Ripple'
+import { Toaster, toast } from 'react-hot-toast';
 import { use } from 'react'
 
 function User() {
@@ -61,7 +62,7 @@ function User() {
           const submissionsData = await submissionsResponse.json();
           setSubmissions(submissionsData);
         } catch (error) {
-          console.error('Error fetching data:', error);
+          toast.error('Oops! Something went wrong');
         }finally{
           setPageLoad(false)
         }
@@ -151,7 +152,7 @@ function User() {
       let { password, ...newUser } = updatedUser;
 
       if(pass != user.password && pass.length < 8){
-          alert('Password must be 8 characters long !')
+          toast.error('Password must be 8 characters long !')
           return;
       }
       else if(pass.length == 8){
@@ -208,7 +209,7 @@ function User() {
           body: JSON.stringify(newUser),
         });
         if (!response.ok) throw new Error('Update failed');
-        alert('Profile updated successfully!');
+        toast.success('Profile updated successfully!');
         setIsModalOpen(false);
         setUser(newUser);
         localStorage.setItem('user', JSON.stringify(newUser));
@@ -236,6 +237,7 @@ function User() {
       {pageload && <Ripple />}
 
 <div className="bg-[#ECECEC] h-full w-full p-4 md:p-10 md:mb-5 mb-20">
+  <Toaster />
   {!pageload && (
     <>
       <div className="flex md:flex-row w-full justify-between items-center">

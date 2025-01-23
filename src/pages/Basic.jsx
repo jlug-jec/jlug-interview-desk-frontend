@@ -14,7 +14,7 @@ const Basic = ({handleCompletion, settings, updateSettings, data})=>{
 
         const phoneRegex = /^[0-9]{10}$/;
 
-        if(profile.sem > 8){
+        if(profile.sem > 8 || profile.age < 15){
             toast.error('Please recheck your information and continue!')
             //alert('Please recheck your information and continue!')
             return;
