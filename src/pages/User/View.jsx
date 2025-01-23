@@ -49,7 +49,7 @@ export default function View() {
 
   return (
     
-    <div className="flex flex-col m-auto w-full p-4 md:mb-0 mb-20">
+    <div className="flex flex-col m-auto w-full p-4 z-[-1] md:mb-0 mb-20">
       <Toaster />
       <div className="flex flex-row w-full gap-5 pt-2 justify-between">
         <p className="text-left text-2xl sm:text-3xl font-medium p-2 sm:p-4 pl-4 sm:pl-6">

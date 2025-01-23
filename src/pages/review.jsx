@@ -32,7 +32,7 @@ console.log(pendingApplicants)
                 </h1>
               </div>
             </header>
-            <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col p-4 rounded-xl drop-shadow-lg relative  md:mb-0 mb-20">
+            <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col p-4 rounded-xl gap-1 drop-shadow-lg relative z-[-1]   md:mb-0 mb-20">
               <div className="p-3">
                 {pendingApplicants.length > 0 ? (
                   pendingApplicants.map((applicant) => (
@@ -46,13 +46,13 @@ console.log(pendingApplicants)
                         className="h-12 w-12 flex-none rounded-full bg-gray-50"
                       />
                       <div className="flex flex-row justify-between w-full items-center">
-                        <span className="text-lg font-medium ml-4">
+                        <span className="text-sm md:text-lg font-medium md:ml-4">
                           {applicant.name}
                         </span>
 
                         <Link to={`/user/${applicant.id}`}>
                           <div className="font-semibold shadow-md border-2 border-primary text-primary md:px-4 py-1 rounded-lg hover:bg-primary hover:text-white px-2 text-sm ">
-                            View Profile
+                            View
                           </div>
                         </Link>
                       </div>
