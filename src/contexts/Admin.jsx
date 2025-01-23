@@ -17,8 +17,8 @@ export const AdminProvider = ({ children }) => {
       const [pendingApplicants, setPendingApplicants] = useState([]);
       const [bookmarks, setBookmarks] = useState({});
 
-      let adminId = localStorage.getItem('userid');
-      const user = JSON.parse(localStorage.getItem('user'));
+      let adminId = sessionStorage.getItem('userid');
+      const user = JSON.parse(sessionStorage.getItem('user'));
 
   const fetchDashboardData = useCallback(async () => {
     
@@ -33,7 +33,7 @@ export const AdminProvider = ({ children }) => {
       const adminResponse = await fetch(`https://firebase-api-hrly.onrender.com/api/get-user/${adminId}`);
       if (!adminResponse.ok) throw new Error('Failed to fetch admin details.');
       const adminData = await adminResponse.json();
-      localStorage.setItem('user', JSON.stringify(adminData))
+      sessionStorage.setItem('user', JSON.stringify(adminData))
 
       let { domain, submissions, approvedby } = adminData
       

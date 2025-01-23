@@ -7,7 +7,7 @@ function User() {
   let { id } = useParams();
   id = id.replace(/['"]+/g, '');
   console.log(id)
-  let adminid = localStorage.getItem('userid')
+  let adminid = sessionStorage.getItem('userid')
   adminid = adminid.replace(/['"]+/g, '');
 
   const {    

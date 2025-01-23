@@ -17,21 +17,21 @@ import set from './assets/Settings.png'
 
 import logo from './assets/logo.png'
 
-const Nav = ()=>{const initialTab = Number(localStorage.getItem('activeTab')) || 0
+const Nav = ()=>{const initialTab = Number(sessionStorage.getItem('activeTab')) || 0
     const [tab, setTab] = useState(initialTab);
 
-    let user = localStorage.getItem('user')
+    let user = sessionStorage.getItem('user')
     user = JSON.parse(user)
     const navigate = useNavigate()
 
 
     const handleChange = (v)=>{
         setTab(v);
-        localStorage.setItem('activeTab', v);
+        sessionStorage.setItem('activeTab', v);
     }
 
     const handleLogOut = ()=>{
-        localStorage.clear();
+        sessionStorage.clear();
         navigate('/login')
     }
 

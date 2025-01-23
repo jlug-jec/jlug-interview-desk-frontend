@@ -6,6 +6,7 @@ import Input from '../components/Input';
 import Loading from '../pages/Loading';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
+import { Toaster, toast } from 'react-hot-toast';
 
 const Reset = () => {
     const navigate = useNavigate();
@@ -24,7 +25,7 @@ const Reset = () => {
         setPageLoad(1);
         try {
             if(step == 2 && profile.newp.length < 8) {
-                alert('Password must be 8 characters long !');
+                toast('Password must be 8 characters long !');
                 return;
             }
             let endpoint = step === 1 ? 'send-otp' : 'verify-otp';
@@ -36,14 +37,14 @@ const Reset = () => {
             res = await res.json();
 
             if (res.ok) {
-                alert(res.message);
+                toast.success(res.message);
                 if (step === 1) {
                     setStep(2); 
                 } else {
                     navigate('/login');
                 }
             } else {
-                alert(res.message || 'Operation failed!');
+                toast.error(res.message || 'Operation failed!');
             }
         } catch (error) {
             console.error('Error:', error);
@@ -78,6 +79,7 @@ const Reset = () => {
         <Loading />
     ) : (
         <>
+            <Toaster />
             <Nav />
             <div className="flex flex-col gap-9 w-[90%] max-w-md h-full p-6 m-auto mt-[20%] bg-white items-center shadow-xl rounded-md md:mt-20">
                 <img

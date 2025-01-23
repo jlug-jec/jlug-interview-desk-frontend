@@ -9,14 +9,14 @@ function Settings() {
   const [dp, setDp] = useState(null); 
   const [pass, setPass] = useState(''); 
   const [reload, setReload] = useState(false);
-  let id = localStorage.getItem('userid')
+  let id = sessionStorage.getItem('userid')
   id = JSON.parse(id);
   const [fileModal, setFileModal] = useState(false); 
   const [passModal, setPassModal] = useState(false); 
   const [actionLoad, setActionLoad] = useState(false);
 
   useEffect(() => {
-    let user = localStorage.getItem('user');
+    let user = sessionStorage.getItem('user');
     user = JSON.parse(user);
     setUser(user);
   }, [reload]);
@@ -71,7 +71,7 @@ function Settings() {
 
       toast.success('Profile updated successfully!');
       setUser(updatedUser);
-      localStorage.setItem('user', JSON.stringify(updatedUser));
+      sessionStorage.setItem('user', JSON.stringify(updatedUser));
       setFileModal(false);
       setPassModal(false);
       setReload(!reload)

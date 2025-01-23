@@ -17,7 +17,7 @@ const TaskList = () => {
         setPageLoad(true)
         const fetchTasks = async () => {
           setPageLoad(true)
-          let user = localStorage.getItem('user')
+          let user = sessionStorage.getItem('user')
           user = JSON.parse(user);
     
           try {
@@ -75,7 +75,7 @@ const TaskList = () => {
         
     const [tasks, setTasks] = useState([]);
     const [loading, setLoading] = useState(true);
-    let userid = localStorage.getItem('userid')
+    let userid = sessionStorage.getItem('userid')
     userid =  userid.replace(/['"]+/g, '');
 
     return (

@@ -19,7 +19,7 @@ function User() {
 
 //pas == orignal passwoed, changes in pas handle by handlepass, in save only if pas == 8 add to newUser
 
-    let id = localStorage.getItem('userid')
+    let id = sessionStorage.getItem('userid')
     id =  id.replace(/['"]+/g, '');
     const twitter = 'https://firebasestorage.googleapis.com/v0/b/user-assets-6616a.appspot.com/o/new-twitter-stroke-rounded.svg?alt=media&token=9ecd522d-7557-42e6-b838-7eb1e5db6780';
     const link = 'https://firebasestorage.googleapis.com/v0/b/user-assets-6616a.appspot.com/o/linkedin-02-stroke-rounded.svg?alt=media&token=41c80506-9e59-4212-8f9a-705cfbfd451b'
@@ -73,7 +73,7 @@ function User() {
   
 
     useEffect(() => {
-      const storedUser = localStorage.getItem('user');
+      const storedUser = sessionStorage.getItem('user');
 
       if (storedUser) {
         setUser(JSON.parse(storedUser));
@@ -213,7 +213,7 @@ function User() {
         toast.success('Profile updated successfully!');
         setIsModalOpen(false);
         setUser(newUser);
-        localStorage.setItem('user', JSON.stringify(newUser));
+        sessionStorage.setItem('user', JSON.stringify(newUser));
 
       } catch (error) {
         console.error(error);

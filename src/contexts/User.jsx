@@ -5,8 +5,8 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
 
-    const storedUser = localStorage.getItem('user');
-    const id = JSON.parse(localStorage.getItem('userid'));
+    const storedUser = sessionStorage.getItem('user');
+    const id = JSON.parse(sessionStorage.getItem('userid'));
 
     const userObj = JSON.parse(storedUser)
     
@@ -87,7 +87,7 @@ export const UserProvider = ({ children }) => {
 
       const handleModalSubmit = useCallback(async (task, tid, submissionUrl) => {
         setActionLoad(true);
-        let userId = localStorage.getItem('userid');
+        let userId = sessionStorage.getItem('userid');
         userId = JSON.parse(userId);
         const today = new Date();
         const deadline = new Date(task.tdead);
