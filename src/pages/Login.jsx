@@ -20,7 +20,7 @@ const Login = () => {
 
     const handleCompletion = async () => {
         if(profile.pass === '' || profile.email === ''){
-            alert('All fields are required!')
+            toast.error('All fields are required!')
             return;
         }
         setPageLoad(1);
@@ -45,10 +45,11 @@ const Login = () => {
                     navigate('/userd');
                 }
             } else {
-                toast('User does not exists!')
+                toast.error('User does not exists!')
                 //alert('User does not exists!');
             }
         } catch (error) {
+            toast.error('Something Went Wrong!')
             console.log('Login Failed:', error);
         } finally {
             setPageLoad(0);
