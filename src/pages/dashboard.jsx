@@ -21,6 +21,11 @@ function Dashboard() {
   } = useAdminContext();
   const image = [people, approve, time, book];
 
+useEffect(() => {
+
+}, [load])
+
+
   return (
     <>
       {load ? (

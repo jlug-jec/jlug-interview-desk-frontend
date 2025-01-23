@@ -96,7 +96,7 @@ function Dashboard() {
             <div className="w-full md:w-2/5 h-auto bg-white shadow-md p-6 rounded-lg">
               <h1 className="border-b pb-2 border-black font-semibold text-lg md:text-xl">Application Status</h1>
               <div className="flex justify-center items-center mt-4 border-2 border-orange-500 text-orange-500 px-4 py-2 rounded-lg text-sm md:text-base font-semibold">
-                {userData['approvedby'] && userData['approvedby']?.length > 0 ? 'In Review' : 'In Queue'}
+                {userData && userData['approvedby'] && userData['approvedby']?.length > 0 ? 'In Review' : 'In Queue'}
               </div>
             </div>
           </div>
