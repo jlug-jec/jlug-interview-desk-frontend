@@ -111,7 +111,7 @@ export default function View() {
             Submission Category
           </p>
           <div className="bg-form-input w-full p-4 border-none rounded-xl text-sm sm:text-[18px]">
-            {task.tsub}
+            {task.tsub === 'GIT' ? 'Github Repositry link' : 'Google Drive link'}
           </div>
         </div>
 
