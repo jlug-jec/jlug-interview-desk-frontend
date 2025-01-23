@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import upload from '../../assets/Upload.png';
 import { useUserContext } from '../../contexts/User';
 import Ripple from '../../components/Ripple';
+import { Toaster, toast } from 'react-hot-toast';
 
 export default function View() {
   const {
@@ -49,6 +50,7 @@ export default function View() {
   return (
     
     <div className="flex flex-col m-auto w-full p-4 md:mb-0 mb-20">
+      <Toaster />
       <div className="flex flex-row w-full gap-5 pt-2 justify-between">
         <p className="text-left text-2xl sm:text-3xl font-medium p-2 sm:p-4 pl-4 sm:pl-6">
           Task / {task.tname}

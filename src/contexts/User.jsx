@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useCallback } from 'react';
 import { useEffect } from 'react';
+import {toast} from 'react-hot-toast';
 
 const UserContext = createContext();
 
@@ -99,13 +100,13 @@ export const UserProvider = ({ children }) => {
         }
       
         if (today > deadline) {
-          alert('The task deadline has passed. Submissions are no longer accepted.');
+          toast.error('The task deadline has passed. Submissions are no longer accepted.');
           setActionLoad(false);
           return;
         }
       
         if (task.tstat === 'suspended') {
-          alert('The task is no longer accepting submissions.');
+          toast.error('The task is no longer accepting submissions.');
           setActionLoad(false);
           return;
         }
@@ -122,7 +123,7 @@ export const UserProvider = ({ children }) => {
       
           if (!submitTaskResponse.ok) {
             const errorData = await submitTaskResponse.json();
-            alert(errorData.message)
+            toast.error(errorData.message)
             setActionLoad(false)
             return;
           }
@@ -143,12 +144,12 @@ export const UserProvider = ({ children }) => {
               throw new Error(errorData.error || 'Failed to update user submissions');
             }
         
-            alert('Task submitted successfully!');
+            toast.success('Task submitted successfully!');
           
           setIsModalOpen(false);
         } catch (error) {
           console.error('Error handling submission:', error);
-          alert('Submission failed. Please try again.');
+          toast.error('Submission failed. Please try again.');
         } finally {
           setActionLoad(false);
         }
