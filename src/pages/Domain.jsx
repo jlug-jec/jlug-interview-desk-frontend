@@ -3,6 +3,7 @@ import Heading from '../components/Heading';
 import Progress from '../components/Progess';
 import DomainCard from '../components/DomainCard';
 import Button from '../components/Button'
+import { Toaster, toast } from 'react-hot-toast';
 
 
 const Domain = ({settings, updateSettings, handleCompletion, data})=>{
@@ -23,7 +24,7 @@ const Domain = ({settings, updateSettings, handleCompletion, data})=>{
 
     const handleNext = (direction)=>{
         if(!checked.domain){
-            alert('Please Select a domain')
+            toast.error('Please Select a domain')
             return
         }
         if(direction === 1){
@@ -40,6 +41,7 @@ const Domain = ({settings, updateSettings, handleCompletion, data})=>{
 
     return (
         <div className='flex flex-col gap-11 md:w-[70%] w-[90%] md:h-[80%] m-auto mb:mt-4 mt-8 bg-white p-6 shadow-xl'>
+            <Toaster />
             <Progress setting={settings} />
             <Heading label={'Select a Domain you wanna join'} />
             <div className='flex md:flex-row flex-col gap-8 w-[90%] items-center m-auto'>

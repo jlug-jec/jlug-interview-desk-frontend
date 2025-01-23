@@ -6,6 +6,7 @@ import Button from '../components/Button'
 import SmallInput from '../components/SmallInput';
 
 
+
 const More = ({settings, updateSettings, handleCompletion, data})=>{  
     
     const [profile, setProfile] = useState(data)

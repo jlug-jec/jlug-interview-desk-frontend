@@ -4,6 +4,7 @@ import Progress from '../components/Progess';
 import Input from '../components/Input'
 import Button from '../components/Button'
 import SmallInput from '../components/SmallInput';
+import { Toaster, toast } from 'react-hot-toast';
 
 
 const Basic = ({handleCompletion, settings, updateSettings, data})=>{      
@@ -14,7 +15,8 @@ const Basic = ({handleCompletion, settings, updateSettings, data})=>{
         const phoneRegex = /^[0-9]{10}$/;
 
         if(profile.sem > 8){
-            alert('Please recheck your information and continue!')
+            toast.error('Please recheck your information and continue!')
+            //alert('Please recheck your information and continue!')
             return;
         }
         
@@ -28,17 +30,17 @@ const Basic = ({handleCompletion, settings, updateSettings, data})=>{
             profile.email === ''
         ) 
         {
-            alert("All fields are required");
+            toast.error('All fields are required')
             return;
         }
     
         if (!profile.email.includes('@')) {
-            alert("Please enter a valid email address");
+            toast.error('Please enter a valid email')
             return;
         }
 
         if (!phoneRegex.test(profile.contact)) {
-            alert("Please enter a valid 10-digit phone number");
+            toast.error('Please enter a valid contact number')
             return;
         }
         handleCompletion(profile, 1);
@@ -77,6 +79,7 @@ console.log(profile)
 
     return (
         <div className='flex flex-col gap-11 md:w-[70%] w-[90%] h-[80%] m-auto md:mt-4 mt-8 bg-white md:p-6 p-3 pb-5 shadow-xl'>
+            <Toaster />
             <Progress setting={settings} />
             <Heading label={'Tell us About Yourself'} />
             <div className='flex flex-col md:gap-8 gap-5 md:w-[90%] w-[95%] p-0 items-center m-auto'>

@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import Loading from './Loading';
 import Final from './Final';
 import Ripple from '../components/Ripple';
+import { Toaster, toast } from 'react-hot-toast';
 
 
 
@@ -75,19 +76,24 @@ function App() {
       res = await res.json();
       
       if(res.ok){
-        alert(res.message)
+        toast(res.message, {
+          icon: '👏',
+        });
+        //alert(res.message)
         
         setPage(5)
       }
       else{
-        alert(res.message)
+        toast.error(res.message);
+        //alert(res.message)
         setPage(3)
       }
     }
 
     catch(e){
       console.log(e)
-      alert(res.message)
+      toast.error(res.message);
+      //alert(res.message)
       setPage(3)
     }
   
@@ -127,6 +133,7 @@ function App() {
 
   return (
     <div className='flex flex-col items-center justify-center w-full h-full gap-4'>
+      <Toaster />
       {page !== 0 ? <Nav/> : null}
       {
         page === 0 ? <Loading /> 

@@ -38,7 +38,8 @@ const Login = () => {
             if (res.user) {
                 localStorage.setItem('user', JSON.stringify(res.user));
                 localStorage.setItem('userid', JSON.stringify(res.userID));
-                alert(res.message);
+                toast.success('Login Successfull!')
+                //alert(res.message);
                 if (res.user.email.includes('admin') || res.user.email.includes('@jlug.club')) {
                     navigate('/admin');
                 } else {
