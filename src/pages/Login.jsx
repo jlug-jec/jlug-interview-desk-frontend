@@ -6,6 +6,7 @@ import Input from '../components/Input';
 import Loading from '../pages/Loading';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -44,7 +45,8 @@ const Login = () => {
                     navigate('/userd');
                 }
             } else {
-                alert('User does not exists!');
+                toast('User does not exists!')
+                //alert('User does not exists!');
             }
         } catch (error) {
             console.log('Login Failed:', error);
@@ -75,6 +77,7 @@ const Login = () => {
                 <Loading />
             ) : (
                 <>
+                    <Toaster />
                     <Nav />
                     <div className="flex flex-col gap-9 w-[90%] max-w-md h-full p-6 m-auto mt-[20%] bg-white items-center shadow-xl rounded-md md:mt-20">
                         <img
