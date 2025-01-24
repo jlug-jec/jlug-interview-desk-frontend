@@ -12,7 +12,7 @@ import { useState, useEffect } from 'react';
 
 function Dashboard() {
   const image = [list, approve, time, book];
-
+  const id = JSON.parse(sessionStorage.getItem('userid'));
   const {
     fetchDomainTasks,
     tasks,
@@ -28,9 +28,11 @@ function Dashboard() {
 
   useEffect(() => {
     fetchDomainTasks()
-    fetchUserData()
+    if(id){
+        fetchUserData(id)
+    }
   
-  }, [])
+  }, [id])
   
 
   const pop = [
