@@ -30,7 +30,7 @@ function Dashboard() {
       fetchLeaderboardData(user)
       fetchPendingApplicants(user)
     }
-  }, [id]);
+  }, [id, fetchDashboardData, fetchLeaderboardData, fetchPendingApplicants]);
 
   return (
     <>
