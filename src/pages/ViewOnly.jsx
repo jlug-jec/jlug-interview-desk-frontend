@@ -37,12 +37,11 @@ export default function ViewOnly() {
   }
 
   return (
-    
     <div className="flex flex-col m-auto w-full p-4 z-[1] md:mb-0 mb-20">
       <Toaster />
       <div className="flex flex-row w-full gap-5 pt-2 justify-between">
         <p className="text-left text-2xl sm:text-3xl font-medium p-2 sm:p-4 pl-4 sm:pl-6">
-          Task / {task.tname}
+          Task / {task?.tname}
         </p>
       </div>
 
@@ -52,7 +51,7 @@ export default function ViewOnly() {
             Task Name
           </p>
           <div className="bg-form-input w-full md:w-[90%] p-4 border-none rounded-xl text-sm sm:text-[18px]">
-            {task.tname}
+            {task?.tname}
           </div>
         </div>
 
@@ -61,7 +60,7 @@ export default function ViewOnly() {
             Task Description
           </p>
           <div className="bg-form-input w-full md:w-[90%] p-4 border-none rounded-xl text-sm sm:text-[18px]">
-            {task.tdesc}
+            {task?.tdesc}
           </div>
         </div>
 
@@ -71,7 +70,7 @@ export default function ViewOnly() {
               Task Category
             </p>
             <div className="bg-form-input w-full p-4 border-none rounded-xl text-sm sm:text-[18px]">
-              {task.tcatg}
+              {task?.tcatg}
             </div>
           </div>
 
@@ -80,7 +79,7 @@ export default function ViewOnly() {
               Task Status
             </p>
             <div className="bg-form-input w-full p-4 border-none rounded-xl text-sm sm:text-[18px]">
-              {task.tstat}
+              {task?.tstat}
             </div>
           </div>
         </div>
@@ -90,7 +89,7 @@ export default function ViewOnly() {
             Submission Category
           </p>
           <div className="bg-form-input w-full p-4 border-none rounded-xl text-sm sm:text-[18px]">
-            {task.tsub === 'GIT' ? 'Github Repositry link' : 'Google Drive link'}
+            {task?.tsub === 'GIT' ? 'Github Repositry link' : 'Google Drive link'}
           </div>
         </div>
 
@@ -99,7 +98,7 @@ export default function ViewOnly() {
             Deadline
           </p>
           <div className="bg-form-input w-full p-4 border-none rounded-xl text-sm sm:text-[18px]">
-            {task.tdead}
+            {task?.tdead}
           </div>
         </div>
 
@@ -108,7 +107,7 @@ export default function ViewOnly() {
             Sample Image
           </p>
           <div className="flex items-center bg-[#f73558] h-10 w-16   font-semibold text-white text-center p-3 border-none rounded-xl">
-            {task.tfileUrl ? ( 
+            {task?.tfileUrl ? ( 
               <a href={task.tfileUrl} target='_blank'>View</a>
             ) : (
               'No file uploaded'
@@ -117,5 +116,6 @@ export default function ViewOnly() {
         </div>
       </div>
     </div>
+
   );
 }
