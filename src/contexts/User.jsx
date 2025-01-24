@@ -49,7 +49,7 @@ export const UserProvider = ({ children }) => {
     
     
 
-      const fetchUserData = useCallback(async () => {
+      const fetchUserData = useCallback(async (id) => {
         setPageLoad(true)
         try {
             console.log('fetching user data.....')
