@@ -41,7 +41,7 @@ function Dashboard() {
 
   return (
     <>
-      {load ? (
+      {load || !pendingApplicants || !leaderboard ? (
         <Ripple />
       ) : (
         <div className="bg-zinc-100 pb-10 w-full h-full md:mb-0 mb-10">
