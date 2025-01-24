@@ -27,7 +27,7 @@ const TaskList = () => {
                 <h1 className="text-4xl tracking-tight font-semibold text-left p-2 sm:p-4 sm:pl-6">Tasks</h1>
               </div>
             </header>
-            <div className="bg-white m-auto w-[100%] min-h-[70vh] flex flex-col p-4 rounded-xl drop-shadow-lg relative z-[-1]  md:mb-0 md-20">
+            <div className="bg-white m-auto w-[100%] min-h-[70vh] flex flex-col p-4 rounded-xl drop-shadow-lg relative z-[1]  md:mb-0 md-20">
               {pageload ? (
                 <Ripple />
               ) : tasks.length > 0 ? (

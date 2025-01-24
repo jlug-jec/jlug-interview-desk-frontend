@@ -32,7 +32,7 @@ console.log(pendingApplicants)
                 </h1>
               </div>
             </header>
-            <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col p-4 rounded-xl gap-1 drop-shadow-lg relative z-[-1]   md:mb-0 mb-20">
+            <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col p-4 rounded-xl gap-1 drop-shadow-lg relative z-[1]   md:mb-0 mb-20">
               <div className="p-3">
                 {pendingApplicants.length > 0 ? (
                   pendingApplicants.map((applicant) => (

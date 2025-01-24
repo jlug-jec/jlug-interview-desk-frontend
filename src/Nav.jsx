@@ -37,7 +37,7 @@ const Nav = ()=>{const initialTab = Number(sessionStorage.getItem('activeTab')) 
 
     return (
         <>
-            <div className="flex flex-row w-full shadow-md fixed top-0 left-0 bg-white">
+            <div className="flex flex-row w-full shadow-md fixed top-0 left-0 z-10 bg-white">
                 <div className="bg-primary flex items-center justify-center p-2 w-16 md:w-20">
                     <img src={logo} alt="logo" className="w-10 h-10 md:w-14 md:h-14" />
                 </div>

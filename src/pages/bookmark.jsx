@@ -25,7 +25,7 @@ const Bookmark = () => {
             <h1 className="md:text-4xl text-3xl tracking-tight font-semibold text-left">Bookmarks</h1>
           </div>
         </header>
-        <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col md:p-10 rounded-xl drop-shadow-lg p-6 md:mb-0 mb-20  z-[-1]  relative">
+        <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col md:p-10 rounded-xl drop-shadow-lg p-6 md:mb-0 mb-20  z-[1]  relative">
           {bookmarks.length > 0 ? (
             <div role="list" className="flex flex-col gap-4">
               {bookmarks.map((bookmark) => (

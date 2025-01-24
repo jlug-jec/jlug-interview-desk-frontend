@@ -95,7 +95,7 @@ const TaskList = () => {
                 </div></Link> 
             </div>
           </header>
-          <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col md:p-10 p-2 rounded-xl drop-shadow-lg relative md:mb-0 mb-20 z-[-1] ">
+          <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col md:p-10 p-2 rounded-xl drop-shadow-lg relative md:mb-0 mb-20 z-[1] ">
           {tasks.length > 0 ? (
             <div role="list" className="flex flex-col gap-8">
                 {tasks.map((task, index) => (

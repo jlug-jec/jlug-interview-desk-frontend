@@ -41,7 +41,7 @@ console.log(id)
     <div className="bg-[#ECECEC] min-h-screen w-full p-4 lg:p-10 md:mb-11 mb-20">
       <Toaster />
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20">
           <div className="bg-white p-6 rounded-lg w-[90%] lg:w-[50%]">
             <h2 className="text-lg font-bold mb-4">Blacklist this Applicant</h2>
             <p className="font-medium text-wrap text-sm text-amber-500 pb-5">

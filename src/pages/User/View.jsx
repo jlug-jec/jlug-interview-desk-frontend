@@ -49,7 +49,7 @@ export default function View() {
 
   return (
     
-    <div className="flex flex-col m-auto w-full p-4 z-[-1] md:mb-0 mb-20">
+    <div className="flex flex-col m-auto w-full p-4 z-[1] md:mb-0 mb-20">
       <Toaster />
       <div className="flex flex-row w-full gap-5 pt-2 justify-between">
         <p className="text-left text-2xl sm:text-3xl font-medium p-2 sm:p-4 pl-4 sm:pl-6">
@@ -139,7 +139,7 @@ export default function View() {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20">
           <div className="bg-white p-6 rounded-lg sm:w-[50%] w-[80%]">
             <h2 className="text-lg font-bold mb-4">Submit Task</h2>
             <p className='font-medium text-wrap text-sm text-amber-500 pb-5'> 
