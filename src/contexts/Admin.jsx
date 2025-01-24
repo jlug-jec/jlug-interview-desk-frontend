@@ -82,7 +82,7 @@ export const AdminProvider = ({ children }) => {
     }
   }, [ ]);
 
-  const fetchPendingApplicants = useCallback(async (user) => {
+  const fetchPendingApplicants = useCallback(async (user, adminId) => {
     setLoading(true);
     try {
         const response = await fetch(`https://firebase-api-hrly.onrender.com/pending/${adminId}/${user.domain}`);
@@ -186,7 +186,7 @@ useEffect(() => {
   if(adminId && user){
   fetchDashboardData(user, adminId);
   fetchLeaderboardData(user);
-  fetchPendingApplicants(user);
+  fetchPendingApplicants(user, adminId);
   fetchBookmarks();
   }
 }, [fetchDashboardData, fetchLeaderboardData, fetchPendingApplicants, fetchBookmarks,]);
