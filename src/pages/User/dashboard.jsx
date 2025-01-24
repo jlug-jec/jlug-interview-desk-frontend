@@ -13,7 +13,6 @@ import { useState, useEffect } from 'react';
 function Dashboard() {
   const image = [list, approve, time, book];
 
-  let id = sessionStorage.getItem('userid')
   const {
     fetchDomainTasks,
     tasks,
@@ -24,17 +23,9 @@ function Dashboard() {
   } = useUserContext();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await Promise.all([fetchDomainTasks(), fetchUserData(id)]);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchData();
-
-    console.log(userData, pageload)
-  }, [fetchDomainTasks, fetchUserData, userData, pageload]);
+    
+  }, [pageload])
+  
 
   const totalTasks = tasks.length;
   const submittedTasks = userSubmissions.length;
