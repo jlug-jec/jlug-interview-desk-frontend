@@ -36,7 +36,7 @@ const Bookmark = () => {
                   <div className="flex gap-4">
                     <Link to={`/user/${bookmark.id}`}>
                     <button
-                      className="bg-blue-500 text-white px-3 py-1 rounded">
+                      className="bg-blue-500 text-white hover:bg-[blue-500] hover:text-white px-3 py-1 rounded">
                       View Profile
                     </button></Link>
                     <button

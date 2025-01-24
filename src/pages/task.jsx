@@ -90,7 +90,7 @@ const TaskList = () => {
           <header className="w-full h-16">
             <div className="flex flex-row justify-between mt-auto max-w-full md:pl-6 pl-4 items-center">
               <h1 className="md:text-4xl text-3xl tracking-tight font-semibold text-left">Tasks</h1>                    
-                <Link to='/add'><div className='font-semibold border-2 text-center h-[50%] border-[#23B0FF] text-[#23B0FF] p-2 mr-4 cursor-pointer rounded-lg'>
+                <Link to='/add'><div className='font-semibold border-2 text-center h-[50%] border-[#23B0FF] text-[#23B0FF]  hover:bg-[#23B0FF] hover:text-white p-2 mr-4 cursor-pointer rounded-lg'>
                     Create a Task
                 </div></Link> 
             </div>

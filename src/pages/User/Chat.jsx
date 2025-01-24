@@ -29,7 +29,7 @@ const Chat = () => {
     <div className="flex-1 pt-4 w-100">
       <div className="w-full px-6 md:px-6 lg:px-10 pb-10 lg:pb-20 xl:pb-20">
         <header className="w-full h-16">
-          <div className="mt-auto max-w-full md:pl-6 ">
+          <div className="mt-auto max-w-full md:pl-6 mb-2 md:mb-4 ">
             <h1 className="text-4xl tracking-tight font-semibold text-left sm:p-4 p-2">Discussion</h1>
           </div>
         </header>

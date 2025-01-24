@@ -23,7 +23,7 @@ const TaskList = () => {
         <div className="flex-1  w-full">
           <div className="w-full px-6 md:px-6 lg:px-10 pb-10 lg:pb-20 xl:pb-20">
             <header className="w-full h-16">
-              <div className="mt-auto max-w-full md:pl-6">
+              <div className="mt-auto max-w-full md:pl-6 mb-2 md:mb-6">
                 <h1 className="text-4xl tracking-tight font-semibold text-left p-2 sm:p-4 sm:pl-6">Tasks</h1>
               </div>
             </header>
@@ -69,7 +69,7 @@ const TaskList = () => {
                             {task.tstat}
                           </div>
                           <Link to={`/userd/view/${task.id}`}>
-                            <div className="font-semibold border-2 text-center h-[50%] border-[#23B0FF] text-[#23B0FF] px-4 rounded-lg">
+                            <div className="font-semibold border-2 text-center h-[50%] border-[#23B0FF] text-[#23B0FF]  hover:bg-[#23B0FF] hover:text-white px-4 rounded-lg">
                               View
                             </div>
                           </Link>

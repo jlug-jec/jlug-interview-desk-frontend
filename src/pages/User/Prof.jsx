@@ -327,7 +327,7 @@ function User() {
                       rel="noopener noreferrer"
                       className="text-blue-500 hover:underline flex items-center"
                     >
-                      <div className="font-semibold border-2 text-center border-[#23B0FF] text-[#23B0FF] px-4 rounded-lg">
+                      <div className="font-semibold border-2 text-center border-[#23B0FF] text-[#23B0FF]  hover:bg-[#23B0FF] hover:text-white px-4 rounded-lg">
                         View
                       </div>
                     </a>

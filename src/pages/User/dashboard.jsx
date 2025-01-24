@@ -78,7 +78,7 @@ if(!userData) return <Ripple />
                     <div className="text-xs md:text-sm font-semibold border-2 border-green-500 text-green-500 px-3 py-1 rounded-lg">
                       {task.tstat}
                     </div>
-                    <Link to={`/userd/view/${task.id}`} className="text-xs md:text-sm font-semibold border-2 border-blue-500 text-blue-500 px-3 py-1 rounded-lg">
+                    <Link to={`/userd/view/${task.id}`} className="text-xs md:text-sm font-semibold border-2 border-blue-500 text-blue-500  hover:bg-[blue-500] hover:text-white px-3 py-1 rounded-lg">
                       View
                     </Link>
                   </div>
