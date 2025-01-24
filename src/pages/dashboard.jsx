@@ -10,6 +10,7 @@ import Ripple from '../components/Ripple';
 import { useAdminContext } from '../contexts/Admin';
 
 function Dashboard() {
+  const id = JSON.parse(sessionStorage.getItem('userid'));
   const {
     stats,
     leaderboard,
@@ -37,7 +38,7 @@ function Dashboard() {
     };
 
     fetchData();
-  }, []);
+  }, [id]);
 
   return (
     <>
