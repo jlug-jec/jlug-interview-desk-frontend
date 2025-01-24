@@ -117,7 +117,7 @@ const TaskList = () => {
                             <div className="w-[10%] md:min-w-[15%] flex flex-auto items-center text-center">
                                 <p className="text-4 font-medium leading-6 text-center text-gray-900">by {task.adminid === userid ? 'You' : task.by}</p>
                             </div>
-                            <div className={`w-[20%] flex flex-row ${task.adminid === userid ? 'md:w-[45%]' : 'md:w-[15%]'} items-center  text-center gap-4 md:gap-12`}>
+                            <div className={`w-[20%] flex flex-row ${task.adminid === userid ? 'md:w-[45%]' : 'md:w-[45%]'} items-center justify-end text-center gap-4 md:gap-12`}>
                                 { 
                                 task.adminid === userid ?
                                     (<>

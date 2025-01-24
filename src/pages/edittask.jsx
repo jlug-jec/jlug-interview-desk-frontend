@@ -7,9 +7,9 @@ import { Toaster, toast } from 'react-hot-toast';
 
 export default function Add() {
   const { id } = useParams();
-  let adminid = localStorage.getItem('userid');
+  let adminid = sessionStorage.getItem('userid');
   adminid = adminid.replace(/['"]+/g, '');
-  const name = localStorage.getItem('user').name;
+  const name = sessionStorage.getItem('user').name;
   const [file, setFile] = useState(null);
   const [actionload, setActionLoad] = useState(false);
 
@@ -56,7 +56,7 @@ export default function Add() {
   const handleSubmit = async () => {
     setActionLoad(true);
     const { tname, tdesc, tcatg, tstat, tsub, tdead } = data;
-    const admin = localStorage.getItem('user');
+    const admin = sessionStorage.getItem('user');
 
     const adminObj = admin ? JSON.parse(admin) : null;
 
