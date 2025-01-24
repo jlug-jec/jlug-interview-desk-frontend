@@ -22,7 +22,7 @@ export const AdminProvider = ({ children }) => {
       let adminId = sessionStorage.getItem('userid');
       const user = JSON.parse(sessionStorage.getItem('user'));
 
-  const fetchDashboardData = useCallback(async (user) => {
+  const fetchDashboardData = useCallback(async (user,  adminId) => {
     
     setLoading(true);
     try {
@@ -184,7 +184,7 @@ const handleAction = useCallback(async (actionType, id) => {
 
 useEffect(() => {
   if(adminId && user){
-  fetchDashboardData(user);
+  fetchDashboardData(user, adminId);
   fetchLeaderboardData(user);
   fetchPendingApplicants(user);
   fetchBookmarks();

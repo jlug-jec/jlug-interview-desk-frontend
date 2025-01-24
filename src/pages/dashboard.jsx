@@ -25,8 +25,8 @@ function Dashboard() {
   const image = [people, approve, time, book];
 
   useEffect(() => {
-    if(user){
-      fetchDashboardData(user)
+    if(user && id){
+      fetchDashboardData(user, id)
       fetchLeaderboardData(user)
       fetchPendingApplicants(user)
     }
