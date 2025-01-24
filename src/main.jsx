@@ -53,7 +53,7 @@ const Main = ()=>{
             <Route path="/edittask/:id" element={<EditTask />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/reset" element={<Reset />} />
-            <Route path="/view/:id" element={< ViewOnly />}/>
+            <Route path="/admin/view/:id" element={< ViewOnly />}/>
             <Route path="*" element={<Lost />} /> 
       </Routes>
     </div>

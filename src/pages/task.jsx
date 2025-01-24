@@ -132,7 +132,7 @@ const TaskList = () => {
                                 <div className='font-semibold border-2 text-center h-[50%] border-[#01ED01] text-[#01ED01] px-4  rounded-lg hidden md:flex'>
                                     {task.tstat}
                                 </div>                          
-                                <Link to= {task.adminid === userid ? `/edittask/${task.id}` : `/view/${task.id}` }>
+                                <Link to= {task.adminid === userid ? `/edittask/${task.id}` : `/admin/view/${task.id}` }>
                                     <div className='font-semibold border-2 text-center h-[50%] border-[#23B0FF] text-[#23B0FF] hover:bg-[#23B0FF] hover:text-[white] px-4  rounded-lg hidden md:block'>
                                         View
                                     </div>                                    
