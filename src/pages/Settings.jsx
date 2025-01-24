@@ -26,7 +26,8 @@ function Settings() {
 
     try {
       let updatedUser = { ...user };
-
+      updatedUser.password = null
+      
       if (type === 'password') {
         if (pass.length < 8) {
           toast.error('Password must be at least 8 characters long!');
