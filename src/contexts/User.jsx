@@ -155,8 +155,10 @@ export const UserProvider = ({ children }) => {
       }, []);
       
     useEffect(() => {
+      if(id && storedUser){
         fetchDomainTasks(),
-        fetchUserData(id)
+        fetchUserData()
+      }
       }, [fetchDomainTasks, fetchUserData]);
     
     const value = {
