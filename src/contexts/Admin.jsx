@@ -154,6 +154,7 @@ export const AdminProvider = ({ children }) => {
 },[]);
 
 const handleAction = useCallback(async (actionType, id) => {
+  let adminId = sessionStorage.getItem('userid');
   setActionLoad(true)
   try {
     const response = await fetch(`https://firebase-api-hrly.onrender.com/api/${actionType}`, {
