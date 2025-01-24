@@ -43,7 +43,6 @@ function Dashboard() {
     { count: totalTasks, text: 'Total Tasks' },
     { count: submittedTasks, text: 'Tasks Submitted' },
     { count: pendingTasks, text: 'Pending Tasks' },
-    { count: 100, text: 'What to write here?' },
   ];
 if(pageload || !userData) return <Ripple />
   return (
