@@ -33,7 +33,7 @@ function Dashboard() {
       }
     };
     fetchData();
-  }, [fetchDomainTasks, fetchUserData]);
+  }, [fetchDomainTasks, fetchUserData, userData]);
 
   const totalTasks = tasks.length;
   const submittedTasks = userSubmissions.length;
