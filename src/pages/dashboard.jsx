@@ -11,6 +11,7 @@ import { useAdminContext } from '../contexts/Admin';
 
 function Dashboard() {
   const id = JSON.parse(sessionStorage.getItem('userid'));
+  const user = JSON.parse(sessionStorage.getItem('user'));
   const {
     stats,
     leaderboard,
@@ -24,21 +25,12 @@ function Dashboard() {
   const image = [people, approve, time, book];
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await Promise.all([
-          fetchDashboardData(),
-          fetchLeaderboardData(),
-          fetchPendingApplicants(),
-        ]);
-        
-      } catch (error) {
-        console.error("Error loading data:", error);
-      }
-    };
-
-    fetchData();
-  }, [pendingApplicants, leaderboard, stats]);
+    if(user){
+      fetchDashboardData(user)
+      fetchLeaderboardData(user)
+      fetchPendingApplicants(user)
+    }
+  }, [id]);
 
   return (
     <>

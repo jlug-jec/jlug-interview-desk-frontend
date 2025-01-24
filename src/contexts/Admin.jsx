@@ -22,7 +22,7 @@ export const AdminProvider = ({ children }) => {
       let adminId = sessionStorage.getItem('userid');
       const user = JSON.parse(sessionStorage.getItem('user'));
 
-  const fetchDashboardData = useCallback(async () => {
+  const fetchDashboardData = useCallback(async (user) => {
     
     setLoading(true);
     try {
@@ -58,7 +58,7 @@ export const AdminProvider = ({ children }) => {
   }, []);
 
 
-  const fetchLeaderboardData = useCallback(async () => {
+  const fetchLeaderboardData = useCallback(async (user) => {
     setLoading(true);
     try {
       const response = await fetch(`https://firebase-api-hrly.onrender.com/leaderboard`, {
@@ -82,7 +82,7 @@ export const AdminProvider = ({ children }) => {
     }
   }, [ ]);
 
-  const fetchPendingApplicants = useCallback(async () => {
+  const fetchPendingApplicants = useCallback(async (user) => {
     setLoading(true);
     try {
         const response = await fetch(`https://firebase-api-hrly.onrender.com/pending/${adminId}/${user.domain}`);
@@ -184,10 +184,11 @@ const handleAction = useCallback(async (actionType, id) => {
 
 useEffect(() => {
   if(adminId && user){
-  fetchDashboardData();
-  fetchLeaderboardData();
-  fetchPendingApplicants();
-  fetchBookmarks();
+  fetchDashboardData(user);
+  fetchLeaderboardData(user);
+  fetchPendingApplicants(user);
+  fetchBookmarks();   
+   fetchUserData(id)
   }
 }, [fetchDashboardData, fetchLeaderboardData, fetchPendingApplicants, fetchBookmarks,]);
 
