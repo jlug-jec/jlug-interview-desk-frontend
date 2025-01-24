@@ -29,9 +29,9 @@ function User() {
   if(submission) submissions = submission
 
   const [isModalOpen, setIsModalOpen] = useState(false); 
-  // useEffect(()=>{
-  //   fetchUserData(id)
-  // }, [id])
+  useEffect(()=>{
+    fetchUserData(id)
+  }, [])
 
 console.log(id)
 
@@ -87,7 +87,7 @@ console.log(id)
             Bookmark
           </button>
           <button 
-            className={`font-semibold shadow-md border-2 border-black text-black px-3 py-1 rounded-lg hover:bg-black hover:text-white ${actionload && 'animate-pulse cursor-not-allowed'}`} 
+            className={`font-semibold shadow-md border-2 border-black text-black px-3 py-1 rounded-lg hover:bg-black hover:text-white `} 
             onClick={() => setIsModalOpen(true)}>
             Blacklist
           </button>
