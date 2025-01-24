@@ -28,7 +28,7 @@ function Dashboard() {
     if(user && id){
       fetchDashboardData(user, id)
       fetchLeaderboardData(user)
-      fetchPendingApplicants(user)
+      fetchPendingApplicants(user, id)
     }
   }, [id, fetchDashboardData, fetchLeaderboardData, fetchPendingApplicants]);
 
