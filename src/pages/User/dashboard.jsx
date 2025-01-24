@@ -9,9 +9,10 @@ import Eye from '../../assets/Eye.png';
 import { useUserContext } from '../../contexts/User';
 import Ripple from '../../components/Ripple';
 import { useState, useEffect } from 'react';
+import star from '../../assets/Star.png'
 
 function Dashboard() {
-  const image = [list, approve, time, book];
+  const image = [list, approve, time, star];
   const storedUser = sessionStorage.getItem('user');
   const userObj = JSON.parse(storedUser)
   const id = JSON.parse(sessionStorage.getItem('userid'));
@@ -43,6 +44,7 @@ function Dashboard() {
     { count: totalTasks, text: 'Total Tasks' },
     { count: submittedTasks, text: 'Tasks Submitted' },
     { count: pendingTasks, text: 'Pending Tasks' },
+    { count: Math.abs(userData.ups - userData.downs), text: 'Points Earned' },
   ];
 if(pageload || !userData) return <Ripple />
   return (
