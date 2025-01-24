@@ -97,7 +97,7 @@ if(!userData) return <Ripple />
               ))}
               <Link
                 to="/userd/tasks"
-                className="flex items-center gap-3 font-semibold border-2 text-primary border-primary hover:text-white hover:bg-primary px-4 py-2 mt-4 w-fit mx-auto rounded-lg"
+                className="flex items-center gap-3 font-semibold border-2 text-primary border-primary  px-4 py-2 mt-4 w-fit mx-auto rounded-lg"
               >
                 <img src={Eye} className="w-5 h-5 md:w-7 md:h-7" alt="view-all" />
                 View All Tasks
