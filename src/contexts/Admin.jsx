@@ -187,8 +187,7 @@ useEffect(() => {
   fetchDashboardData(user);
   fetchLeaderboardData(user);
   fetchPendingApplicants(user);
-  fetchBookmarks();   
-   fetchUserData(id)
+  fetchBookmarks();
   }
 }, [fetchDashboardData, fetchLeaderboardData, fetchPendingApplicants, fetchBookmarks,]);
 
