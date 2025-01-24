@@ -44,7 +44,7 @@ function Dashboard() {
     { count: totalTasks, text: 'Total Tasks' },
     { count: submittedTasks, text: 'Tasks Submitted' },
     { count: pendingTasks, text: 'Pending Tasks' },
-    { count: Math.abs(userData.ups - userData.downs), text: 'Points Earned' },
+    { count: Math.abs(userData?.ups - userData?.downs), text: 'Points Earned' },
   ];
 if(pageload || !userData) return <Ripple />
   return (
