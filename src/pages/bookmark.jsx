@@ -10,6 +10,7 @@ const Bookmark = () => {
     bookmarks,
     handleRemoveBookmark,
     fetchBookmarks,
+    actionload,
     load
   } = useAdminContext();
   
@@ -40,7 +41,7 @@ const Bookmark = () => {
                       View
                     </button></Link>
                     <button
-                      className="bg-red-500 text-white px-3 py-1 rounded"
+                      className={`bg-red-500 text-white px-3 py-1 rounded ${actionload && 'animate-pulse cursor-not-allowed'}`}
                       onClick={() => handleRemoveBookmark(bookmark.id)}
                     >
                       <img src={remove} className='w-4 h-4' alt="remove" />

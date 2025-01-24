@@ -122,7 +122,7 @@ export const AdminProvider = ({ children }) => {
   }, []);
 
   const handleRemoveBookmark = useCallback(async (userId) => {
-    setLoading(true);
+    setActionLoad(true);
     try {
       const response = await fetch(`https://firebase-api-hrly.onrender.com/api/delete-bookmark/${adminId}/${userId}`, { method: 'DELETE' });
       if (!response.ok) throw new Error('Failed to delete bookmark');
@@ -132,7 +132,7 @@ export const AdminProvider = ({ children }) => {
     } catch (error) {
       console.error('Error deleting bookmark:', error);
     } finally {
-      setLoading(false);
+      setActionLoad(false);
     }
   }, [adminId]);
 
