@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useUserContext } from '../../contexts/User';
-import Ripple from '../../components/Ripple';
+import { useUserContext } from '../contexts/User';
+import Ripple from '../components/Ripple';
 import { Toaster, toast } from 'react-hot-toast';
 
 export default function ViewOnly() {
