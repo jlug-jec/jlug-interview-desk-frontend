@@ -22,7 +22,7 @@ const Bookmark = () => {
       <div className="w-full px-6 md:px-6 pb-10  sm:p-4 p-4 sm:pl-6">
         <header className="w-full h-16">
           <div className="mt-auto max-w-full md:pl-6 pl-3">
-            <h1 className="md:text-4xl text-3xl tracking-tight font-semibold text-left">Bookmarks</h1>
+            <h1 className="md:text-4xl text-3xl tracking-tight font-semibold text-left mt-4">Bookmarks</h1>
           </div>
         </header>
         <div className="bg-white m-auto w-[95%] min-h-[70vh] flex flex-col md:p-10 rounded-xl drop-shadow-lg p-6 md:mb-0 mb-20  z-[1]  relative">
@@ -36,8 +36,8 @@ const Bookmark = () => {
                   <div className="flex gap-4">
                     <Link to={`/user/${bookmark.id}`}>
                     <button
-                      className="bg-blue-500 text-white hover:bg-[blue-500] hover:text-white px-3 py-1 rounded">
-                      View Profile
+                      className="bg-blue-500 text-white hover:bg-blue-500 hover:text-white px-3 py-1 rounded">
+                      View
                     </button></Link>
                     <button
                       className="bg-red-500 text-white px-3 py-1 rounded"

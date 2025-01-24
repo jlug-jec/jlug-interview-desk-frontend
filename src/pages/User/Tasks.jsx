@@ -23,15 +23,15 @@ const TaskList = () => {
         <div className="flex-1  w-full">
           <div className="w-full px-6 md:px-6 lg:px-10 pb-10 lg:pb-20 xl:pb-20">
             <header className="w-full h-16">
-              <div className="mt-auto max-w-full md:pl-6 mb-2 md:mb-6">
-                <h1 className="text-4xl tracking-tight font-semibold text-left p-2 sm:p-4 sm:pl-6">Tasks</h1>
+              <div className="mt-auto max-w-full md:pl-6">
+                <h1 className="text-4xl tracking-tight font-semibold text-left p-2 sm:p-4 sm:pl-6 mt-4">Tasks</h1>
               </div>
             </header>
             <div className="bg-white m-auto w-[100%] min-h-[70vh] flex flex-col p-4 rounded-xl drop-shadow-lg relative z-[1]  md:mb-0 md-20">
               {pageload ? (
                 <Ripple />
               ) : tasks.length > 0 ? (
-                <div role="list" className="flex flex-col gap-6  md:px-0">
+                <div role="list" className="flex flex-col gap-6  md:px-5">
                   {tasks.map((task) => (
                     <div key={task.id} className="flex flex-col md:flex-row justify-between items-center md:gap-x-10 md:px-6 py-2 w-full min-h-[10px]">
                       <div className="flex w-full gap-x-5 items-center">

@@ -89,7 +89,7 @@ const TaskList = () => {
         <div className= " w-full  md:px-6  px-5 md:pb-10 sm:p-4 p-4 sm:pl-6">
           <header className="w-full h-16">
             <div className="flex flex-row justify-between mt-auto max-w-full md:pl-6 pl-4 items-center">
-              <h1 className="md:text-4xl text-3xl tracking-tight font-semibold text-left">Tasks</h1>                    
+              <h1 className="md:text-4xl text-3xl tracking-tight font-semibold text-left mt-4">Tasks</h1>                    
                 <Link to='/add'><div className='font-semibold border-2 text-center h-[50%] border-[#23B0FF] text-[#23B0FF]  hover:bg-[#23B0FF] hover:text-white p-2 mr-4 cursor-pointer rounded-lg'>
                     Create a Task
                 </div></Link> 
@@ -122,7 +122,7 @@ const TaskList = () => {
                                     <div className='  h-7 w-7 md:flex justify-center items-center hidden'>
                                         <img src={Pencil} alt="edit" />
                                     </div>                          
-                                    <div className='font-semibold border-2 text-center h-[50%] border-[#FF3A3A] text-[#FF3A3A] px-4  rounded-lg cursor-pointer md:flex hidden' onClick={() => handleDelete(task.id)}>
+                                    <div className='font-semibold border-2 text-center h-[50%] border-[#FF3A3A] text-[#FF3A3A] hover:bg-[#FF3A3A] hover:text-[white] px-4  rounded-lg cursor-pointer md:flex hidden' onClick={() => handleDelete(task.id)}>
                                         Delete
                                     </div> 
                                     <img src={remove} className='w-7 h-7 md:hidden visible flex bg-[#FF3A3A] rounded-lg p-1'></img>
@@ -133,8 +133,8 @@ const TaskList = () => {
                                     {task.tstat}
                                 </div>                          
                                 <Link to={`/edittask/${task.id}`}>
-                                    <div className='font-semibold border-2 text-center h-[50%] border-[#23B0FF] text-[#23B0FF] px-4  rounded-lg hidden md:block'>
-                                        View here
+                                    <div className='font-semibold border-2 text-center h-[50%] border-[#23B0FF] text-[#23B0FF] hover:bg-[#23B0FF] hover:text-[white] px-4  rounded-lg hidden md:block'>
+                                        View
                                     </div>                                    
                                     <img src={View} className='w-16 h-8 md:hidden visible flex  border-2 border-primary rounded-md '></img>
                                 </Link>

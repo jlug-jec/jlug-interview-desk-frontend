@@ -27,7 +27,7 @@ console.log(pendingApplicants)
           <div className="w-full px-6 md:px-6 sm:p-4 p-4 sm:pl-6">
             <header className="w-full h-16">
               <div className="mt-auto max-w-full pl-6">
-                <h1 className="md:text-4xl text-3xl text-nowrap tracking-tight font-semibold text-left">
+                <h1 className="md:text-4xl text-3xl text-nowrap tracking-tight font-semibold text-left mt-4">
                   Review Applications
                 </h1>
               </div>

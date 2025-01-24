@@ -350,7 +350,7 @@ function User() {
                   </div>
                   <div className="text-blue-500">
                     <a href={submission.fileUrl} target="_blank" rel="noopener noreferrer">
-                      <div className="font-semibold border-2 text-center border-[#23B0FF] text-[#23B0FF] px-4 rounded-lg">
+                      <div className="font-semibold border-2 text-center border-[#23B0FF] text-[#23B0FF] hover:bg-[#23B0FF] hover:text-white px-4 rounded-lg">
                         View
                       </div>
                     </a>

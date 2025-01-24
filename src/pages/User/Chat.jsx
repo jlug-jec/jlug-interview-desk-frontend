@@ -33,7 +33,7 @@ const Chat = () => {
             <h1 className="text-4xl tracking-tight font-semibold text-left sm:p-4 p-2">Discussion</h1>
           </div>
         </header>
-        <div className="bg-white m-auto w-[95] flex flex-col p-5 rounded-xl drop-shadow-lg md:mb-0 mb-20 z-[-1] ">
+        <div className="bg-white m-auto w-[95] flex flex-col p-5 rounded-xl drop-shadow-lg md:mb-0 mb-20 z-[-1] mt-4">
           <div className='text-xl  p-2 font-semibold'>
             Join this <span className='text-green-500 text-wrap'><a href=''>Whatsapp group</a></span> to ask doubts and interact with your team.
           </div>
