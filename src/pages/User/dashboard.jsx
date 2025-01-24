@@ -9,12 +9,11 @@ import Eye from '../../assets/Eye.png';
 import { useUserContext } from '../../contexts/User';
 import Ripple from '../../components/Ripple';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
-  const navigate = useNavigate();
   const image = [list, approve, time, book];
 
+  let id = sessionStorage.getItem('userid')
   const {
     fetchDomainTasks,
     tasks,
@@ -27,13 +26,15 @@ function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        await Promise.all([fetchDomainTasks(), fetchUserData()]);
+        await Promise.all([fetchDomainTasks(), fetchUserData(id)]);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
     fetchData();
-  }, [fetchDomainTasks, fetchUserData, userData]);
+
+    console.log(userData, pageload)
+  }, [fetchDomainTasks, fetchUserData, userData, pageload]);
 
   const totalTasks = tasks.length;
   const submittedTasks = userSubmissions.length;
