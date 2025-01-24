@@ -38,7 +38,7 @@ function Dashboard() {
     };
 
     fetchData();
-  }, [id]);
+  }, [pendingApplicants, leaderboard, stats]);
 
   return (
     <>
