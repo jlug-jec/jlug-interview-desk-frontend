@@ -22,7 +22,7 @@ export const UserProvider = ({ children }) => {
     const fetchDomainTasks = useCallback(async () => {
         setPageLoad(true)
         const domain  = userObj.domain
-    
+        
         try {
           const response = await fetch('https://firebase-api-hrly.onrender.com/get-tasks-by-domain', {
             method: 'POST',

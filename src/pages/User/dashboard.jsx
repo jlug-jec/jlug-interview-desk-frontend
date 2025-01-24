@@ -30,7 +30,7 @@ function Dashboard() {
     fetchDomainTasks()
     fetchUserData()
   
-  }, [userData])
+  }, [])
   
 
   const pop = [
