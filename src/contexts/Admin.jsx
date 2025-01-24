@@ -167,9 +167,9 @@ const handleAction = useCallback(async (actionType, id) => {
     const data = await response.json();
     toast.success(data.message || `Action ${actionType} completed successfully.`);
     await fetchUserData(id)
-    await fetchPendingApplicants()
-    await fetchDashboardData();
-    await fetchLeaderboardData()
+    await fetchDashboardData(user, adminId);
+    await fetchLeaderboardData(user);
+    await fetchPendingApplicants(user, adminId);
     await fetchBookmarks()
   } catch (error) {
 
