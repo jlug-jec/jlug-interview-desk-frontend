@@ -22,14 +22,16 @@ function Dashboard() {
     fetchUserData,
   } = useUserContext();
 
-  useEffect(() => {
-    
-  }, [userData])
-  
-
   const totalTasks = tasks.length;
   const submittedTasks = userSubmissions.length;
   const pendingTasks = totalTasks - submittedTasks;
+
+  useEffect(() => {
+    fetchDomainTasks()
+    fetchUserData()
+  
+  }, [userData, pageload])
+  
 
   const pop = [
     { count: totalTasks, text: 'Total Tasks' },
@@ -37,7 +39,7 @@ function Dashboard() {
     { count: pendingTasks, text: 'Pending Tasks' },
     { count: 100, text: 'What to write here?' },
   ];
-if(!userData) return <Ripple />
+if(pageload || !userData) return <Ripple />
   return (
     <>
     
