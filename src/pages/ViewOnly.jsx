@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';s
+import { useParams } from 'react-router-dom';
 import { useUserContext } from '../../contexts/User';
 import Ripple from '../../components/Ripple';
 import { Toaster, toast } from 'react-hot-toast';
@@ -109,7 +109,7 @@ export default function ViewOnly() {
           </p>
           <div className="flex items-center bg-[#f73558] h-10 w-16   font-semibold text-white text-center p-3 border-none rounded-xl">
             {task.tfileUrl ? ( 
-              <a href={task.tfileUrl} target='blank'>View</a>
+              <a href={task.tfileUrl} target='_blank'>View</a>
             ) : (
               'No file uploaded'
             )}
