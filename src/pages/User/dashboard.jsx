@@ -12,6 +12,8 @@ import { useState, useEffect } from 'react';
 
 function Dashboard() {
   const image = [list, approve, time, book];
+  const storedUser = sessionStorage.getItem('user');
+  const userObj = JSON.parse(storedUser)
   const id = JSON.parse(sessionStorage.getItem('userid'));
   const {
     fetchDomainTasks,
@@ -27,7 +29,9 @@ function Dashboard() {
   const pendingTasks = totalTasks - submittedTasks;
 
   useEffect(() => {
-    fetchDomainTasks()
+    if(userObj){
+      fetchDomainTasks(userObj)
+    }
     if(id){
         fetchUserData(id)
     }
