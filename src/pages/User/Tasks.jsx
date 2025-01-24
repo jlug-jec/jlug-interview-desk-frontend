@@ -24,10 +24,10 @@ const TaskList = () => {
           <div className="w-full px-6 md:px-6 lg:px-10 pb-10 lg:pb-20 xl:pb-20">
             <header className="w-full h-16">
               <div className="mt-auto max-w-full md:pl-6">
-                <h1 className="text-4xl tracking-tight font-semibold text-left p-2 sm:p-4 sm:pl-6 mt-4">Tasks</h1>
+                <h1 className="text-4xl tracking-tight font-semibold text-left p-2 sm:p-4 sm:pl-6 ">Tasks</h1>
               </div>
             </header>
-            <div className="bg-white m-auto w-[100%] min-h-[70vh] flex flex-col p-4 rounded-xl drop-shadow-lg relative z-[1]  md:mb-0 md-20">
+            <div className="bg-white m-auto w-[100%] min-h-[70vh] flex flex-col p-4 rounded-xl drop-shadow-lg relative z-[1] mt-4 md:mb-0 md-20">
               {pageload ? (
                 <Ripple />
               ) : tasks.length > 0 ? (

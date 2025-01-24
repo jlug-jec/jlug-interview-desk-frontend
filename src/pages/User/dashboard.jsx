@@ -24,6 +24,17 @@ function Dashboard() {
     fetchUserData,
   } = useUserContext();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await Promise.all([fetchDomainTasks(), fetchUserData()]);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, [fetchDomainTasks, fetchUserData]);
+
   const totalTasks = tasks.length;
   const submittedTasks = userSubmissions.length;
   const pendingTasks = totalTasks - submittedTasks;

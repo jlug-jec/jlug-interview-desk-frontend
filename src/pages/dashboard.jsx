@@ -19,12 +19,25 @@ function Dashboard() {
     fetchLeaderboardData,
     fetchPendingApplicants,
   } = useAdminContext();
+
   const image = [people, approve, time, book];
 
-useEffect(() => {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await Promise.all([
+          fetchDashboardData(),
+          fetchLeaderboardData(),
+          fetchPendingApplicants(),
+        ]);
+        
+      } catch (error) {
+        console.error("Error loading data:", error);
+      }
+    };
 
-}, [load])
-
+    fetchData();
+  }, []);
 
   return (
     <>
