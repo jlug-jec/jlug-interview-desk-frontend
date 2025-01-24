@@ -183,10 +183,12 @@ const handleAction = useCallback(async (actionType, id) => {
 
 
 useEffect(() => {
+  if(adminId && user){
   fetchDashboardData();
   fetchLeaderboardData();
   fetchPendingApplicants();
   fetchBookmarks();
+  }
 }, [fetchDashboardData, fetchLeaderboardData, fetchPendingApplicants, fetchBookmarks,]);
 
 
