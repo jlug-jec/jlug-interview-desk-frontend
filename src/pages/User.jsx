@@ -21,6 +21,7 @@ function User() {
     fetchLeaderboardData,
     fetchPendingApplicants,
     fetchBookmarks,
+    actionload
     
   } = useAdminContext();
 
@@ -28,9 +29,9 @@ function User() {
   if(submission) submissions = submission
 
   const [isModalOpen, setIsModalOpen] = useState(false); 
-  useEffect(()=>{
-    fetchUserData(id)
-  }, [id])
+  // useEffect(()=>{
+  //   fetchUserData(id)
+  // }, [id])
 
 console.log(id)
 
@@ -71,22 +72,22 @@ console.log(id)
         <h1 className="text-3xl lg:text-4xl font-semibold text-left self-start">Applicant Profile</h1>
         <div className="flex gap-2 ">
           <button 
-            className="font-semibold shadow-md border-2 border-green-500 text-green-500 px-3 py-1 rounded-lg hover:bg-green-500 hover:text-white" 
+            className={`font-semibold shadow-md border-2 border-green-500 text-green-500 px-3 py-1 rounded-lg hover:bg-green-500 hover:text-white ${actionload && 'animate-pulse cursor-not-allowed'}`}
             onClick={() => handleAction('upvote', id)}>
             Upvote
           </button>
           <button 
-            className="font-semibold shadow-md border-2 border-red-500 text-red-500 px-3 py-1 rounded-lg hover:bg-red-500 hover:text-white" 
+            className={`font-semibold shadow-md border-2 border-red-500 text-red-500 px-3 py-1 rounded-lg hover:bg-red-500 hover:text-white ${actionload && 'animate-pulse cursor-not-allowed'}`} 
             onClick={() => handleAction('downvote', id)}>
             Downvote
           </button>
           <button 
-            className="font-semibold shadow-md border-2 border-blue-500 text-blue-500 px-3 py-1 rounded-lg hover:bg-blue-500 hover:text-white" 
+            className={`font-semibold shadow-md border-2 border-blue-500 text-blue-500 px-3 py-1 rounded-lg hover:bg-blue-500 hover:text-white ${actionload && 'animate-pulse cursor-not-allowed'}` }
             onClick={() => handleAction('bookmark', id)}>
             Bookmark
           </button>
           <button 
-            className="font-semibold shadow-md border-2 border-black text-black px-3 py-1 rounded-lg hover:bg-black hover:text-white" 
+            className={`font-semibold shadow-md border-2 border-black text-black px-3 py-1 rounded-lg hover:bg-black hover:text-white ${actionload && 'animate-pulse cursor-not-allowed'}`} 
             onClick={() => setIsModalOpen(true)}>
             Blacklist
           </button>

@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 const AdminContext = createContext();
 
 export const AdminProvider = ({ children }) => {
+  const [actionload, setActionLoad] = useState(false)
     const [stats, setStats] = useState({
         totalApplicants: 0,
         applicationsReviewed: 0,
@@ -153,7 +154,7 @@ export const AdminProvider = ({ children }) => {
 },[]);
 
 const handleAction = useCallback(async (actionType, id) => {
-  
+  setActionLoad(true)
   try {
     const response = await fetch(`https://firebase-api-hrly.onrender.com/api/${actionType}`, {
       method: 'POST',
@@ -174,6 +175,9 @@ const handleAction = useCallback(async (actionType, id) => {
 
     console.error(`Error during ${actionType}:`, error);
     toast.error(`Error during ${actionType}.`);
+  }
+  finally{
+    setActionLoad(false)
   }
 },[]);
 
@@ -200,7 +204,8 @@ useEffect(() => {
     userData,
     fetchUserData,
     submission,
-    handleAction
+    handleAction,
+    actionload
   };
 
   return <AdminContext.Provider value={value}>{children}</AdminContext.Provider>;
