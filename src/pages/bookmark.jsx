@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom';
 import remove from '../assets/Remove.png';
 import Ripple from '../components/Ripple';
 import { useAdminContext } from '../contexts/Admin';
+const id = JSON.parse(sessionStorage.getItem('userid'));
+const user = JSON.parse(sessionStorage.getItem('user'));
 
 const Bookmark = () => {
   const navigate = useNavigate();
@@ -42,7 +44,7 @@ const Bookmark = () => {
                     </button></Link>
                     <button
                       className={`bg-red-500 text-white px-3 py-1 rounded ${actionload && 'animate-pulse cursor-not-allowed'}`}
-                      onClick={() => handleRemoveBookmark(bookmark.id)}
+                      onClick={() => handleRemoveBookmark(bookmark.id, id)}
                     >
                       <img src={remove} className='w-4 h-4' alt="remove" />
                     </button>
