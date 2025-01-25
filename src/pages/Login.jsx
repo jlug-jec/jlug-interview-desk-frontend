@@ -33,7 +33,7 @@ const Login = () => {
                 body: JSON.stringify(profile),
             });
             res = await res.json();
-            console.log(res);
+            //console.log(res);
 
             if (res.user) {
                 sessionStorage.setItem('user', JSON.stringify(res.user));

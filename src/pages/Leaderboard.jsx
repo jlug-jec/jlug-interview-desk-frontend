@@ -20,7 +20,7 @@ const Leader = () => {
   } = useAdminContext();
 
   
-console.log(leaderboard)
+//console.log(leaderboard)
 
   return (
 <>

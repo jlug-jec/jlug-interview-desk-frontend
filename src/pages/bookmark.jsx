@@ -14,7 +14,7 @@ const Bookmark = () => {
     load
   } = useAdminContext();
   
-  console.log(bookmarks)
+  //console.log(bookmarks)
 
   return (
     <>

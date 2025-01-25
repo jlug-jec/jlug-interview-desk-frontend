@@ -42,7 +42,7 @@ const TaskList = () => {
               }))
             );
           } catch (error) {
-            console.error('Error fetching tasks:', error);
+            //console.error('Error fetching tasks:', error);
           } finally {
             setLoading(false);
             setPageLoad(false)
@@ -81,7 +81,7 @@ const TaskList = () => {
     let userid = sessionStorage.getItem('userid')
     userid =  userid.replace(/['"]+/g, '');
 
-    console.log(tasks , userid)
+    //console.log(tasks , userid)
 
     return (
       <>

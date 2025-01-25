@@ -78,7 +78,7 @@ function Settings() {
       setPassModal(false);
       setReload(!reload)
     } catch (error) {
-      console.error(error);
+      //console.error(error);
       toast.error('Failed to update profile. Please try again.');
     } finally {
       setActionLoad(false);

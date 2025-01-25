@@ -24,7 +24,7 @@ export default function ViewOnly() {
     }
   }, [task]);
 
-  console.log(task)
+  //console.log(task)
 
   const [data, setData] = useState(task);
   

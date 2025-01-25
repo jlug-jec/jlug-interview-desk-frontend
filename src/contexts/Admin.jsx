@@ -107,7 +107,7 @@ export const AdminProvider = ({ children }) => {
 
   const fetchBookmarks = useCallback(async () => {
     adminId = adminId.replace(/['"]+/g, '');
-    console.log(adminId)
+    //console.log(adminId)
     setLoading(true);
     try {
         const response = await fetch(`https://firebase-api-hrly.onrender.com/api/bookmarked/${adminId}`);

@@ -187,7 +187,7 @@ function User() {
       if (dp.name != user.dp && !uploadResult.secure_url) {
         throw new Error('Image upload failed ');
       }
-      console.log(uploadResult)
+      //console.log(uploadResult)
 
       const projectsMap = projects.reduce((acc, { name, url }) => {
         acc[name] = url; 
@@ -200,7 +200,7 @@ function User() {
       }
 
 
-      console.log(newUser)
+      //console.log(newUser)
       try {
         const response = await fetch(`https://firebase-api-hrly.onrender.com/update-user/${id}`, {
           method: 'POST',
@@ -216,7 +216,7 @@ function User() {
         sessionStorage.setItem('user', JSON.stringify(newUser));
 
       } catch (error) {
-        console.error(error);
+        //console.error(error);
         alert('Failed to update profile. Please try again.');
       }finally{setActionLoad(false)}
     };

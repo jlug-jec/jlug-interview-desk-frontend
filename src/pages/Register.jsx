@@ -109,7 +109,7 @@ function App() {
         setPage(page + 1)
       // }
   }
-    console.log({"page" : page, "profile" : profile} )
+    //console.log({"page" : page, "profile" : profile} )
     if(dir !== 1) {
       if(page > 1)
       setPage(page - 1);

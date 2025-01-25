@@ -55,7 +55,7 @@ export default function Add() {
     }
 
     if (tname !== '' && tdesc !== '' && tcatg !== '' && tstat !== '' && tsub !== '' && tdead !== '' && tfile !== '') {
-      console.log('Data will be sent to the API');
+      //console.log('Data will be sent to the API');
 
       const cloudinaryUrl = `https://api.cloudinary.com/v1_1/dqcqijw3c/image/upload`;
       const uploadPreset = 'sample-img';
@@ -103,7 +103,7 @@ export default function Add() {
           toast.success('Task was added successfully!');
           setActionLoad(false);
         } else {
-          console.error('Failed to add task to Firebase');
+          //console.error('Failed to add task to Firebase');
           toast.error('Oops! Something went wrong');
           setActionLoad(false);
         }

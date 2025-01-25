@@ -17,10 +17,6 @@ function User() {
     fetchUserData,
     handleAction,
     submission,
-    fetchDashboardData,
-    fetchLeaderboardData,
-    fetchPendingApplicants,
-    fetchBookmarks,
     actionload
     
   } = useAdminContext();
@@ -33,7 +29,7 @@ function User() {
     fetchUserData(id)
   }, [])
 
-console.log(id)
+//console.log(id)
 
   if (load || !userData) return <Ripple/>;
 
