@@ -102,6 +102,8 @@ const Login = () => {
                                 type={'password'}
                                 value={profile.pass}
                                 name={'pass'}
+                                support={1}
+                                show={0}
                             />
                             <div className="text-sm text-center">
                                 Missing Something?
