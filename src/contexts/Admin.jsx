@@ -176,8 +176,7 @@ const handleAction = useCallback(async (actionType, id) => {
     await fetchBookmarks()
   } catch (error) {
 
-    console.error(`Error during ${actionType}:`, error);
-    toast.error(`Error during ${actionType}.`);
+    console.error(`Error during ${actionType}:`, error)
   }
   finally{
     setActionLoad(false)
