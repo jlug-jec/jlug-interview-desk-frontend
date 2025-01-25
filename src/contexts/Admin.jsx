@@ -51,7 +51,7 @@ export const AdminProvider = ({ children }) => {
         applicationsBookmarked,
       });
     } catch (error) {
-      console.error('Error fetching leaderboard data:', error);
+      //console.error('Error fetching leaderboard data:', error);
     } finally {
       setLoading(false);
     }
@@ -76,7 +76,7 @@ export const AdminProvider = ({ children }) => {
       const data = await response.json();
       setLeaderboard(data);
     } catch (error) {
-      console.error('Error fetching leaderboard:', error);
+      //console.error('Error fetching leaderboard:', error);
     } finally {
       setLoading(false);
     }
@@ -91,7 +91,7 @@ export const AdminProvider = ({ children }) => {
         }
   
         const data = await response.json();
-        console.log('Pending Applicants:', data);
+        //console.log('Pending Applicants:', data);
   
       if (!response.ok) {
         throw new Error('Failed to fetch leaderboard');
@@ -99,7 +99,7 @@ export const AdminProvider = ({ children }) => {
 
       setPendingApplicants(data);
     } catch (error) {
-      console.error('Error fetching leaderboard:', error);
+      //console.error('Error fetching leaderboard:', error);
     } finally {
       setLoading(false);
     }
