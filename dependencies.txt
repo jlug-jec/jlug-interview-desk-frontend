@@ -1,0 +1,23 @@
+jlu@0.0.0 C:\Users\ASUS\Desktop\frontend\jlu
+├── @emotion/react@11.13.3
+├── @emotion/styled@11.13.0
+├── @eslint/js@9.10.0
+├── @mui/icons-material@6.1.1
+├── @mui/material@6.1.1
+├── @mui/x-date-pickers@7.17.0
+├── @types/react-dom@18.3.0
+├── @types/react@18.3.7
+├── @vitejs/plugin-react@4.3.1
+├── autoprefixer@10.4.20
+├── dayjs@1.11.13
+├── eslint-plugin-react-hooks@5.1.0-rc-fb9a90fa48-20240614
+├── eslint-plugin-react-refresh@0.4.12
+├── eslint-plugin-react@7.36.1
+├── eslint@9.10.0
+├── globals@15.9.0
+├── postcss@8.4.47
+├── react-dom@18.3.1
+├── react@18.3.1
+├── tailwindcss@3.4.12
+└── vite@5.4.6
+
